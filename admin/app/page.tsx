@@ -4,6 +4,8 @@ import Heading from "./utils/Heading";
 import Signup from "./components/Auth/SignUp";
 import { useSelector } from "react-redux";
 import { redirect } from "next/navigation";
+import Verification from "./components/Auth/Verification";
+import Login from "./components/Auth/Login";
 
 interface Props {}
 
@@ -25,7 +27,9 @@ const Page: FC<Props> = (props) => {
         keywords="EduVoyage"
       />
       <div className="w-[90%] md:w-[420px] m-auto h-screen flex items-center justify-center">
+        {route === "Login" && <Login setRoute={setRoute} />}
         {route === "Sign-up" && <Signup setRoute={setRoute} />}
+        {route === "Verification" && <Verification setRoute={setRoute} />}
       </div>
     </div>
   );
