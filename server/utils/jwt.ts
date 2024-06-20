@@ -46,6 +46,9 @@ export const sendToken = (user: IUser, statusCode: number, res: Response) => {
   // upload session to redis
   redis.set(userId, JSON.stringify(user) as any);
 
+  res.cookie("access_token", accessToken, accessTokenOptions);
+  res.cookie("refresh_token", refreshToken, refreshTokenOptions);
+
   res.status(statusCode).json({
     success: true,
     user,
