@@ -17,10 +17,14 @@ const schema = Yup.object().shape({
     .email("Invalid email!")
     .required("Please enter your email!"),
   password: Yup.string().required("Please enter your password!").min(6),
+  confirmPassword: Yup.string()
+    .oneOf([Yup.ref('password'), undefined], "Passwords must match")
+    .required("Please confirm your password!"),
 });
 
 const Signup: FC<Props> = ({ setRoute }) => {
   const [show, setShow] = useState(false);
+  const [showConfirm, setShowConfirm] = useState(false);
   const [register, { data, error, isSuccess }] = useRegisterMutation();
 
   useEffect(() => {
@@ -38,7 +42,7 @@ const Signup: FC<Props> = ({ setRoute }) => {
   }, [isSuccess, error]);
 
   const formik = useFormik({
-    initialValues: { name: "", email: "", password: "" },
+    initialValues: { name: "", email: "", password: "", confirmPassword: "" },
     validationSchema: schema,
     onSubmit: async ({ name, email, password }) => {
       const data = {
@@ -57,16 +61,16 @@ const Signup: FC<Props> = ({ setRoute }) => {
       <h1 className={`${styles.title}`}>Join to EduVoyage</h1>
       <form onSubmit={handleSubmit}>
         <div className="mb-3">
-          <label className={`${styles.label}`} htmlFor="email">
+          <label className={`${styles.label}`} htmlFor="name">
             Enter your Name
           </label>
           <input
             type="text"
-            name=""
+            name="name"
             value={values.name}
             onChange={handleChange}
             id="name"
-            placeholder="johndoe"
+            placeholder="name"
             className={`${errors.name && touched.name && "border-red-500"} ${
               styles.input
             }`}
@@ -75,25 +79,27 @@ const Signup: FC<Props> = ({ setRoute }) => {
             <span className="text-red-500 pt-2 block">{errors.name}</span>
           )}
         </div>
-        <label className={`${styles.label}`} htmlFor="email">
-          Enter your Email
-        </label>
-        <input
-          type="email"
-          name=""
-          value={values.email}
-          onChange={handleChange}
-          id="email"
-          placeholder="yourmail@gmail.com"
-          className={`${errors.email && touched.email && "border-red-500"} ${
-            styles.input
-          }`}
-        />
-        {errors.email && touched.email && (
-          <span className="text-red-500 pt-2 block">{errors.email}</span>
-        )}
-        <div className="w-full mt-5 relative mb-1">
+        <div className="mb-3">
           <label className={`${styles.label}`} htmlFor="email">
+            Enter your Email
+          </label>
+          <input
+            type="email"
+            name="email"
+            value={values.email}
+            onChange={handleChange}
+            id="email"
+            placeholder="yourmail@gmail.com"
+            className={`${errors.email && touched.email && "border-red-500"} ${
+              styles.input
+            }`}
+          />
+          {errors.email && touched.email && (
+            <span className="text-red-500 pt-2 block">{errors.email}</span>
+          )}
+        </div>
+        <div className="w-full mt-5 relative mb-1">
+          <label className={`${styles.label}`} htmlFor="password">
             Enter your password
           </label>
           <input
@@ -123,6 +129,38 @@ const Signup: FC<Props> = ({ setRoute }) => {
         </div>
         {errors.password && touched.password && (
           <span className="text-red-500 pt-2 block">{errors.password}</span>
+        )}
+        <div className="w-full mt-5 relative mb-1">
+          <label className={`${styles.label}`} htmlFor="confirmPassword">
+            Confirm your password
+          </label>
+          <input
+            type={!showConfirm ? "password" : "text"}
+            name="confirmPassword"
+            value={values.confirmPassword}
+            onChange={handleChange}
+            id="confirmPassword"
+            placeholder="confirm password"
+            className={`${
+              errors.confirmPassword && touched.confirmPassword && "border-red-500"
+            } ${styles.input}`}
+          />
+          {!showConfirm ? (
+            <AiOutlineEyeInvisible
+              className="absolute bottom-3 right-2 z-1 cursor-pointer"
+              size={20}
+              onClick={() => setShowConfirm(true)}
+            />
+          ) : (
+            <AiOutlineEye
+              className="absolute bottom-3 right-2 z-1 cursor-pointer"
+              size={20}
+              onClick={() => setShowConfirm(false)}
+            />
+          )}
+        </div>
+        {errors.confirmPassword && touched.confirmPassword && (
+          <span className="text-red-500 pt-2 block">{errors.confirmPassword}</span>
         )}
         <div className="w-full mt-5">
           <input type="submit" value="Sign Up" className={`${styles.button}`} />
