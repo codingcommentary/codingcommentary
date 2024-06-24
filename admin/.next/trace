@@ -1,3 +1,1108 @@
-[{"name":"generate-buildid","duration":185,"timestamp":1287182084529,"id":4,"parentId":1,"tags":{},"startTime":1718908247372,"traceId":"c3cad3ead5a52bb1"},{"name":"load-custom-routes","duration":221,"timestamp":1287182084877,"id":5,"parentId":1,"tags":{},"startTime":1718908247372,"traceId":"c3cad3ead5a52bb1"},{"name":"collect-pages","duration":1340,"timestamp":1287182151502,"id":6,"parentId":1,"tags":{},"startTime":1718908247439,"traceId":"c3cad3ead5a52bb1"},{"name":"create-pages-mapping","duration":440,"timestamp":1287182154268,"id":7,"parentId":1,"tags":{},"startTime":1718908247442,"traceId":"c3cad3ead5a52bb1"},{"name":"collect-app-paths","duration":2198,"timestamp":1287182154765,"id":8,"parentId":1,"tags":{},"startTime":1718908247442,"traceId":"c3cad3ead5a52bb1"},{"name":"create-app-mapping","duration":622,"timestamp":1287182156996,"id":9,"parentId":1,"tags":{},"startTime":1718908247445,"traceId":"c3cad3ead5a52bb1"},{"name":"public-dir-conflict-check","duration":573,"timestamp":1287182157933,"id":10,"parentId":1,"tags":{},"startTime":1718908247446,"traceId":"c3cad3ead5a52bb1"},{"name":"generate-routes-manifest","duration":1924,"timestamp":1287182158651,"id":11,"parentId":1,"tags":{},"startTime":1718908247446,"traceId":"c3cad3ead5a52bb1"},{"name":"create-dist-dir","duration":220,"timestamp":1287182161233,"id":12,"parentId":1,"tags":{},"startTime":1718908247449,"traceId":"c3cad3ead5a52bb1"},{"name":"write-routes-manifest","duration":1131,"timestamp":1287182177563,"id":13,"parentId":1,"tags":{},"startTime":1718908247465,"traceId":"c3cad3ead5a52bb1"},{"name":"generate-required-server-files","duration":746,"timestamp":1287182180307,"id":14,"parentId":1,"tags":{},"startTime":1718908247468,"traceId":"c3cad3ead5a52bb1"},{"name":"create-entrypoints","duration":23055,"timestamp":1287182625827,"id":18,"parentId":16,"tags":{},"startTime":1718908247914,"traceId":"c3cad3ead5a52bb1"},{"name":"generate-webpack-config","duration":266785,"timestamp":1287182649081,"id":19,"parentId":17,"tags":{},"startTime":1718908247937,"traceId":"c3cad3ead5a52bb1"},{"name":"next-trace-entrypoint-plugin","duration":1542,"timestamp":1287182971244,"id":21,"parentId":20,"tags":{},"startTime":1718908248259,"traceId":"c3cad3ead5a52bb1"},{"name":"add-entry","duration":262753,"timestamp":1287182976906,"id":24,"parentId":22,"tags":{"request":"private-next-pages/_app.tsx"},"startTime":1718908248265,"traceId":"c3cad3ead5a52bb1"},{"name":"add-entry","duration":295019,"timestamp":1287182977020,"id":29,"parentId":22,"tags":{"request":"next-app-loader?page=%2Ffavicon.ico%2Froute&name=app%2Ffavicon.ico%2Froute&pagePath=private-next-app-dir%2Ffavicon.ico&appDir=E%3A%5Ccodingcommentary%5Cadmin%5Capp&appPaths=%2Ffavicon.ico&pageExtensions=tsx&pageExtensions=ts&pageExtensions=jsx&pageExtensions=js&basePath=&assetPrefix=&nextConfigOutput=&nextConfigExperimentalUseEarlyImport=false&preferredRegion=&middlewareConfig=e30%3D!"},"startTime":1718908248265,"traceId":"c3cad3ead5a52bb1"},{"name":"add-entry","duration":301118,"timestamp":1287182977035,"id":31,"parentId":22,"tags":{"request":"next/dist/pages/_document"},"startTime":1718908248265,"traceId":"c3cad3ead5a52bb1"},{"name":"add-entry","duration":301277,"timestamp":1287182976926,"id":25,"parentId":22,"tags":{"request":"next-route-loader?kind=PAGES&page=%2F_error&preferredRegion=&absolutePagePath=next%2Fdist%2Fpages%2F_error&absoluteAppPath=private-next-pages%2F_app.tsx&absoluteDocumentPath=next%2Fdist%2Fpages%2F_document&middlewareConfigBase64=e30%3D!"},"startTime":1718908248265,"traceId":"c3cad3ead5a52bb1"},{"name":"add-entry","duration":330162,"timestamp":1287182977003,"id":27,"parentId":22,"tags":{"request":"next-route-loader?kind=PAGES_API&page=%2Fapi%2Fauth%2F%5B...nextauth%5D&preferredRegion=&absolutePagePath=private-next-pages%2Fapi%2Fauth%2F%5B...nextauth%5D.ts&middlewareConfigBase64=e30%3D!"},"startTime":1718908248265,"traceId":"c3cad3ead5a52bb1"},{"name":"add-entry","duration":335027,"timestamp":1287182976551,"id":23,"parentId":22,"tags":{"request":"next-app-loader?page=%2F_not-found%2Fpage&name=app%2F_not-found%2Fpage&pagePath=next%2Fdist%2Fclient%2Fcomponents%2Fnot-found-error&appDir=E%3A%5Ccodingcommentary%5Cadmin%5Capp&appPaths=next%2Fdist%2Fclient%2Fcomponents%2Fnot-found-error&pageExtensions=tsx&pageExtensions=ts&pageExtensions=jsx&pageExtensions=js&basePath=&assetPrefix=&nextConfigOutput=&nextConfigExperimentalUseEarlyImport=false&preferredRegion=&middlewareConfig=e30%3D!"},"startTime":1718908248264,"traceId":"c3cad3ead5a52bb1"},{"name":"add-entry","duration":338680,"timestamp":1287182976939,"id":26,"parentId":22,"tags":{"request":"next-app-loader?page=%2Fadmin%2Fcreate-course%2Fpage&name=app%2Fadmin%2Fcreate-course%2Fpage&pagePath=private-next-app-dir%2Fadmin%2Fcreate-course%2Fpage.tsx&appDir=E%3A%5Ccodingcommentary%5Cadmin%5Capp&appPaths=%2Fadmin%2Fcreate-course%2Fpage&pageExtensions=tsx&pageExtensions=ts&pageExtensions=jsx&pageExtensions=js&basePath=&assetPrefix=&nextConfigOutput=&nextConfigExperimentalUseEarlyImport=false&preferredRegion=&middlewareConfig=e30%3D!"},"startTime":1718908248265,"traceId":"c3cad3ead5a52bb1"},{"name":"add-entry","duration":338631,"timestamp":1287182977013,"id":28,"parentId":22,"tags":{"request":"next-app-loader?page=%2Fadmin%2Fpage&name=app%2Fadmin%2Fpage&pagePath=private-next-app-dir%2Fadmin%2Fpage.tsx&appDir=E%3A%5Ccodingcommentary%5Cadmin%5Capp&appPaths=%2Fadmin%2Fpage&pageExtensions=tsx&pageExtensions=ts&pageExtensions=jsx&pageExtensions=js&basePath=&assetPrefix=&nextConfigOutput=&nextConfigExperimentalUseEarlyImport=false&preferredRegion=&middlewareConfig=e30%3D!"},"startTime":1718908248265,"traceId":"c3cad3ead5a52bb1"},{"name":"add-entry","duration":338623,"timestamp":1287182977028,"id":30,"parentId":22,"tags":{"request":"next-app-loader?page=%2Fpage&name=app%2Fpage&pagePath=private-next-app-dir%2Fpage.tsx&appDir=E%3A%5Ccodingcommentary%5Cadmin%5Capp&appPaths=%2Fpage&pageExtensions=tsx&pageExtensions=ts&pageExtensions=jsx&pageExtensions=js&basePath=&assetPrefix=&nextConfigOutput=&nextConfigExperimentalUseEarlyImport=false&preferredRegion=&middlewareConfig=e30%3D!"},"startTime":1718908248265,"traceId":"c3cad3ead5a52bb1"},{"name":"make","duration":700195,"timestamp":1287182976299,"id":22,"parentId":20,"tags":{},"startTime":1718908248264,"traceId":"c3cad3ead5a52bb1"},{"name":"get-entries","duration":781,"timestamp":1287183677536,"id":51,"parentId":50,"tags":{},"startTime":1718908248965,"traceId":"c3cad3ead5a52bb1"},{"name":"node-file-trace-plugin","duration":51177,"timestamp":1287183680281,"id":52,"parentId":50,"tags":{"traceEntryCount":"14"},"startTime":1718908248968,"traceId":"c3cad3ead5a52bb1"},{"name":"collect-traced-files","duration":325,"timestamp":1287183731467,"id":53,"parentId":50,"tags":{},"startTime":1718908249019,"traceId":"c3cad3ead5a52bb1"},{"name":"finish-modules","duration":54426,"timestamp":1287183677371,"id":50,"parentId":21,"tags":{},"startTime":1718908248965,"traceId":"c3cad3ead5a52bb1"},{"name":"chunk-graph","duration":20582,"timestamp":1287183848004,"id":55,"parentId":54,"tags":{},"startTime":1718908249136,"traceId":"c3cad3ead5a52bb1"},{"name":"optimize-modules","duration":17,"timestamp":1287183868683,"id":57,"parentId":54,"tags":{},"startTime":1718908249156,"traceId":"c3cad3ead5a52bb1"},{"name":"optimize-chunks","duration":13133,"timestamp":1287183868756,"id":58,"parentId":54,"tags":{},"startTime":1718908249156,"traceId":"c3cad3ead5a52bb1"},{"name":"optimize-tree","duration":103,"timestamp":1287183881965,"id":59,"parentId":54,"tags":{},"startTime":1718908249170,"traceId":"c3cad3ead5a52bb1"},{"name":"optimize-chunk-modules","duration":53837,"timestamp":1287183882139,"id":60,"parentId":54,"tags":{},"startTime":1718908249170,"traceId":"c3cad3ead5a52bb1"},{"name":"optimize","duration":67420,"timestamp":1287183868646,"id":56,"parentId":54,"tags":{},"startTime":1718908249156,"traceId":"c3cad3ead5a52bb1"},{"name":"module-hash","duration":27437,"timestamp":1287183989697,"id":61,"parentId":54,"tags":{},"startTime":1718908249277,"traceId":"c3cad3ead5a52bb1"},{"name":"code-generation","duration":14051,"timestamp":1287184017199,"id":62,"parentId":54,"tags":{},"startTime":1718908249305,"traceId":"c3cad3ead5a52bb1"},{"name":"hash","duration":7073,"timestamp":1287184035478,"id":63,"parentId":54,"tags":{},"startTime":1718908249323,"traceId":"c3cad3ead5a52bb1"},{"name":"code-generation-jobs","duration":209,"timestamp":1287184042551,"id":64,"parentId":54,"tags":{},"startTime":1718908249330,"traceId":"c3cad3ead5a52bb1"},{"name":"module-assets","duration":564,"timestamp":1287184042729,"id":65,"parentId":54,"tags":{},"startTime":1718908249330,"traceId":"c3cad3ead5a52bb1"},{"name":"create-chunk-assets","duration":10553,"timestamp":1287184043316,"id":66,"parentId":54,"tags":{},"startTime":1718908249331,"traceId":"c3cad3ead5a52bb1"},{"name":"minify-js","duration":32890,"timestamp":1287184066644,"id":68,"parentId":67,"tags":{"name":"../app/_not-found/page.js","cache":"HIT"},"startTime":1718908249354,"traceId":"c3cad3ead5a52bb1"},{"name":"minify-js","duration":32753,"timestamp":1287184066788,"id":69,"parentId":67,"tags":{"name":"../pages/_app.js","cache":"HIT"},"startTime":1718908249354,"traceId":"c3cad3ead5a52bb1"},{"name":"minify-js","duration":32742,"timestamp":1287184066800,"id":70,"parentId":67,"tags":{"name":"../pages/_error.js","cache":"HIT"},"startTime":1718908249355,"traceId":"c3cad3ead5a52bb1"},{"name":"minify-js","duration":18642,"timestamp":1287184080901,"id":72,"parentId":67,"tags":{"name":"../pages/api/auth/[...nextauth].js","cache":"HIT"},"startTime":1718908249369,"traceId":"c3cad3ead5a52bb1"},{"name":"minify-js","duration":18476,"timestamp":1287184081068,"id":74,"parentId":67,"tags":{"name":"../app/favicon.ico/route.js","cache":"HIT"},"startTime":1718908249369,"traceId":"c3cad3ead5a52bb1"},{"name":"minify-js","duration":2059,"timestamp":1287184097486,"id":76,"parentId":67,"tags":{"name":"../pages/_document.js","cache":"HIT"},"startTime":1718908249385,"traceId":"c3cad3ead5a52bb1"},{"name":"minify-js","duration":2021,"timestamp":1287184097526,"id":77,"parentId":67,"tags":{"name":"../webpack-runtime.js","cache":"HIT"},"startTime":1718908249385,"traceId":"c3cad3ead5a52bb1"},{"name":"minify-js","duration":2010,"timestamp":1287184097537,"id":78,"parentId":67,"tags":{"name":"../webpack-api-runtime.js","cache":"HIT"},"startTime":1718908249385,"traceId":"c3cad3ead5a52bb1"},{"name":"minify-js","duration":2005,"timestamp":1287184097543,"id":79,"parentId":67,"tags":{"name":"948.js","cache":"HIT"},"startTime":1718908249385,"traceId":"c3cad3ead5a52bb1"},{"name":"minify-js","duration":2001,"timestamp":1287184097547,"id":80,"parentId":67,"tags":{"name":"370.js","cache":"HIT"},"startTime":1718908249385,"traceId":"c3cad3ead5a52bb1"},{"name":"minify-js","duration":40,"timestamp":1287184099509,"id":83,"parentId":67,"tags":{"name":"682.js","cache":"HIT"},"startTime":1718908249387,"traceId":"c3cad3ead5a52bb1"},{"name":"minify-js","duration":26,"timestamp":1287184099523,"id":84,"parentId":67,"tags":{"name":"905.js","cache":"HIT"},"startTime":1718908249387,"traceId":"c3cad3ead5a52bb1"},{"name":"minify-js","duration":22,"timestamp":1287184099528,"id":85,"parentId":67,"tags":{"name":"739.js","cache":"HIT"},"startTime":1718908249387,"traceId":"c3cad3ead5a52bb1"},{"name":"minify-js","duration":100237,"timestamp":1287184080929,"id":73,"parentId":67,"tags":{"name":"../app/admin/page.js","cache":"MISS"},"startTime":1718908249369,"traceId":"c3cad3ead5a52bb1"},{"name":"minify-js","duration":108838,"timestamp":1287184097975,"id":82,"parentId":67,"tags":{"name":"765.js","cache":"MISS"},"startTime":1718908249386,"traceId":"c3cad3ead5a52bb1"},{"name":"minify-js","duration":114621,"timestamp":1287184097550,"id":81,"parentId":67,"tags":{"name":"339.js","cache":"MISS"},"startTime":1718908249385,"traceId":"c3cad3ead5a52bb1"},{"name":"minify-js","duration":184716,"timestamp":1287184081126,"id":75,"parentId":67,"tags":{"name":"../app/page.js","cache":"MISS"},"startTime":1718908249369,"traceId":"c3cad3ead5a52bb1"},{"name":"minify-js","duration":477660,"timestamp":1287184066809,"id":71,"parentId":67,"tags":{"name":"../app/admin/create-course/page.js","cache":"MISS"},"startTime":1718908249355,"traceId":"c3cad3ead5a52bb1"},{"name":"terser-webpack-plugin-optimize","duration":487786,"timestamp":1287184056697,"id":67,"parentId":20,"tags":{"compilationName":"server","swcMinify":true},"startTime":1718908249344,"traceId":"c3cad3ead5a52bb1"},{"name":"css-minimizer-plugin","duration":123,"timestamp":1287184544655,"id":86,"parentId":20,"tags":{},"startTime":1718908249832,"traceId":"c3cad3ead5a52bb1"},{"name":"create-trace-assets","duration":620,"timestamp":1287184544911,"id":87,"parentId":21,"tags":{},"startTime":1718908249833,"traceId":"c3cad3ead5a52bb1"},{"name":"seal","duration":736112,"timestamp":1287183814518,"id":54,"parentId":20,"tags":{},"startTime":1718908249102,"traceId":"c3cad3ead5a52bb1"},{"name":"webpack-compilation","duration":1585318,"timestamp":1287182969841,"id":20,"parentId":17,"tags":{"name":"server"},"startTime":1718908248258,"traceId":"c3cad3ead5a52bb1"},{"name":"emit","duration":19767,"timestamp":1287184555521,"id":88,"parentId":17,"tags":{},"startTime":1718908249843,"traceId":"c3cad3ead5a52bb1"},{"name":"webpack-close","duration":885843,"timestamp":1287184575753,"id":89,"parentId":17,"tags":{"name":"server"},"startTime":1718908249863,"traceId":"c3cad3ead5a52bb1"},{"name":"webpack-generate-error-stats","duration":4257,"timestamp":1287185461699,"id":90,"parentId":89,"tags":{},"startTime":1718908250749,"traceId":"c3cad3ead5a52bb1"},{"name":"run-webpack-compiler","duration":2840525,"timestamp":1287182625824,"id":17,"parentId":16,"tags":{},"startTime":1718908247914,"traceId":"c3cad3ead5a52bb1"},{"name":"format-webpack-messages","duration":139,"timestamp":1287185466360,"id":91,"parentId":16,"tags":{},"startTime":1718908250754,"traceId":"c3cad3ead5a52bb1"},{"name":"worker-main-server","duration":2841082,"timestamp":1287182625571,"id":16,"parentId":1,"tags":{},"startTime":1718908247913,"traceId":"c3cad3ead5a52bb1"},{"name":"create-entrypoints","duration":29479,"timestamp":1287186067472,"id":95,"parentId":93,"tags":{},"startTime":1718908251355,"traceId":"c3cad3ead5a52bb1"},{"name":"generate-webpack-config","duration":309191,"timestamp":1287186097102,"id":96,"parentId":94,"tags":{},"startTime":1718908251385,"traceId":"c3cad3ead5a52bb1"},{"name":"make","duration":723,"timestamp":1287186475224,"id":98,"parentId":97,"tags":{},"startTime":1718908251763,"traceId":"c3cad3ead5a52bb1"},{"name":"chunk-graph","duration":755,"timestamp":1287186478771,"id":100,"parentId":99,"tags":{},"startTime":1718908251766,"traceId":"c3cad3ead5a52bb1"},{"name":"optimize-modules","duration":20,"timestamp":1287186479638,"id":102,"parentId":99,"tags":{},"startTime":1718908251767,"traceId":"c3cad3ead5a52bb1"},{"name":"optimize-chunks","duration":840,"timestamp":1287186479741,"id":103,"parentId":99,"tags":{},"startTime":1718908251767,"traceId":"c3cad3ead5a52bb1"},{"name":"optimize-tree","duration":118,"timestamp":1287186480660,"id":104,"parentId":99,"tags":{},"startTime":1718908251768,"traceId":"c3cad3ead5a52bb1"},{"name":"optimize-chunk-modules","duration":451,"timestamp":1287186480974,"id":105,"parentId":99,"tags":{},"startTime":1718908251768,"traceId":"c3cad3ead5a52bb1"},{"name":"optimize","duration":2008,"timestamp":1287186479593,"id":101,"parentId":99,"tags":{},"startTime":1718908251767,"traceId":"c3cad3ead5a52bb1"},{"name":"module-hash","duration":73,"timestamp":1287186482424,"id":106,"parentId":99,"tags":{},"startTime":1718908251770,"traceId":"c3cad3ead5a52bb1"},{"name":"code-generation","duration":184,"timestamp":1287186482532,"id":107,"parentId":99,"tags":{},"startTime":1718908251770,"traceId":"c3cad3ead5a52bb1"},{"name":"hash","duration":374,"timestamp":1287186482988,"id":108,"parentId":99,"tags":{},"startTime":1718908251771,"traceId":"c3cad3ead5a52bb1"},{"name":"code-generation-jobs","duration":100,"timestamp":1287186483361,"id":109,"parentId":99,"tags":{},"startTime":1718908251771,"traceId":"c3cad3ead5a52bb1"},{"name":"module-assets","duration":65,"timestamp":1287186483439,"id":110,"parentId":99,"tags":{},"startTime":1718908251771,"traceId":"c3cad3ead5a52bb1"},{"name":"create-chunk-assets","duration":174,"timestamp":1287186483508,"id":111,"parentId":99,"tags":{},"startTime":1718908251771,"traceId":"c3cad3ead5a52bb1"},{"name":"minify-js","duration":259,"timestamp":1287186522228,"id":113,"parentId":112,"tags":{"name":"interception-route-rewrite-manifest.js","cache":"HIT"},"startTime":1718908251810,"traceId":"c3cad3ead5a52bb1"},{"name":"terser-webpack-plugin-optimize","duration":8265,"timestamp":1287186514231,"id":112,"parentId":97,"tags":{"compilationName":"edge-server","swcMinify":true},"startTime":1718908251802,"traceId":"c3cad3ead5a52bb1"},{"name":"css-minimizer-plugin","duration":127,"timestamp":1287186522563,"id":114,"parentId":97,"tags":{},"startTime":1718908251810,"traceId":"c3cad3ead5a52bb1"},{"name":"seal","duration":46652,"timestamp":1287186478143,"id":99,"parentId":97,"tags":{},"startTime":1718908251766,"traceId":"c3cad3ead5a52bb1"},{"name":"webpack-compilation","duration":56389,"timestamp":1287186468692,"id":97,"parentId":94,"tags":{"name":"edge-server"},"startTime":1718908251756,"traceId":"c3cad3ead5a52bb1"},{"name":"emit","duration":2768,"timestamp":1287186525386,"id":115,"parentId":94,"tags":{},"startTime":1718908251813,"traceId":"c3cad3ead5a52bb1"},{"name":"webpack-close","duration":580,"timestamp":1287186528725,"id":116,"parentId":94,"tags":{"name":"edge-server"},"startTime":1718908251816,"traceId":"c3cad3ead5a52bb1"},{"name":"webpack-generate-error-stats","duration":2040,"timestamp":1287186529342,"id":117,"parentId":116,"tags":{},"startTime":1718908251817,"traceId":"c3cad3ead5a52bb1"},{"name":"run-webpack-compiler","duration":463974,"timestamp":1287186067464,"id":94,"parentId":93,"tags":{},"startTime":1718908251355,"traceId":"c3cad3ead5a52bb1"},{"name":"format-webpack-messages","duration":56,"timestamp":1287186531442,"id":118,"parentId":93,"tags":{},"startTime":1718908251819,"traceId":"c3cad3ead5a52bb1"},{"name":"worker-main-edge-server","duration":464552,"timestamp":1287186067006,"id":93,"parentId":1,"tags":{},"startTime":1718908251355,"traceId":"c3cad3ead5a52bb1"},{"name":"create-entrypoints","duration":17737,"timestamp":1287186985843,"id":121,"parentId":119,"tags":{},"startTime":1718908252274,"traceId":"c3cad3ead5a52bb1"},{"name":"generate-webpack-config","duration":238790,"timestamp":1287187003710,"id":122,"parentId":120,"tags":{},"startTime":1718908252291,"traceId":"c3cad3ead5a52bb1"},{"name":"next-swc-transform","duration":36447,"timestamp":1287187591657,"id":138,"parentId":137,"tags":{},"startTime":1718908252879,"traceId":"c3cad3ead5a52bb1"},{"name":"next-swc-loader","duration":37107,"timestamp":1287187591020,"id":137,"parentId":136,"tags":{},"startTime":1718908252879,"traceId":"c3cad3ead5a52bb1"},{"name":"build-module-js","duration":93816,"timestamp":1287187587573,"id":136,"parentId":123,"tags":{"name":"E:\\codingcommentary\\admin\\node_modules\\next\\dist\\shared\\lib\\router\\router.js","layer":null},"startTime":1718908252875,"traceId":"c3cad3ead5a52bb1"},{"name":"add-entry","duration":395085,"timestamp":1287187305691,"id":129,"parentId":124,"tags":{"request":"next-client-pages-loader?absolutePagePath=private-next-pages%2F_app.tsx&page=%2F_app!"},"startTime":1718908252593,"traceId":"c3cad3ead5a52bb1"}]
-[{"name":"add-entry","duration":395431,"timestamp":1287187305677,"id":128,"parentId":124,"tags":{"request":"next-client-pages-loader?absolutePagePath=next%2Fdist%2Fclient%2Fcomponents%2Fnot-found-error&page=%2F_not-found%2Fpage!"},"startTime":1718908252593,"traceId":"c3cad3ead5a52bb1"},{"name":"add-entry","duration":406992,"timestamp":1287187305722,"id":131,"parentId":124,"tags":{"request":"next-client-pages-loader?absolutePagePath=next%2Fdist%2Fpages%2F_error&page=%2F_error!"},"startTime":1718908252593,"traceId":"c3cad3ead5a52bb1"},{"name":"add-entry","duration":423181,"timestamp":1287187305711,"id":130,"parentId":124,"tags":{"request":"E:\\codingcommentary\\admin\\node_modules\\next\\dist\\client\\router.js"},"startTime":1718908252593,"traceId":"c3cad3ead5a52bb1"},{"name":"add-entry","duration":444291,"timestamp":1287187305665,"id":127,"parentId":124,"tags":{"request":"next-flight-client-entry-loader?modules=%7B%22request%22%3A%22E%3A%5C%5Ccodingcommentary%5C%5Cadmin%5C%5Cnode_modules%5C%5Cnext%5C%5Cdist%5C%5Cclient%5C%5Ccomponents%5C%5Capp-router.js%22%2C%22ids%22%3A%5B%5D%7D&modules=%7B%22request%22%3A%22E%3A%5C%5Ccodingcommentary%5C%5Cadmin%5C%5Cnode_modules%5C%5Cnext%5C%5Cdist%5C%5Cclient%5C%5Ccomponents%5C%5Cclient-page.js%22%2C%22ids%22%3A%5B%5D%7D&modules=%7B%22request%22%3A%22E%3A%5C%5Ccodingcommentary%5C%5Cadmin%5C%5Cnode_modules%5C%5Cnext%5C%5Cdist%5C%5Cclient%5C%5Ccomponents%5C%5Cerror-boundary.js%22%2C%22ids%22%3A%5B%5D%7D&modules=%7B%22request%22%3A%22E%3A%5C%5Ccodingcommentary%5C%5Cadmin%5C%5Cnode_modules%5C%5Cnext%5C%5Cdist%5C%5Cclient%5C%5Ccomponents%5C%5Clayout-router.js%22%2C%22ids%22%3A%5B%5D%7D&modules=%7B%22request%22%3A%22E%3A%5C%5Ccodingcommentary%5C%5Cadmin%5C%5Cnode_modules%5C%5Cnext%5C%5Cdist%5C%5Cclient%5C%5Ccomponents%5C%5Cnot-found-boundary.js%22%2C%22ids%22%3A%5B%5D%7D&modules=%7B%22request%22%3A%22E%3A%5C%5Ccodingcommentary%5C%5Cadmin%5C%5Cnode_modules%5C%5Cnext%5C%5Cdist%5C%5Cclient%5C%5Ccomponents%5C%5Crender-from-template-context.js%22%2C%22ids%22%3A%5B%5D%7D&server=false!"},"startTime":1718908252593,"traceId":"c3cad3ead5a52bb1"},{"name":"add-entry","duration":444352,"timestamp":1287187305632,"id":126,"parentId":124,"tags":{"request":"./node_modules/next/dist/client/app-next.js"},"startTime":1718908252593,"traceId":"c3cad3ead5a52bb1"},{"name":"read-resource","duration":21877,"timestamp":1287187735867,"id":141,"parentId":140,"tags":{},"startTime":1718908253024,"traceId":"c3cad3ead5a52bb1"},{"name":"add-entry","duration":829864,"timestamp":1287187305200,"id":125,"parentId":124,"tags":{"request":"./node_modules/next/dist/client/next.js"},"startTime":1718908252593,"traceId":"c3cad3ead5a52bb1"},{"name":"postcss-process","duration":234069,"timestamp":1287187992012,"id":143,"parentId":142,"tags":{},"startTime":1718908253280,"traceId":"c3cad3ead5a52bb1"},{"name":"postcss-loader","duration":467943,"timestamp":1287187758199,"id":142,"parentId":140,"tags":{},"startTime":1718908253046,"traceId":"c3cad3ead5a52bb1"},{"name":"css-loader","duration":22900,"timestamp":1287188226293,"id":144,"parentId":140,"tags":{"astUsed":"true"},"startTime":1718908253514,"traceId":"c3cad3ead5a52bb1"},{"name":"build-module-css","duration":547580,"timestamp":1287187732965,"id":140,"parentId":139,"tags":{"name":"E:\\codingcommentary\\admin\\app\\globals.css.webpack[javascript/auto]!=!E:\\codingcommentary\\admin\\node_modules\\next\\dist\\build\\webpack\\loaders\\css-loader\\src\\index.js??ruleSet[1].rules[13].oneOf[12].use[2]!E:\\codingcommentary\\admin\\node_modules\\next\\dist\\build\\webpack\\loaders\\postcss-loader\\src\\index.js??ruleSet[1].rules[13].oneOf[12].use[3]!E:\\codingcommentary\\admin\\app\\globals.css","layer":null},"startTime":1718908253021,"traceId":"c3cad3ead5a52bb1"},{"name":"build-module-css","duration":640878,"timestamp":1287187713176,"id":139,"parentId":123,"tags":{"name":"E:\\codingcommentary\\admin\\app\\globals.css","layer":"app-pages-browser"},"startTime":1718908253001,"traceId":"c3cad3ead5a52bb1"},{"name":"build-module","duration":193,"timestamp":1287188373154,"id":145,"parentId":139,"tags":{},"startTime":1718908253661,"traceId":"c3cad3ead5a52bb1"},{"name":"add-entry","duration":1085689,"timestamp":1287187305732,"id":132,"parentId":124,"tags":{"request":"next-flight-client-entry-loader?modules=%7B%22request%22%3A%22E%3A%5C%5Ccodingcommentary%5C%5Cadmin%5C%5Capp%5C%5CProvider.tsx%22%2C%22ids%22%3A%5B%22Providers%22%2C%22Custom%22%5D%7D&modules=%7B%22request%22%3A%22E%3A%5C%5Ccodingcommentary%5C%5Cadmin%5C%5Capp%5C%5Cutils%5C%5Ctheme-provider.tsx%22%2C%22ids%22%3A%5B%22ThemeProvider%22%5D%7D&modules=%7B%22request%22%3A%22E%3A%5C%5Ccodingcommentary%5C%5Cadmin%5C%5Cnode_modules%5C%5Cnext%5C%5Cfont%5C%5Cgoogle%5C%5Ctarget.css%3F%7B%5C%22path%5C%22%3A%5C%22app%5C%5C%5C%5Clayout.tsx%5C%22%2C%5C%22import%5C%22%3A%5C%22Poppins%5C%22%2C%5C%22arguments%5C%22%3A%5B%7B%5C%22subsets%5C%22%3A%5B%5C%22latin%5C%22%5D%2C%5C%22weight%5C%22%3A%5B%5C%22400%5C%22%2C%5C%22500%5C%22%2C%5C%22600%5C%22%2C%5C%22700%5C%22%5D%2C%5C%22variable%5C%22%3A%5C%22--font-Poppins%5C%22%7D%5D%2C%5C%22variableName%5C%22%3A%5C%22poppins%5C%22%7D%22%2C%22ids%22%3A%5B%5D%7D&modules=%7B%22request%22%3A%22E%3A%5C%5Ccodingcommentary%5C%5Cadmin%5C%5Cnode_modules%5C%5Cnext%5C%5Cfont%5C%5Cgoogle%5C%5Ctarget.css%3F%7B%5C%22path%5C%22%3A%5C%22app%5C%5C%5C%5Clayout.tsx%5C%22%2C%5C%22import%5C%22%3A%5C%22Josefin_Sans%5C%22%2C%5C%22arguments%5C%22%3A%5B%7B%5C%22subsets%5C%22%3A%5B%5C%22latin%5C%22%5D%2C%5C%22weight%5C%22%3A%5B%5C%22400%5C%22%2C%5C%22500%5C%22%2C%5C%22600%5C%22%2C%5C%22700%5C%22%5D%2C%5C%22variable%5C%22%3A%5C%22--font-Josefin%5C%22%7D%5D%2C%5C%22variableName%5C%22%3A%5C%22josefin%5C%22%7D%22%2C%22ids%22%3A%5B%5D%7D&modules=%7B%22request%22%3A%22E%3A%5C%5Ccodingcommentary%5C%5Cadmin%5C%5Capp%5C%5Cglobals.css%22%2C%22ids%22%3A%5B%5D%7D&modules=%7B%22request%22%3A%22E%3A%5C%5Ccodingcommentary%5C%5Cadmin%5C%5Cnode_modules%5C%5Creact-hot-toast%5C%5Cdist%5C%5Cindex.mjs%22%2C%22ids%22%3A%5B%22Toaster%22%5D%7D&server=false!"},"startTime":1718908252593,"traceId":"c3cad3ead5a52bb1"},{"name":"add-entry","duration":1093302,"timestamp":1287187305833,"id":135,"parentId":124,"tags":{"request":"next-flight-client-entry-loader?modules=%7B%22request%22%3A%22E%3A%5C%5Ccodingcommentary%5C%5Cadmin%5C%5Capp%5C%5Cpage.tsx%22%2C%22ids%22%3A%5B%5D%7D&server=false!"},"startTime":1718908252594,"traceId":"c3cad3ead5a52bb1"},{"name":"add-entry","duration":1103152,"timestamp":1287187305739,"id":133,"parentId":124,"tags":{"request":"next-flight-client-entry-loader?modules=%7B%22request%22%3A%22E%3A%5C%5Ccodingcommentary%5C%5Cadmin%5C%5Capp%5C%5Cadmin%5C%5Ccreate-course%5C%5Cpage.tsx%22%2C%22ids%22%3A%5B%5D%7D&server=false!"},"startTime":1718908252593,"traceId":"c3cad3ead5a52bb1"},{"name":"add-entry","duration":1103097,"timestamp":1287187305809,"id":134,"parentId":124,"tags":{"request":"next-flight-client-entry-loader?modules=%7B%22request%22%3A%22E%3A%5C%5Ccodingcommentary%5C%5Cadmin%5C%5Capp%5C%5Cadmin%5C%5Cpage.tsx%22%2C%22ids%22%3A%5B%5D%7D&server=false!"},"startTime":1718908252594,"traceId":"c3cad3ead5a52bb1"},{"name":"make","duration":1104336,"timestamp":1287187304776,"id":124,"parentId":123,"tags":{},"startTime":1718908252593,"traceId":"c3cad3ead5a52bb1"},{"name":"chunk-graph","duration":15340,"timestamp":1287188497676,"id":147,"parentId":146,"tags":{},"startTime":1718908253785,"traceId":"c3cad3ead5a52bb1"},{"name":"optimize-modules","duration":17,"timestamp":1287188513160,"id":149,"parentId":146,"tags":{},"startTime":1718908253801,"traceId":"c3cad3ead5a52bb1"},{"name":"optimize-chunks","duration":19847,"timestamp":1287188515229,"id":151,"parentId":146,"tags":{},"startTime":1718908253803,"traceId":"c3cad3ead5a52bb1"},{"name":"optimize-tree","duration":129,"timestamp":1287188535182,"id":152,"parentId":146,"tags":{},"startTime":1718908253823,"traceId":"c3cad3ead5a52bb1"},{"name":"optimize-chunk-modules","duration":50347,"timestamp":1287188535405,"id":153,"parentId":146,"tags":{},"startTime":1718908253823,"traceId":"c3cad3ead5a52bb1"},{"name":"optimize","duration":72761,"timestamp":1287188513124,"id":148,"parentId":146,"tags":{},"startTime":1718908253801,"traceId":"c3cad3ead5a52bb1"},{"name":"module-hash","duration":30086,"timestamp":1287188646645,"id":154,"parentId":146,"tags":{},"startTime":1718908253934,"traceId":"c3cad3ead5a52bb1"},{"name":"code-generation","duration":9984,"timestamp":1287188676836,"id":155,"parentId":146,"tags":{},"startTime":1718908253965,"traceId":"c3cad3ead5a52bb1"},{"name":"hash","duration":16615,"timestamp":1287188696043,"id":156,"parentId":146,"tags":{},"startTime":1718908253984,"traceId":"c3cad3ead5a52bb1"},{"name":"code-generation-jobs","duration":383,"timestamp":1287188712654,"id":157,"parentId":146,"tags":{},"startTime":1718908254000,"traceId":"c3cad3ead5a52bb1"},{"name":"module-assets","duration":1027,"timestamp":1287188712969,"id":158,"parentId":146,"tags":{},"startTime":1718908254001,"traceId":"c3cad3ead5a52bb1"},{"name":"create-chunk-assets","duration":10729,"timestamp":1287188714027,"id":159,"parentId":146,"tags":{},"startTime":1718908254002,"traceId":"c3cad3ead5a52bb1"},{"name":"NextJsBuildManifest-generateClientManifest","duration":791,"timestamp":1287188726477,"id":161,"parentId":123,"tags":{},"startTime":1718908254014,"traceId":"c3cad3ead5a52bb1"},{"name":"NextJsBuildManifest-createassets","duration":1480,"timestamp":1287188725802,"id":160,"parentId":123,"tags":{},"startTime":1718908254014,"traceId":"c3cad3ead5a52bb1"},{"name":"minify-js","duration":831,"timestamp":1287188741780,"id":164,"parentId":162,"tags":{"name":"static/chunks/main-app-f576a99b76b1a535.js","cache":"HIT"},"startTime":1718908254030,"traceId":"c3cad3ead5a52bb1"},{"name":"minify-js","duration":767,"timestamp":1287188741851,"id":165,"parentId":162,"tags":{"name":"static/chunks/app/_not-found/page-361ab58b2d340291.js","cache":"HIT"},"startTime":1718908254030,"traceId":"c3cad3ead5a52bb1"},{"name":"minify-js","duration":570,"timestamp":1287188742048,"id":166,"parentId":162,"tags":{"name":"static/chunks/pages/_app-d6932ac60c55b2c9.js","cache":"HIT"},"startTime":1718908254030,"traceId":"c3cad3ead5a52bb1"},{"name":"minify-js","duration":559,"timestamp":1287188742060,"id":167,"parentId":162,"tags":{"name":"static/chunks/pages/_error-1be831200e60c5c0.js","cache":"HIT"},"startTime":1718908254030,"traceId":"c3cad3ead5a52bb1"},{"name":"minify-js","duration":553,"timestamp":1287188742067,"id":168,"parentId":162,"tags":{"name":"static/chunks/app/layout-e32929f6c86d6d40.js","cache":"HIT"},"startTime":1718908254030,"traceId":"c3cad3ead5a52bb1"},{"name":"minify-js","duration":546,"timestamp":1287188742074,"id":169,"parentId":162,"tags":{"name":"static/chunks/app/admin/create-course/page-2375b2451ed564b5.js","cache":"HIT"},"startTime":1718908254030,"traceId":"c3cad3ead5a52bb1"},{"name":"minify-js","duration":536,"timestamp":1287188742086,"id":170,"parentId":162,"tags":{"name":"static/chunks/app/admin/page-fb65784f61d369d8.js","cache":"HIT"},"startTime":1718908254030,"traceId":"c3cad3ead5a52bb1"},{"name":"minify-js","duration":531,"timestamp":1287188742092,"id":171,"parentId":162,"tags":{"name":"static/chunks/app/page-560d263fdde10f9e.js","cache":"HIT"},"startTime":1718908254030,"traceId":"c3cad3ead5a52bb1"},{"name":"minify-js","duration":433,"timestamp":1287188742190,"id":172,"parentId":162,"tags":{"name":"static/chunks/webpack-bb2d05b5b16c7a58.js","cache":"HIT"},"startTime":1718908254030,"traceId":"c3cad3ead5a52bb1"},{"name":"minify-js","duration":416,"timestamp":1287188742208,"id":173,"parentId":162,"tags":{"name":"static/chunks/framework-56343d6ce4928a14.js","cache":"HIT"},"startTime":1718908254030,"traceId":"c3cad3ead5a52bb1"},{"name":"minify-js","duration":409,"timestamp":1287188742216,"id":174,"parentId":162,"tags":{"name":"static/chunks/3627521c-be95a063eaeb22df.js","cache":"HIT"},"startTime":1718908254030,"traceId":"c3cad3ead5a52bb1"},{"name":"minify-js","duration":395,"timestamp":1287188742230,"id":175,"parentId":162,"tags":{"name":"static/chunks/46170725-2bdaabc37c724365.js","cache":"HIT"},"startTime":1718908254030,"traceId":"c3cad3ead5a52bb1"},{"name":"minify-js","duration":390,"timestamp":1287188742237,"id":176,"parentId":162,"tags":{"name":"static/chunks/fd9d1056-f6566c22bb3f451b.js","cache":"HIT"},"startTime":1718908254030,"traceId":"c3cad3ead5a52bb1"},{"name":"minify-js","duration":384,"timestamp":1287188742243,"id":177,"parentId":162,"tags":{"name":"static/chunks/5349c568-9aec96407390bff8.js","cache":"HIT"},"startTime":1718908254030,"traceId":"c3cad3ead5a52bb1"},{"name":"minify-js","duration":379,"timestamp":1287188742248,"id":178,"parentId":162,"tags":{"name":"static/chunks/bc9c3264-d137751ba73e1fc3.js","cache":"HIT"},"startTime":1718908254030,"traceId":"c3cad3ead5a52bb1"},{"name":"minify-js","duration":371,"timestamp":1287188742257,"id":179,"parentId":162,"tags":{"name":"static/chunks/12038df7-8f6e0cf13f9463ec.js","cache":"HIT"},"startTime":1718908254030,"traceId":"c3cad3ead5a52bb1"},{"name":"minify-js","duration":360,"timestamp":1287188742268,"id":180,"parentId":162,"tags":{"name":"static/chunks/ec3863c0-d1b9ced83ea029a2.js","cache":"HIT"},"startTime":1718908254030,"traceId":"c3cad3ead5a52bb1"},{"name":"minify-js","duration":353,"timestamp":1287188742276,"id":181,"parentId":162,"tags":{"name":"static/chunks/00cbbcb7-bca83dad98e32047.js","cache":"HIT"},"startTime":1718908254030,"traceId":"c3cad3ead5a52bb1"},{"name":"minify-js","duration":334,"timestamp":1287188742296,"id":182,"parentId":162,"tags":{"name":"static/chunks/863-93d7e2f8cef4bd26.js","cache":"HIT"},"startTime":1718908254030,"traceId":"c3cad3ead5a52bb1"},{"name":"minify-js","duration":329,"timestamp":1287188742301,"id":183,"parentId":162,"tags":{"name":"static/chunks/786-58c1b5048ec4f2b9.js","cache":"HIT"},"startTime":1718908254030,"traceId":"c3cad3ead5a52bb1"},{"name":"minify-js","duration":333,"timestamp":1287188742307,"id":184,"parentId":162,"tags":{"name":"static/chunks/276-a4dd6c42b37e533f.js","cache":"HIT"},"startTime":1718908254030,"traceId":"c3cad3ead5a52bb1"},{"name":"minify-js","duration":326,"timestamp":1287188742315,"id":185,"parentId":162,"tags":{"name":"static/chunks/300-530b92f246ee8a47.js","cache":"HIT"},"startTime":1718908254030,"traceId":"c3cad3ead5a52bb1"},{"name":"minify-js","duration":322,"timestamp":1287188742320,"id":186,"parentId":162,"tags":{"name":"static/chunks/374-42a0b97cdb8b5648.js","cache":"HIT"},"startTime":1718908254030,"traceId":"c3cad3ead5a52bb1"},{"name":"minify-js","duration":318,"timestamp":1287188742325,"id":187,"parentId":162,"tags":{"name":"static/chunks/23-c444f689a8cfe250.js","cache":"HIT"},"startTime":1718908254030,"traceId":"c3cad3ead5a52bb1"},{"name":"minify-js","duration":313,"timestamp":1287188742330,"id":188,"parentId":162,"tags":{"name":"static/chunks/966-aa4f27525c3f5eeb.js","cache":"HIT"},"startTime":1718908254030,"traceId":"c3cad3ead5a52bb1"},{"name":"minify-js","duration":308,"timestamp":1287188742335,"id":189,"parentId":162,"tags":{"name":"static/chunks/63-3511c498872db81f.js","cache":"HIT"},"startTime":1718908254030,"traceId":"c3cad3ead5a52bb1"},{"name":"minify-js","duration":304,"timestamp":1287188742340,"id":190,"parentId":162,"tags":{"name":"server/middleware-react-loadable-manifest.js","cache":"HIT"},"startTime":1718908254030,"traceId":"c3cad3ead5a52bb1"},{"name":"minify-js","duration":47,"timestamp":1287188742598,"id":194,"parentId":162,"tags":{"name":"server/next-font-manifest.js","cache":"HIT"},"startTime":1718908254030,"traceId":"c3cad3ead5a52bb1"},{"name":"minify-js","duration":8978,"timestamp":1287188742581,"id":193,"parentId":162,"tags":{"name":"static/bMe2zJeDjnk9SumFKHIzU/_buildManifest.js","cache":"MISS"},"startTime":1718908254030,"traceId":"c3cad3ead5a52bb1"},{"name":"minify-js","duration":9249,"timestamp":1287188742353,"id":191,"parentId":162,"tags":{"name":"static/bMe2zJeDjnk9SumFKHIzU/_ssgManifest.js","cache":"MISS"},"startTime":1718908254030,"traceId":"c3cad3ead5a52bb1"},{"name":"minify-js","duration":9093,"timestamp":1287188742522,"id":192,"parentId":162,"tags":{"name":"server/middleware-build-manifest.js","cache":"MISS"},"startTime":1718908254030,"traceId":"c3cad3ead5a52bb1"},{"name":"minify-js","duration":94052,"timestamp":1287188735037,"id":163,"parentId":162,"tags":{"name":"static/chunks/main-d25c630b491a2c20.js","cache":"MISS"},"startTime":1718908254023,"traceId":"c3cad3ead5a52bb1"},{"name":"terser-webpack-plugin-optimize","duration":100380,"timestamp":1287188728724,"id":162,"parentId":123,"tags":{"compilationName":"client","swcMinify":true},"startTime":1718908254016,"traceId":"c3cad3ead5a52bb1"},{"name":"minify-css","duration":214124,"timestamp":1287188829448,"id":196,"parentId":195,"tags":{"file":"static/css/d19a0c898fe4f69e.css","cache":"MISS"},"startTime":1718908254117,"traceId":"c3cad3ead5a52bb1"},{"name":"css-minimizer-plugin","duration":214305,"timestamp":1287188829280,"id":195,"parentId":123,"tags":{},"startTime":1718908254117,"traceId":"c3cad3ead5a52bb1"},{"name":"seal","duration":582357,"timestamp":1287188470394,"id":146,"parentId":123,"tags":{},"startTime":1718908253758,"traceId":"c3cad3ead5a52bb1"},{"name":"webpack-compilation","duration":1754362,"timestamp":1287187298647,"id":123,"parentId":120,"tags":{"name":"client"},"startTime":1718908252586,"traceId":"c3cad3ead5a52bb1"},{"name":"emit","duration":27293,"timestamp":1287189053270,"id":197,"parentId":120,"tags":{},"startTime":1718908254341,"traceId":"c3cad3ead5a52bb1"},{"name":"webpack-close","duration":245498,"timestamp":1287189081234,"id":198,"parentId":120,"tags":{"name":"client"},"startTime":1718908254369,"traceId":"c3cad3ead5a52bb1"},{"name":"webpack-generate-error-stats","duration":4780,"timestamp":1287189326794,"id":199,"parentId":198,"tags":{},"startTime":1718908254615,"traceId":"c3cad3ead5a52bb1"},{"name":"run-webpack-compiler","duration":2345973,"timestamp":1287186985841,"id":120,"parentId":119,"tags":{},"startTime":1718908252274,"traceId":"c3cad3ead5a52bb1"},{"name":"format-webpack-messages","duration":88,"timestamp":1287189331820,"id":200,"parentId":119,"tags":{},"startTime":1718908254620,"traceId":"c3cad3ead5a52bb1"},{"name":"worker-main-client","duration":2346382,"timestamp":1287186985596,"id":119,"parentId":1,"tags":{},"startTime":1718908252273,"traceId":"c3cad3ead5a52bb1"},{"name":"verify-and-lint","duration":89204,"timestamp":1287189393533,"id":204,"parentId":1,"tags":{},"startTime":1718908254681,"traceId":"c3cad3ead5a52bb1"},{"name":"verify-typescript-setup","duration":2057200,"timestamp":1287189371972,"id":203,"parentId":1,"tags":{},"startTime":1718908254660,"traceId":"c3cad3ead5a52bb1"},{"name":"check-static-error-page","duration":5823,"timestamp":1287191600649,"id":207,"parentId":206,"tags":{},"startTime":1718908256888,"traceId":"c3cad3ead5a52bb1"},{"name":"check-page","duration":1897,"timestamp":1287191632965,"id":210,"parentId":206,"tags":{"page":"/_document"},"startTime":1718908256921,"traceId":"c3cad3ead5a52bb1"},{"name":"check-page","duration":2791,"timestamp":1287191632777,"id":209,"parentId":206,"tags":{"page":"/_error"},"startTime":1718908256920,"traceId":"c3cad3ead5a52bb1"},{"name":"check-page","duration":6141,"timestamp":1287191631613,"id":208,"parentId":206,"tags":{"page":"/_app"},"startTime":1718908256919,"traceId":"c3cad3ead5a52bb1"},{"name":"check-page","duration":25933,"timestamp":1287191633014,"id":211,"parentId":206,"tags":{"page":"/api/auth/[...nextauth]"},"startTime":1718908256921,"traceId":"c3cad3ead5a52bb1"},{"name":"is-page-static","duration":327196,"timestamp":1287191638486,"id":218,"parentId":212,"tags":{},"startTime":1718908256926,"traceId":"c3cad3ead5a52bb1"},{"name":"check-page","duration":332712,"timestamp":1287191633067,"id":212,"parentId":206,"tags":{"page":"/_not-found"},"startTime":1718908256921,"traceId":"c3cad3ead5a52bb1"},{"name":"is-page-static","duration":311719,"timestamp":1287191655478,"id":221,"parentId":216,"tags":{},"startTime":1718908256943,"traceId":"c3cad3ead5a52bb1"},{"name":"check-page","duration":333702,"timestamp":1287191633561,"id":216,"parentId":206,"tags":{"page":"/"},"startTime":1718908256921,"traceId":"c3cad3ead5a52bb1"},{"name":"is-page-static","duration":335651,"timestamp":1287191637965,"id":217,"parentId":215,"tags":{},"startTime":1718908256926,"traceId":"c3cad3ead5a52bb1"},{"name":"check-page","duration":340161,"timestamp":1287191633530,"id":215,"parentId":206,"tags":{"page":"/favicon.ico"},"startTime":1718908256921,"traceId":"c3cad3ead5a52bb1"},{"name":"is-page-static","duration":347455,"timestamp":1287191638662,"id":219,"parentId":213,"tags":{},"startTime":1718908256926,"traceId":"c3cad3ead5a52bb1"},{"name":"check-page","duration":352829,"timestamp":1287191633377,"id":213,"parentId":206,"tags":{"page":"/admin/create-course"},"startTime":1718908256921,"traceId":"c3cad3ead5a52bb1"},{"name":"is-page-static","duration":333584,"timestamp":1287191655266,"id":220,"parentId":214,"tags":{},"startTime":1718908256943,"traceId":"c3cad3ead5a52bb1"},{"name":"check-page","duration":355471,"timestamp":1287191633466,"id":214,"parentId":206,"tags":{"page":"/admin"},"startTime":1718908256921,"traceId":"c3cad3ead5a52bb1"},{"name":"static-check","duration":388949,"timestamp":1287191600019,"id":206,"parentId":1,"tags":{},"startTime":1718908256888,"traceId":"c3cad3ead5a52bb1"},{"name":"load-dotenv","duration":30,"timestamp":1287192010487,"id":226,"parentId":225,"tags":{},"startTime":1718908257298,"traceId":"c3cad3ead5a52bb1"},{"name":"run-export-path-map","duration":300,"timestamp":1287192619584,"id":227,"parentId":225,"tags":{},"startTime":1718908257907,"traceId":"c3cad3ead5a52bb1"},{"name":"export-page","duration":395673,"timestamp":1287192621072,"id":229,"parentId":225,"tags":{"path":"/500"},"startTime":1718908257909,"traceId":"c3cad3ead5a52bb1"},{"name":"export-page","duration":409187,"timestamp":1287192621760,"id":232,"parentId":225,"tags":{"path":"/favicon.ico"},"startTime":1718908257909,"traceId":"c3cad3ead5a52bb1"},{"name":"export-page","duration":412414,"timestamp":1287192620872,"id":228,"parentId":225,"tags":{"path":"/404"},"startTime":1718908257908,"traceId":"c3cad3ead5a52bb1"},{"name":"export-page","duration":781549,"timestamp":1287192621133,"id":230,"parentId":225,"tags":{"path":"/_not-found"},"startTime":1718908257909,"traceId":"c3cad3ead5a52bb1"},{"name":"export-page","duration":783976,"timestamp":1287192621201,"id":231,"parentId":225,"tags":{"path":"/"},"startTime":1718908257909,"traceId":"c3cad3ead5a52bb1"},{"name":"export-page","duration":785420,"timestamp":1287192622096,"id":234,"parentId":225,"tags":{"path":"/admin"},"startTime":1718908257910,"traceId":"c3cad3ead5a52bb1"}]
-[{"name":"export-page","duration":844883,"timestamp":1287192621881,"id":233,"parentId":225,"tags":{"path":"/admin/create-course"},"startTime":1718908257909,"traceId":"c3cad3ead5a52bb1"},{"name":"next-export","duration":1569968,"timestamp":1287192009680,"id":225,"parentId":1,"tags":{},"startTime":1718908257297,"traceId":"c3cad3ead5a52bb1"},{"name":"move-exported-app-not-found-","duration":13550,"timestamp":1287193580226,"id":235,"parentId":224,"tags":{},"startTime":1718908258868,"traceId":"c3cad3ead5a52bb1"},{"name":"move-exported-page","duration":55308,"timestamp":1287193594020,"id":236,"parentId":224,"tags":{},"startTime":1718908258882,"traceId":"c3cad3ead5a52bb1"},{"name":"static-generation","duration":1742841,"timestamp":1287192004632,"id":224,"parentId":1,"tags":{},"startTime":1718908257292,"traceId":"c3cad3ead5a52bb1"},{"name":"node-file-trace-build","duration":4891393,"timestamp":1287191992667,"id":223,"parentId":1,"tags":{"isTurbotrace":"false"},"startTime":1718908257280,"traceId":"c3cad3ead5a52bb1"},{"name":"apply-include-excludes","duration":798,"timestamp":1287196884097,"id":237,"parentId":1,"tags":{},"startTime":1718908262172,"traceId":"c3cad3ead5a52bb1"},{"name":"print-tree-view","duration":3554,"timestamp":1287196886425,"id":238,"parentId":1,"tags":{},"startTime":1718908262174,"traceId":"c3cad3ead5a52bb1"},{"name":"telemetry-flush","duration":53,"timestamp":1287196889998,"id":239,"parentId":1,"tags":{},"startTime":1718908262178,"traceId":"c3cad3ead5a52bb1"},{"name":"next-build","duration":14889198,"timestamp":1287182000863,"id":1,"tags":{"buildMode":"default","isTurboBuild":"false","version":"14.2.4","isTurbopack":false,"has-custom-webpack-config":"false","use-build-worker":"true"},"startTime":1718908247288,"traceId":"c3cad3ead5a52bb1"}]
+[
+  {
+    "name": "generate-buildid",
+    "duration": 185,
+    "timestamp": 1287182084529,
+    "id": 4,
+    "parentId": 1,
+    "tags": {},
+    "startTime": 1718908247372,
+    "traceId": "c3cad3ead5a52bb1"
+  },
+  {
+    "name": "load-custom-routes",
+    "duration": 221,
+    "timestamp": 1287182084877,
+    "id": 5,
+    "parentId": 1,
+    "tags": {},
+    "startTime": 1718908247372,
+    "traceId": "c3cad3ead5a52bb1"
+  },
+  {
+    "name": "collect-pages",
+    "duration": 1340,
+    "timestamp": 1287182151502,
+    "id": 6,
+    "parentId": 1,
+    "tags": {},
+    "startTime": 1718908247439,
+    "traceId": "c3cad3ead5a52bb1"
+  },
+  {
+    "name": "create-pages-mapping",
+    "duration": 440,
+    "timestamp": 1287182154268,
+    "id": 7,
+    "parentId": 1,
+    "tags": {},
+    "startTime": 1718908247442,
+    "traceId": "c3cad3ead5a52bb1"
+  },
+  {
+    "name": "collect-app-paths",
+    "duration": 2198,
+    "timestamp": 1287182154765,
+    "id": 8,
+    "parentId": 1,
+    "tags": {},
+    "startTime": 1718908247442,
+    "traceId": "c3cad3ead5a52bb1"
+  },
+  {
+    "name": "create-app-mapping",
+    "duration": 622,
+    "timestamp": 1287182156996,
+    "id": 9,
+    "parentId": 1,
+    "tags": {},
+    "startTime": 1718908247445,
+    "traceId": "c3cad3ead5a52bb1"
+  },
+  {
+    "name": "public-dir-conflict-check",
+    "duration": 573,
+    "timestamp": 1287182157933,
+    "id": 10,
+    "parentId": 1,
+    "tags": {},
+    "startTime": 1718908247446,
+    "traceId": "c3cad3ead5a52bb1"
+  },
+  {
+    "name": "generate-routes-manifest",
+    "duration": 1924,
+    "timestamp": 1287182158651,
+    "id": 11,
+    "parentId": 1,
+    "tags": {},
+    "startTime": 1718908247446,
+    "traceId": "c3cad3ead5a52bb1"
+  },
+  {
+    "name": "create-dist-dir",
+    "duration": 220,
+    "timestamp": 1287182161233,
+    "id": 12,
+    "parentId": 1,
+    "tags": {},
+    "startTime": 1718908247449,
+    "traceId": "c3cad3ead5a52bb1"
+  },
+  {
+    "name": "write-routes-manifest",
+    "duration": 1131,
+    "timestamp": 1287182177563,
+    "id": 13,
+    "parentId": 1,
+    "tags": {},
+    "startTime": 1718908247465,
+    "traceId": "c3cad3ead5a52bb1"
+  },
+  {
+    "name": "generate-required-server-files",
+    "duration": 746,
+    "timestamp": 1287182180307,
+    "id": 14,
+    "parentId": 1,
+    "tags": {},
+    "startTime": 1718908247468,
+    "traceId": "c3cad3ead5a52bb1"
+  },
+  {
+    "name": "create-entrypoints",
+    "duration": 23055,
+    "timestamp": 1287182625827,
+    "id": 18,
+    "parentId": 16,
+    "tags": {},
+    "startTime": 1718908247914,
+    "traceId": "c3cad3ead5a52bb1"
+  },
+  {
+    "name": "generate-webpack-config",
+    "duration": 266785,
+    "timestamp": 1287182649081,
+    "id": 19,
+    "parentId": 17,
+    "tags": {},
+    "startTime": 1718908247937,
+    "traceId": "c3cad3ead5a52bb1"
+  },
+  {
+    "name": "next-trace-entrypoint-plugin",
+    "duration": 1542,
+    "timestamp": 1287182971244,
+    "id": 21,
+    "parentId": 20,
+    "tags": {},
+    "startTime": 1718908248259,
+    "traceId": "c3cad3ead5a52bb1"
+  },
+  {
+    "name": "add-entry",
+    "duration": 262753,
+    "timestamp": 1287182976906,
+    "id": 24,
+    "parentId": 22,
+    "tags": {
+      "request": "private-next-pages/_app.tsx"
+    },
+    "startTime": 1718908248265,
+    "traceId": "c3cad3ead5a52bb1"
+  },
+  {
+    "name": "add-entry",
+    "duration": 295019,
+    "timestamp": 1287182977020,
+    "id": 29,
+    "parentId": 22,
+    "tags": {
+      "request": "next-app-loader?page=%2Ffavicon.ico%2Froute&name=app%2Ffavicon.ico%2Froute&pagePath=private-next-app-dir%2Ffavicon.ico&appDir=E%3A%5Ccodingcommentary%5Cadmin%5Capp&appPaths=%2Ffavicon.ico&pageExtensions=tsx&pageExtensions=ts&pageExtensions=jsx&pageExtensions=js&basePath=&assetPrefix=&nextConfigOutput=&nextConfigExperimentalUseEarlyImport=false&preferredRegion=&middlewareConfig=e30%3D!"
+    },
+    "startTime": 1718908248265,
+    "traceId": "c3cad3ead5a52bb1"
+  },
+  {
+    "name": "add-entry",
+    "duration": 301118,
+    "timestamp": 1287182977035,
+    "id": 31,
+    "parentId": 22,
+    "tags": {
+      "request": "next/dist/pages/_document"
+    },
+    "startTime": 1718908248265,
+    "traceId": "c3cad3ead5a52bb1"
+  },
+  {
+    "name": "add-entry",
+    "duration": 301277,
+    "timestamp": 1287182976926,
+    "id": 25,
+    "parentId": 22,
+    "tags": {
+      "request": "next-route-loader?kind=PAGES&page=%2F_error&preferredRegion=&absolutePagePath=next%2Fdist%2Fpages%2F_error&absoluteAppPath=private-next-pages%2F_app.tsx&absoluteDocumentPath=next%2Fdist%2Fpages%2F_document&middlewareConfigBase64=e30%3D!"
+    },
+    "startTime": 1718908248265,
+    "traceId": "c3cad3ead5a52bb1"
+  },
+  {
+    "name": "add-entry",
+    "duration": 330162,
+    "timestamp": 1287182977003,
+    "id": 27,
+    "parentId": 22,
+    "tags": {
+      "request": "next-route-loader?kind=PAGES_API&page=%2Fapi%2Fauth%2F%5B...nextauth%5D&preferredRegion=&absolutePagePath=private-next-pages%2Fapi%2Fauth%2F%5B...nextauth%5D.ts&middlewareConfigBase64=e30%3D!"
+    },
+    "startTime": 1718908248265,
+    "traceId": "c3cad3ead5a52bb1"
+  },
+  {
+    "name": "add-entry",
+    "duration": 335027,
+    "timestamp": 1287182976551,
+    "id": 23,
+    "parentId": 22,
+    "tags": {
+      "request": "next-app-loader?page=%2F_not-found%2Fpage&name=app%2F_not-found%2Fpage&pagePath=next%2Fdist%2Fclient%2Fcomponents%2Fnot-found-error&appDir=E%3A%5Ccodingcommentary%5Cadmin%5Capp&appPaths=next%2Fdist%2Fclient%2Fcomponents%2Fnot-found-error&pageExtensions=tsx&pageExtensions=ts&pageExtensions=jsx&pageExtensions=js&basePath=&assetPrefix=&nextConfigOutput=&nextConfigExperimentalUseEarlyImport=false&preferredRegion=&middlewareConfig=e30%3D!"
+    },
+    "startTime": 1718908248264,
+    "traceId": "c3cad3ead5a52bb1"
+  },
+  {
+    "name": "add-entry",
+    "duration": 338680,
+    "timestamp": 1287182976939,
+    "id": 26,
+    "parentId": 22,
+    "tags": {
+      "request": "next-app-loader?page=%2Fadmin%2Fcreate-course%2Fpage&name=app%2Fadmin%2Fcreate-course%2Fpage&pagePath=private-next-app-dir%2Fadmin%2Fcreate-course%2Fpage.tsx&appDir=E%3A%5Ccodingcommentary%5Cadmin%5Capp&appPaths=%2Fadmin%2Fcreate-course%2Fpage&pageExtensions=tsx&pageExtensions=ts&pageExtensions=jsx&pageExtensions=js&basePath=&assetPrefix=&nextConfigOutput=&nextConfigExperimentalUseEarlyImport=false&preferredRegion=&middlewareConfig=e30%3D!"
+    },
+    "startTime": 1718908248265,
+    "traceId": "c3cad3ead5a52bb1"
+  },
+  {
+    "name": "add-entry",
+    "duration": 338631,
+    "timestamp": 1287182977013,
+    "id": 28,
+    "parentId": 22,
+    "tags": {
+      "request": "next-app-loader?page=%2Fadmin%2Fpage&name=app%2Fadmin%2Fpage&pagePath=private-next-app-dir%2Fadmin%2Fpage.tsx&appDir=E%3A%5Ccodingcommentary%5Cadmin%5Capp&appPaths=%2Fadmin%2Fpage&pageExtensions=tsx&pageExtensions=ts&pageExtensions=jsx&pageExtensions=js&basePath=&assetPrefix=&nextConfigOutput=&nextConfigExperimentalUseEarlyImport=false&preferredRegion=&middlewareConfig=e30%3D!"
+    },
+    "startTime": 1718908248265,
+    "traceId": "c3cad3ead5a52bb1"
+  },
+  {
+    "name": "add-entry",
+    "duration": 338623,
+    "timestamp": 1287182977028,
+    "id": 30,
+    "parentId": 22,
+    "tags": {
+      "request": "next-app-loader?page=%2Fpage&name=app%2Fpage&pagePath=private-next-app-dir%2Fpage.tsx&appDir=E%3A%5Ccodingcommentary%5Cadmin%5Capp&appPaths=%2Fpage&pageExtensions=tsx&pageExtensions=ts&pageExtensions=jsx&pageExtensions=js&basePath=&assetPrefix=&nextConfigOutput=&nextConfigExperimentalUseEarlyImport=false&preferredRegion=&middlewareConfig=e30%3D!"
+    },
+    "startTime": 1718908248265,
+    "traceId": "c3cad3ead5a52bb1"
+  },
+  {
+    "name": "make",
+    "duration": 700195,
+    "timestamp": 1287182976299,
+    "id": 22,
+    "parentId": 20,
+    "tags": {},
+    "startTime": 1718908248264,
+    "traceId": "c3cad3ead5a52bb1"
+  },
+  {
+    "name": "get-entries",
+    "duration": 781,
+    "timestamp": 1287183677536,
+    "id": 51,
+    "parentId": 50,
+    "tags": {},
+    "startTime": 1718908248965,
+    "traceId": "c3cad3ead5a52bb1"
+  },
+  {
+    "name": "node-file-trace-plugin",
+    "duration": 51177,
+    "timestamp": 1287183680281,
+    "id": 52,
+    "parentId": 50,
+    "tags": {
+      "traceEntryCount": "14"
+    },
+    "startTime": 1718908248968,
+    "traceId": "c3cad3ead5a52bb1"
+  },
+  {
+    "name": "collect-traced-files",
+    "duration": 325,
+    "timestamp": 1287183731467,
+    "id": 53,
+    "parentId": 50,
+    "tags": {},
+    "startTime": 1718908249019,
+    "traceId": "c3cad3ead5a52bb1"
+  },
+  {
+    "name": "finish-modules",
+    "duration": 54426,
+    "timestamp": 1287183677371,
+    "id": 50,
+    "parentId": 21,
+    "tags": {},
+    "startTime": 1718908248965,
+    "traceId": "c3cad3ead5a52bb1"
+  },
+  {
+    "name": "chunk-graph",
+    "duration": 20582,
+    "timestamp": 1287183848004,
+    "id": 55,
+    "parentId": 54,
+    "tags": {},
+    "startTime": 1718908249136,
+    "traceId": "c3cad3ead5a52bb1"
+  },
+  {
+    "name": "optimize-modules",
+    "duration": 17,
+    "timestamp": 1287183868683,
+    "id": 57,
+    "parentId": 54,
+    "tags": {},
+    "startTime": 1718908249156,
+    "traceId": "c3cad3ead5a52bb1"
+  },
+  {
+    "name": "optimize-chunks",
+    "duration": 13133,
+    "timestamp": 1287183868756,
+    "id": 58,
+    "parentId": 54,
+    "tags": {},
+    "startTime": 1718908249156,
+    "traceId": "c3cad3ead5a52bb1"
+  },
+  {
+    "name": "optimize-tree",
+    "duration": 103,
+    "timestamp": 1287183881965,
+    "id": 59,
+    "parentId": 54,
+    "tags": {},
+    "startTime": 1718908249170,
+    "traceId": "c3cad3ead5a52bb1"
+  },
+  {
+    "name": "optimize-chunk-modules",
+    "duration": 53837,
+    "timestamp": 1287183882139,
+    "id": 60,
+    "parentId": 54,
+    "tags": {},
+    "startTime": 1718908249170,
+    "traceId": "c3cad3ead5a52bb1"
+  },
+  {
+    "name": "optimize",
+    "duration": 67420,
+    "timestamp": 1287183868646,
+    "id": 56,
+    "parentId": 54,
+    "tags": {},
+    "startTime": 1718908249156,
+    "traceId": "c3cad3ead5a52bb1"
+  },
+  {
+    "name": "module-hash",
+    "duration": 27437,
+    "timestamp": 1287183989697,
+    "id": 61,
+    "parentId": 54,
+    "tags": {},
+    "startTime": 1718908249277,
+    "traceId": "c3cad3ead5a52bb1"
+  },
+  {
+    "name": "code-generation",
+    "duration": 14051,
+    "timestamp": 1287184017199,
+    "id": 62,
+    "parentId": 54,
+    "tags": {},
+    "startTime": 1718908249305,
+    "traceId": "c3cad3ead5a52bb1"
+  },
+  {
+    "name": "hash",
+    "duration": 7073,
+    "timestamp": 1287184035478,
+    "id": 63,
+    "parentId": 54,
+    "tags": {},
+    "startTime": 1718908249323,
+    "traceId": "c3cad3ead5a52bb1"
+  },
+  {
+    "name": "code-generation-jobs",
+    "duration": 209,
+    "timestamp": 1287184042551,
+    "id": 64,
+    "parentId": 54,
+    "tags": {},
+    "startTime": 1718908249330,
+    "traceId": "c3cad3ead5a52bb1"
+  },
+  {
+    "name": "module-assets",
+    "duration": 564,
+    "timestamp": 1287184042729,
+    "id": 65,
+    "parentId": 54,
+    "tags": {},
+    "startTime": 1718908249330,
+    "traceId": "c3cad3ead5a52bb1"
+  },
+  {
+    "name": "create-chunk-assets",
+    "duration": 10553,
+    "timestamp": 1287184043316,
+    "id": 66,
+    "parentId": 54,
+    "tags": {},
+    "startTime": 1718908249331,
+    "traceId": "c3cad3ead5a52bb1"
+  },
+  {
+    "name": "minify-js",
+    "duration": 32890,
+    "timestamp": 1287184066644,
+    "id": 68,
+    "parentId": 67,
+    "tags": {
+      "name": "../app/_not-found/page.js",
+      "cache": "HIT"
+    },
+    "startTime": 1718908249354,
+    "traceId": "c3cad3ead5a52bb1"
+  },
+  {
+    "name": "minify-js",
+    "duration": 32753,
+    "timestamp": 1287184066788,
+    "id": 69,
+    "parentId": 67,
+    "tags": {
+      "name": "../pages/_app.js",
+      "cache": "HIT"
+    },
+    "startTime": 1718908249354,
+    "traceId": "c3cad3ead5a52bb1"
+  },
+  {
+    "name": "minify-js",
+    "duration": 32742,
+    "timestamp": 1287184066800,
+    "id": 70,
+    "parentId": 67,
+    "tags": {
+      "name": "../pages/_error.js",
+      "cache": "HIT"
+    },
+    "startTime": 1718908249355,
+    "traceId": "c3cad3ead5a52bb1"
+  },
+  {
+    "name": "minify-js",
+    "duration": 18642,
+    "timestamp": 1287184080901,
+    "id": 72,
+    "parentId": 67,
+    "tags": {
+      "name": "../pages/api/auth/[...nextauth].js",
+      "cache": "HIT"
+    },
+    "startTime": 1718908249369,
+    "traceId": "c3cad3ead5a52bb1"
+  },
+  {
+    "name": "minify-js",
+    "duration": 18476,
+    "timestamp": 1287184081068,
+    "id": 74,
+    "parentId": 67,
+    "tags": {
+      "name": "../app/favicon.ico/route.js",
+      "cache": "HIT"
+    },
+    "startTime": 1718908249369,
+    "traceId": "c3cad3ead5a52bb1"
+  },
+  {
+    "name": "minify-js",
+    "duration": 2059,
+    "timestamp": 1287184097486,
+    "id": 76,
+    "parentId": 67,
+    "tags": {
+      "name": "../pages/_document.js",
+      "cache": "HIT"
+    },
+    "startTime": 1718908249385,
+    "traceId": "c3cad3ead5a52bb1"
+  },
+  {
+    "name": "minify-js",
+    "duration": 2021,
+    "timestamp": 1287184097526,
+    "id": 77,
+    "parentId": 67,
+    "tags": {
+      "name": "../webpack-runtime.js",
+      "cache": "HIT"
+    },
+    "startTime": 1718908249385,
+    "traceId": "c3cad3ead5a52bb1"
+  },
+  {
+    "name": "minify-js",
+    "duration": 2010,
+    "timestamp": 1287184097537,
+    "id": 78,
+    "parentId": 67,
+    "tags": {
+      "name": "../webpack-api-runtime.js",
+      "cache": "HIT"
+    },
+    "startTime": 1718908249385,
+    "traceId": "c3cad3ead5a52bb1"
+  },
+  {
+    "name": "minify-js",
+    "duration": 2005,
+    "timestamp": 1287184097543,
+    "id": 79,
+    "parentId": 67,
+    "tags": {
+      "name": "948.js",
+      "cache": "HIT"
+    },
+    "startTime": 1718908249385,
+    "traceId": "c3cad3ead5a52bb1"
+  },
+  {
+    "name": "minify-js",
+    "duration": 2001,
+    "timestamp": 1287184097547,
+    "id": 80,
+    "parentId": 67,
+    "tags": {
+      "name": "370.js",
+      "cache": "HIT"
+    },
+    "startTime": 1718908249385,
+    "traceId": "c3cad3ead5a52bb1"
+  },
+  {
+    "name": "minify-js",
+    "duration": 40,
+    "timestamp": 1287184099509,
+    "id": 83,
+    "parentId": 67,
+    "tags": {
+      "name": "682.js",
+      "cache": "HIT"
+    },
+    "startTime": 1718908249387,
+    "traceId": "c3cad3ead5a52bb1"
+  },
+  {
+    "name": "minify-js",
+    "duration": 26,
+    "timestamp": 1287184099523,
+    "id": 84,
+    "parentId": 67,
+    "tags": {
+      "name": "905.js",
+      "cache": "HIT"
+    },
+    "startTime": 1718908249387,
+    "traceId": "c3cad3ead5a52bb1"
+  },
+  {
+    "name": "minify-js",
+    "duration": 22,
+    "timestamp": 1287184099528,
+    "id": 85,
+    "parentId": 67,
+    "tags": {
+      "name": "739.js",
+      "cache": "HIT"
+    },
+    "startTime": 1718908249387,
+    "traceId": "c3cad3ead5a52bb1"
+  },
+  {
+    "name": "minify-js",
+    "duration": 100237,
+    "timestamp": 1287184080929,
+    "id": 73,
+    "parentId": 67,
+    "tags": {
+      "name": "../app/admin/page.js",
+      "cache": "MISS"
+    },
+    "startTime": 1718908249369,
+    "traceId": "c3cad3ead5a52bb1"
+  },
+  {
+    "name": "minify-js",
+    "duration": 108838,
+    "timestamp": 1287184097975,
+    "id": 82,
+    "parentId": 67,
+    "tags": {
+      "name": "765.js",
+      "cache": "MISS"
+    },
+    "startTime": 1718908249386,
+    "traceId": "c3cad3ead5a52bb1"
+  },
+  {
+    "name": "minify-js",
+    "duration": 114621,
+    "timestamp": 1287184097550,
+    "id": 81,
+    "parentId": 67,
+    "tags": {
+      "name": "339.js",
+      "cache": "MISS"
+    },
+    "startTime": 1718908249385,
+    "traceId": "c3cad3ead5a52bb1"
+  },
+  {
+    "name": "minify-js",
+    "duration": 184716,
+    "timestamp": 1287184081126,
+    "id": 75,
+    "parentId": 67,
+    "tags": {
+      "name": "../app/page.js",
+      "cache": "MISS"
+    },
+    "startTime": 1718908249369,
+    "traceId": "c3cad3ead5a52bb1"
+  },
+  {
+    "name": "minify-js",
+    "duration": 477660,
+    "timestamp": 1287184066809,
+    "id": 71,
+    "parentId": 67,
+    "tags": {
+      "name": "../app/admin/create-course/page.js",
+      "cache": "MISS"
+    },
+    "startTime": 1718908249355,
+    "traceId": "c3cad3ead5a52bb1"
+  },
+  {
+    "name": "terser-webpack-plugin-optimize",
+    "duration": 487786,
+    "timestamp": 1287184056697,
+    "id": 67,
+    "parentId": 20,
+    "tags": {
+      "compilationName": "server",
+      "swcMinify": true
+    },
+    "startTime": 1718908249344,
+    "traceId": "c3cad3ead5a52bb1"
+  },
+  {
+    "name": "css-minimizer-plugin",
+    "duration": 123,
+    "timestamp": 1287184544655,
+    "id": 86,
+    "parentId": 20,
+    "tags": {},
+    "startTime": 1718908249832,
+    "traceId": "c3cad3ead5a52bb1"
+  },
+  {
+    "name": "create-trace-assets",
+    "duration": 620,
+    "timestamp": 1287184544911,
+    "id": 87,
+    "parentId": 21,
+    "tags": {},
+    "startTime": 1718908249833,
+    "traceId": "c3cad3ead5a52bb1"
+  },
+  {
+    "name": "seal",
+    "duration": 736112,
+    "timestamp": 1287183814518,
+    "id": 54,
+    "parentId": 20,
+    "tags": {},
+    "startTime": 1718908249102,
+    "traceId": "c3cad3ead5a52bb1"
+  },
+  {
+    "name": "webpack-compilation",
+    "duration": 1585318,
+    "timestamp": 1287182969841,
+    "id": 20,
+    "parentId": 17,
+    "tags": {
+      "name": "server"
+    },
+    "startTime": 1718908248258,
+    "traceId": "c3cad3ead5a52bb1"
+  },
+  {
+    "name": "emit",
+    "duration": 19767,
+    "timestamp": 1287184555521,
+    "id": 88,
+    "parentId": 17,
+    "tags": {},
+    "startTime": 1718908249843,
+    "traceId": "c3cad3ead5a52bb1"
+  },
+  {
+    "name": "webpack-close",
+    "duration": 885843,
+    "timestamp": 1287184575753,
+    "id": 89,
+    "parentId": 17,
+    "tags": {
+      "name": "server"
+    },
+    "startTime": 1718908249863,
+    "traceId": "c3cad3ead5a52bb1"
+  },
+  {
+    "name": "webpack-generate-error-stats",
+    "duration": 4257,
+    "timestamp": 1287185461699,
+    "id": 90,
+    "parentId": 89,
+    "tags": {},
+    "startTime": 1718908250749,
+    "traceId": "c3cad3ead5a52bb1"
+  },
+  {
+    "name": "run-webpack-compiler",
+    "duration": 2840525,
+    "timestamp": 1287182625824,
+    "id": 17,
+    "parentId": 16,
+    "tags": {},
+    "startTime": 1718908247914,
+    "traceId": "c3cad3ead5a52bb1"
+  },
+  {
+    "name": "format-webpack-messages",
+    "duration": 139,
+    "timestamp": 1287185466360,
+    "id": 91,
+    "parentId": 16,
+    "tags": {},
+    "startTime": 1718908250754,
+    "traceId": "c3cad3ead5a52bb1"
+  },
+  {
+    "name": "worker-main-server",
+    "duration": 2841082,
+    "timestamp": 1287182625571,
+    "id": 16,
+    "parentId": 1,
+    "tags": {},
+    "startTime": 1718908247913,
+    "traceId": "c3cad3ead5a52bb1"
+  },
+  {
+    "name": "create-entrypoints",
+    "duration": 29479,
+    "timestamp": 1287186067472,
+    "id": 95,
+    "parentId": 93,
+    "tags": {},
+    "startTime": 1718908251355,
+    "traceId": "c3cad3ead5a52bb1"
+  },
+  {
+    "name": "generate-webpack-config",
+    "duration": 309191,
+    "timestamp": 1287186097102,
+    "id": 96,
+    "parentId": 94,
+    "tags": {},
+    "startTime": 1718908251385,
+    "traceId": "c3cad3ead5a52bb1"
+  },
+  {
+    "name": "make",
+    "duration": 723,
+    "timestamp": 1287186475224,
+    "id": 98,
+    "parentId": 97,
+    "tags": {},
+    "startTime": 1718908251763,
+    "traceId": "c3cad3ead5a52bb1"
+  },
+  {
+    "name": "chunk-graph",
+    "duration": 755,
+    "timestamp": 1287186478771,
+    "id": 100,
+    "parentId": 99,
+    "tags": {},
+    "startTime": 1718908251766,
+    "traceId": "c3cad3ead5a52bb1"
+  },
+  {
+    "name": "optimize-modules",
+    "duration": 20,
+    "timestamp": 1287186479638,
+    "id": 102,
+    "parentId": 99,
+    "tags": {},
+    "startTime": 1718908251767,
+    "traceId": "c3cad3ead5a52bb1"
+  },
+  {
+    "name": "optimize-chunks",
+    "duration": 840,
+    "timestamp": 1287186479741,
+    "id": 103,
+    "parentId": 99,
+    "tags": {},
+    "startTime": 1718908251767,
+    "traceId": "c3cad3ead5a52bb1"
+  },
+  {
+    "name": "optimize-tree",
+    "duration": 118,
+    "timestamp": 1287186480660,
+    "id": 104,
+    "parentId": 99,
+    "tags": {},
+    "startTime": 1718908251768,
+    "traceId": "c3cad3ead5a52bb1"
+  },
+  {
+    "name": "optimize-chunk-modules",
+    "duration": 451,
+    "timestamp": 1287186480974,
+    "id": 105,
+    "parentId": 99,
+    "tags": {},
+    "startTime": 1718908251768,
+    "traceId": "c3cad3ead5a52bb1"
+  },
+  {
+    "name": "optimize",
+    "duration": 2008,
+    "timestamp": 1287186479593,
+    "id": 101,
+    "parentId": 99,
+    "tags": {},
+    "startTime": 1718908251767,
+    "traceId": "c3cad3ead5a52bb1"
+  },
+  {
+    "name": "module-hash",
+    "duration": 73,
+    "timestamp": 1287186482424,
+    "id": 106,
+    "parentId": 99,
+    "tags": {},
+    "startTime": 1718908251770,
+    "traceId": "c3cad3ead5a52bb1"
+  },
+  {
+    "name": "code-generation",
+    "duration": 184,
+    "timestamp": 1287186482532,
+    "id": 107,
+    "parentId": 99,
+    "tags": {},
+    "startTime": 1718908251770,
+    "traceId": "c3cad3ead5a52bb1"
+  },
+  {
+    "name": "hash",
+    "duration": 374,
+    "timestamp": 1287186482988,
+    "id": 108,
+    "parentId": 99,
+    "tags": {},
+    "startTime": 1718908251771,
+    "traceId": "c3cad3ead5a52bb1"
+  },
+  {
+    "name": "code-generation-jobs",
+    "duration": 100,
+    "timestamp": 1287186483361,
+    "id": 109,
+    "parentId": 99,
+    "tags": {},
+    "startTime": 1718908251771,
+    "traceId": "c3cad3ead5a52bb1"
+  },
+  {
+    "name": "module-assets",
+    "duration": 65,
+    "timestamp": 1287186483439,
+    "id": 110,
+    "parentId": 99,
+    "tags": {},
+    "startTime": 1718908251771,
+    "traceId": "c3cad3ead5a52bb1"
+  },
+  {
+    "name": "create-chunk-assets",
+    "duration": 174,
+    "timestamp": 1287186483508,
+    "id": 111,
+    "parentId": 99,
+    "tags": {},
+    "startTime": 1718908251771,
+    "traceId": "c3cad3ead5a52bb1"
+  },
+  {
+    "name": "minify-js",
+    "duration": 259,
+    "timestamp": 1287186522228,
+    "id": 113,
+    "parentId": 112,
+    "tags": {
+      "name": "interception-route-rewrite-manifest.js",
+      "cache": "HIT"
+    },
+    "startTime": 1718908251810,
+    "traceId": "c3cad3ead5a52bb1"
+  },
+  {
+    "name": "terser-webpack-plugin-optimize",
+    "duration": 8265,
+    "timestamp": 1287186514231,
+    "id": 112,
+    "parentId": 97,
+    "tags": {
+      "compilationName": "edge-server",
+      "swcMinify": true
+    },
+    "startTime": 1718908251802,
+    "traceId": "c3cad3ead5a52bb1"
+  },
+  {
+    "name": "css-minimizer-plugin",
+    "duration": 127,
+    "timestamp": 1287186522563,
+    "id": 114,
+    "parentId": 97,
+    "tags": {},
+    "startTime": 1718908251810,
+    "traceId": "c3cad3ead5a52bb1"
+  },
+  {
+    "name": "seal",
+    "duration": 46652,
+    "timestamp": 1287186478143,
+    "id": 99,
+    "parentId": 97,
+    "tags": {},
+    "startTime": 1718908251766,
+    "traceId": "c3cad3ead5a52bb1"
+  },
+  {
+    "name": "webpack-compilation",
+    "duration": 56389,
+    "timestamp": 1287186468692,
+    "id": 97,
+    "parentId": 94,
+    "tags": {
+      "name": "edge-server"
+    },
+    "startTime": 1718908251756,
+    "traceId": "c3cad3ead5a52bb1"
+  },
+  {
+    "name": "emit",
+    "duration": 2768,
+    "timestamp": 1287186525386,
+    "id": 115,
+    "parentId": 94,
+    "tags": {},
+    "startTime": 1718908251813,
+    "traceId": "c3cad3ead5a52bb1"
+  },
+  {
+    "name": "webpack-close",
+    "duration": 580,
+    "timestamp": 1287186528725,
+    "id": 116,
+    "parentId": 94,
+    "tags": {
+      "name": "edge-server"
+    },
+    "startTime": 1718908251816,
+    "traceId": "c3cad3ead5a52bb1"
+  },
+  {
+    "name": "webpack-generate-error-stats",
+    "duration": 2040,
+    "timestamp": 1287186529342,
+    "id": 117,
+    "parentId": 116,
+    "tags": {},
+    "startTime": 1718908251817,
+    "traceId": "c3cad3ead5a52bb1"
+  },
+  {
+    "name": "run-webpack-compiler",
+    "duration": 463974,
+    "timestamp": 1287186067464,
+    "id": 94,
+    "parentId": 93,
+    "tags": {},
+    "startTime": 1718908251355,
+    "traceId": "c3cad3ead5a52bb1"
+  },
+  {
+    "name": "format-webpack-messages",
+    "duration": 56,
+    "timestamp": 1287186531442,
+    "id": 118,
+    "parentId": 93,
+    "tags": {},
+    "startTime": 1718908251819,
+    "traceId": "c3cad3ead5a52bb1"
+  },
+  {
+    "name": "worker-main-edge-server",
+    "duration": 464552,
+    "timestamp": 1287186067006,
+    "id": 93,
+    "parentId": 1,
+    "tags": {},
+    "startTime": 1718908251355,
+    "traceId": "c3cad3ead5a52bb1"
+  },
+  {
+    "name": "create-entrypoints",
+    "duration": 17737,
+    "timestamp": 1287186985843,
+    "id": 121,
+    "parentId": 119,
+    "tags": {},
+    "startTime": 1718908252274,
+    "traceId": "c3cad3ead5a52bb1"
+  },
+  {
+    "name": "generate-webpack-config",
+    "duration": 238790,
+    "timestamp": 1287187003710,
+    "id": 122,
+    "parentId": 120,
+    "tags": {},
+    "startTime": 1718908252291,
+    "traceId": "c3cad3ead5a52bb1"
+  },
+  {
+    "name": "next-swc-transform",
+    "duration": 36447,
+    "timestamp": 1287187591657,
+    "id": 138,
+    "parentId": 137,
+    "tags": {},
+    "startTime": 1718908252879,
+    "traceId": "c3cad3ead5a52bb1"
+  },
+  {
+    "name": "next-swc-loader",
+    "duration": 37107,
+    "timestamp": 1287187591020,
+    "id": 137,
+    "parentId": 136,
+    "tags": {},
+    "startTime": 1718908252879,
+    "traceId": "c3cad3ead5a52bb1"
+  },
+  {
+    "name": "build-module-js",
+    "duration": 93816,
+    "timestamp": 1287187587573,
+    "id": 136,
+    "parentId": 123,
+    "tags": {
+      "name": "E:\\codingcommentary\\admin\\node_modules\\next\\dist\\shared\\lib\\router\\router.js",
+      "layer": null
+    },
+    "startTime": 1718908252875,
+    "traceId": "c3cad3ead5a52bb1"
+  },
+  {
+    "name": "add-entry",
+    "duration": 395085,
+    "timestamp": 1287187305691,
+    "id": 129,
+    "parentId": 124,
+    "tags": {
+      "request": "next-client-pages-loader?absolutePagePath=private-next-pages%2F_app.tsx&page=%2F_app!"
+    },
+    "startTime": 1718908252593,
+    "traceId": "c3cad3ead5a52bb1"
+  }
+]

@@ -1,4 +1,4 @@
-import { Redis } from "ioredis";
+import { Redis, RedisKey } from "ioredis";
 require("dotenv").config();
 
 const redisClient = () => {
