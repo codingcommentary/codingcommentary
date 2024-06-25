@@ -201,6 +201,16 @@ const AdminSidebar = () => {
               selected={selected}
               setSelected={setSelected}
             />
+
+            <Item
+              title="View Courses"
+              to="/admin/courses"
+              icon={
+                <OndemandVideoIcon className="text-black dark:text-white" />
+              }
+              selected={selected}
+              setSelected={setSelected}
+            />
             
 
             

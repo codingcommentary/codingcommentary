@@ -1,6 +1,6 @@
 import { styles } from "../../../../app/styles/style";
 import { useGetHeroDataQuery } from "../../../../redux/features/layout/layoutApi";
-import React, { FC, useEffect, useState } from "react";
+import React, { FC, useState } from "react";
 
 type Props = {
   courseInfo: any;
@@ -16,14 +16,6 @@ const CourseInformation: FC<Props> = ({
   setActive,
 }) => {
   const [dragging, setDragging] = useState(false);
-  const { data } = useGetHeroDataQuery("Categories", {});
-  const [categories, setCategories] = useState([]);
-
-  useEffect(() => {
-    if (data) {
-      setCategories(data.layout.categories);
-    }
-  }, [data]);
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
@@ -70,31 +62,29 @@ const CourseInformation: FC<Props> = ({
     }
   };
 
-
   return (
     <div className="w-[80%] m-auto mt-24">
       <form onSubmit={handleSubmit} className={`${styles.label}`}>
         <div>
-          <label htmlFor="">Course Name</label>
+          <label htmlFor="name">Course Name</label>
           <input
-            type="name"
-            name=""
+            type="text"
+            name="name"
             required
             value={courseInfo.name}
             onChange={(e: any) =>
               setCourseInfo({ ...courseInfo, name: e.target.value })
             }
             id="name"
-            className={`
-            ${styles.input}`}
+            className={`${styles.input}`}
           />
         </div>
         <br />
         <div className="mb-5">
           <label className={`${styles.label}`}>Course Description</label>
           <textarea
-            name=""
-            id=""
+            name="description"
+            id="description"
             cols={30}
             rows={8}
             className={`${styles.input} !h-min !py-2`}
@@ -110,15 +100,14 @@ const CourseInformation: FC<Props> = ({
             <label className={`${styles.label}`}>Course Price</label>
             <input
               type="number"
-              name=""
+              name="price"
               required
               value={courseInfo.price}
               onChange={(e: any) =>
                 setCourseInfo({ ...courseInfo, price: e.target.value })
               }
               id="price"
-              className={`
-            ${styles.input}`}
+              className={`${styles.input}`}
             />
           </div>
           <div className="w-[50%]">
@@ -127,56 +116,53 @@ const CourseInformation: FC<Props> = ({
             </label>
             <input
               type="number"
-              name=""
+              name="estimatedPrice"
               value={courseInfo.estimatedPrice}
               onChange={(e: any) =>
-                setCourseInfo({ ...courseInfo, estimatedPrice: e.target.value })
+                setCourseInfo({
+                  ...courseInfo,
+                  estimatedPrice: e.target.value,
+                })
               }
-              id="price"
-              className={`
-            ${styles.input}`}
+              id="estimatedPrice"
+              className={`${styles.input}`}
             />
           </div>
         </div>
         <br />
         <div className="w-full flex justify-between">
           <div className="w-[45%]">
-            <label className={`${styles.label}`} htmlFor="email">
+            <label className={`${styles.label}`} htmlFor="tags">
               Course Tags
             </label>
             <input
               type="text"
               required
-              name=""
+              name="tags"
               value={courseInfo.tags}
               onChange={(e: any) =>
                 setCourseInfo({ ...courseInfo, tags: e.target.value })
               }
               id="tags"
-              className={`
-            ${styles.input}`}
+              className={`${styles.input}`}
             />
           </div>
           <div className="w-[50%]">
-            <label className={`${styles.label} w-[50%]`}>
-              Course Categories
-            </label>
+            <label className={`${styles.label}`}>Course Category</label>
             <select
-              name=""
-              id=""
-              className={`${styles.input}`}
-              value={courseInfo.category}
+              name="category"
+              required
+              value={courseInfo.categories}
               onChange={(e: any) =>
                 setCourseInfo({ ...courseInfo, categories: e.target.value })
               }
+              id="category"
+              className={`${styles.input} appearance-none bg-transparent border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent`}
             >
               <option value="">Select Category</option>
-              {categories &&
-                categories.map((item: any) => (
-                  <option value={item.title} key={item._id}>
-                    {item.title}
-                  </option>
-                ))}
+              <option value="Category1">Category1</option>
+              <option value="Category2">Category2</option>
+              <option value="Category3">Category3</option>
             </select>
           </div>
         </div>
@@ -185,15 +171,14 @@ const CourseInformation: FC<Props> = ({
           <div className="w-[45%]">
             <label className={`${styles.label}`}>Course Level</label>
             <select
-              name=""
+              name="level"
               required
               value={courseInfo.level}
               onChange={(e: any) =>
                 setCourseInfo({ ...courseInfo, level: e.target.value })
               }
               id="level"
-              className={`
-            ${styles.input} appearance-none bg-transparent border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent`}
+              className={`${styles.input} appearance-none bg-transparent border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent`}
             >
               <option value="">Select Level</option>
               <option value="Basic">Basic</option>
@@ -205,15 +190,14 @@ const CourseInformation: FC<Props> = ({
             <label className={`${styles.label} w-[50%]`}>Demo Url</label>
             <input
               type="text"
-              name=""
+              name="demoUrl"
               required
               value={courseInfo.demoUrl}
               onChange={(e: any) =>
                 setCourseInfo({ ...courseInfo, demoUrl: e.target.value })
               }
               id="demoUrl"
-              className={`
-            ${styles.input}`}
+              className={`${styles.input}`}
             />
           </div>
         </div>
