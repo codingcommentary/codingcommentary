@@ -191,9 +191,15 @@ const AdminSidebar = () => {
             >
               {!isCollapsed && "Data"}
             </Typography>
-            
 
-            
+            <Item
+              title="Users"
+              to="/admin/users"
+              icon={<GroupsIcon className="text-black dark:text-white" />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+
             <Item
               title="Create Course"
               to="/admin/create-course"
@@ -211,9 +217,7 @@ const AdminSidebar = () => {
               selected={selected}
               setSelected={setSelected}
             />
-            
 
-            
             <Item
               title="FAQ"
               to="/admin/faq"
