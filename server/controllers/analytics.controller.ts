@@ -3,6 +3,7 @@ import Errorhandler from "../utils/ErrorHandler";
 import { CatchAsyncError } from "../middleware/catchAsyncErrors";
 import { generateLast12MonthsData } from "../utils/analytics.generator";
 import userModel from "../models/user.model";
+import CourseModel from "../models/course.model";
 
 // get user analytics -- only for admin
 
