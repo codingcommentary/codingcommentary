@@ -38,3 +38,20 @@ export const getCoursesAnalytics = CatchAsyncError(
         }
     }
 );
+
+// get order analytics -- only for admin
+
+export const getOrderAnalytics = CatchAsyncError(
+    async (req: Request, res: Response, next: NextFunction) => {
+        try {
+            const orders = await generateLast12MonthsData(OrderModel);
+
+            res.status(200).json({
+                success: true,
+                orders,
+            });
+        } catch (error: any) {
+            return next(new Errorhandler(error.message, 500));
+        }
+    }
+);
