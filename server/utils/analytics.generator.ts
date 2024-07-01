@@ -24,7 +24,20 @@ export async function generateLast12MonthsData<T extends Document>(
             endDate.getMonth(),
             endDate.getDate() - 28
         )
-        
-    };
+
+        const monthYear = endDate.toLocaleString("default", {
+            day: "numeric",
+            month: "short",
+            year: "numeric"
+        })
+
+        const count = await model.countDocuments({
+            createdAt: {
+                $gte: startDate,
+                $lt: endDate,
+        },
+    });
+
+    }
 
 }   
