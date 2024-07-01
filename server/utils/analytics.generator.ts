@@ -18,6 +18,13 @@ export async function generateLast12MonthsData<T extends Document>(
             currentDate.getMonth(),
             currentDate.getDate() - i *28
         )
+
+        const startDate = new Date(
+            endDate.getFullYear(),
+            endDate.getMonth(),
+            endDate.getDate() - 28
+        )
+        
     };
 
 }   
