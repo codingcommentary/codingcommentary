@@ -20,3 +20,21 @@ export const getUsersAnalytics = CatchAsyncError(
         }
     }
 );
+
+
+// get course analytics -- only for admin
+
+export const getCoursesAnalytics = CatchAsyncError(
+    async (req: Request, res: Response, next: NextFunction) => {
+        try {
+            const courses = await generateLast12MonthsData(CourseModel);
+
+            res.status(200).json({
+                success: true,
+                courses,
+            });
+        } catch (error: any) {
+            return next(new Errorhandler(error.message, 500));
+        }
+    }
+);
