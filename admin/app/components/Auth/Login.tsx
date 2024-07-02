@@ -23,7 +23,7 @@ const schema = Yup.object().shape({
 
 const Login: FC<Props> = ({ setRoute, setOpen, refetch }) => {
   const [show, setShow] = useState(false);
-  const [login, { isSuccess, error }] = useLoginMutation();
+  const [login, { isSuccess, error,data }] = useLoginMutation();
   const formik = useFormik({
     initialValues: { email: "", password: "" },
     validationSchema: schema,
@@ -35,7 +35,11 @@ const Login: FC<Props> = ({ setRoute, setOpen, refetch }) => {
   useEffect(() => {
     if (isSuccess) {
       toast.success("Login Successfully!");
-      redirect("/admin");
+      if (data?.user?.role === "admin") {
+        redirect("/admin");
+      } else {
+        redirect("/client");
+      }
     }
     if (error) {
       if ("data" in error) {

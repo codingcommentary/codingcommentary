@@ -19,7 +19,7 @@ import {
   ManageHistoryIcon,
   SettingsIcon,
   ExitToAppIcon,
-} from "./Icon";
+} from "../../Admin/sidebar/Icon";
 import avatarDefault from "../../../../public/assests/avatar.png";
 import { useSelector } from "react-redux";
 import Link from "next/link";
@@ -178,7 +178,7 @@ const AdminSidebar = () => {
           <Box paddingLeft={isCollapsed ? undefined : "10%"}>
             <Item
               title="Dashboard"
-              to="/admin"
+              to="/client"
               icon={<HomeOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
@@ -193,38 +193,13 @@ const AdminSidebar = () => {
             </Typography>
 
             <Item
-              title="Users"
-              to="/admin/users"
+              title="Enrolled Courses"
+              to="/client/enrolledcourses"
               icon={<GroupsIcon className="text-black dark:text-white" />}
               selected={selected}
               setSelected={setSelected}
             />
 
-            <Item
-              title="Create Course"
-              to="/admin/create-course"
-              icon={<VideoCallIcon className="text-black dark:text-white" />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-
-            <Item
-              title="View Courses"
-              to="/admin/courses"
-              icon={
-                <OndemandVideoIcon className="text-black dark:text-white" />
-              }
-              selected={selected}
-              setSelected={setSelected}
-            />
-
-            <Typography
-              variant="h6"
-              className="!text-[18px] text-black dark:text-[#ffffffc1] capitalize !font-[400]"
-              sx={{ m: "15px 0 5px 20px" }}
-            >
-              {!isCollapsed && "Extras"}
-            </Typography>
             <div onClick={logoutHandler}>
               <Item
                 title="Logout"
