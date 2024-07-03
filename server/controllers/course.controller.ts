@@ -26,7 +26,15 @@ export const uploadCourse = CatchAsyncError(
           url: myCloud.secure_url,
         };
       }
-      createCourse(data, res, next);
+      const course = await createCourse(data, res, next);
+
+      // Invalidate cache
+      await redis.del("allCourses");
+
+      res.status(201).json({
+        success: true,
+        course,
+      });
     } catch (error: any) {
       return next(new ErrorHandler(error.message, 500));
     }
@@ -65,6 +73,10 @@ export const editCourse = CatchAsyncError(
         },
         { new: true }
       );
+
+      // Invalidate cache
+      await redis.del(courseId);
+      await redis.del("allCourses");
 
       res.status(201).json({
         success: true,
@@ -205,6 +217,9 @@ export const addQuestion = CatchAsyncError(
       // save the updated course
       await course?.save();
 
+      // Invalidate cache
+      await redis.del(courseId);
+
       res.status(200).json({
         success: true,
         course,
@@ -263,6 +278,9 @@ export const addAnwser = CatchAsyncError(
       question.questionReplies.push(newAnswer);
 
       await course?.save();
+
+      // Invalidate cache
+      await redis.del(courseId);
 
       if (req.user?._id === question.user._id) {
         // create a notification
@@ -348,7 +366,9 @@ export const addReview = CatchAsyncError(
 
       await course?.save();
 
-      await redis.set(courseId, JSON.stringify(course), "EX", 604800); // 7days
+      // Update cache
+      await redis.set(courseId, JSON.stringify(course), "EX", 604800); // 7 days
+      await redis.del("allCourses");
 
       const notification = {
         title: "New Review Received",
@@ -408,7 +428,9 @@ export const addReplyToReview = CatchAsyncError(
 
       await course?.save();
 
-      await redis.set(courseId, JSON.stringify(course), "EX", 604800); // 7days
+      // Update cache
+      await redis.set(courseId, JSON.stringify(course), "EX", 604800); // 7 days
+      await redis.del("allCourses");
 
       res.status(200).json({
         success: true,
@@ -445,7 +467,9 @@ export const deleteCourse = CatchAsyncError(
 
       await course.deleteOne({ id });
 
+      // Invalidate cache
       await redis.del(id);
+      await redis.del("allCourses");
 
       res.status(200).json({
         success: true,
