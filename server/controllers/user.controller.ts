@@ -444,9 +444,17 @@ export const getAllUsers = CatchAsyncError(
 export const updateUserRole = CatchAsyncError(
   async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const { id, role } = req.body;
+      const { email, role } = req.body;
+      const isUserExist = await userModel.findOne({ email });
+      if (!isUserExist) {
+        updateUserRoleService(res, email, role);
+      } else {
+        res.status(400).json({
+          success: false,
+          message: "User not found"
+        })
+      }
 
-      updateUserRoleService(res, id, role);
     } catch (error: any) {
       return next(new ErrorHandler(error.message, 400));
     }
