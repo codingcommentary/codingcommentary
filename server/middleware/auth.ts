@@ -15,7 +15,7 @@ export const isAuthenticated = CatchAsyncError(
         new ErrorHandler("Please login to access this resource", 401)
       );
     }
-    const decoded = jwt.verify(
+    const decoded = jwt.decode(
       access_token,
       process.env.ACCESS_TOKEN as string
     ) as JwtPayload;
@@ -24,13 +24,13 @@ export const isAuthenticated = CatchAsyncError(
     }
 
     // check if the access token is expired
-    // if (decoded.exp && decoded.exp <= Date.now() / 1000) {
-    //   try {
-    //     await updateAccessToken(req, res, next);
-    //   } catch (error) {
-    //     return next(error);
-    //   }
-    // } else {
+    if (decoded.exp && decoded.exp <= Date.now() / 1000) {
+      try {
+        await updateAccessToken(req, res, next);
+      } catch (error) {
+        return next(error);
+      }
+    } else {
     const user = await redis.get(decoded.id as string);
 
     if (!user) {
@@ -43,7 +43,7 @@ export const isAuthenticated = CatchAsyncError(
 
     next();
   }
-  // }
+  }
 );
 
 // validate user role
