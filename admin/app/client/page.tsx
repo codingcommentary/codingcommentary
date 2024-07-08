@@ -3,6 +3,7 @@ import React from "react";
 import Heading from "../utils/Heading";
 import UserSideBar from "../components/Client/sidebar/ClientSidebar";
 import UserProtected from "../hooks/useProtected";
+import Courses from "../components/Route/Courses"
 
 type Props = {};
 
@@ -21,6 +22,7 @@ const page = (props: Props) => {
           </div>
           <div className="w-4/5 p-8">
             <h1 className="text-3xl font-bold mb-4">Welcome, uSER!</h1>
+            <Courses/>
           </div>
         </div>
         

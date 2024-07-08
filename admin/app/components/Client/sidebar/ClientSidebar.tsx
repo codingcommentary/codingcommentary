@@ -52,7 +52,7 @@ const Item: FC<itemProps> = ({ title, to, icon, selected, setSelected }) => {
   );
 };
 
-const AdminSidebar = () => {
+const ClientSidebar = () => {
   const { user } = useSelector((state: any) => state.auth);
   const [logout, setlogout] = useState(false);
   const [isCollapsed, setIsCollapsed] = useState(false);
@@ -216,4 +216,4 @@ const AdminSidebar = () => {
   );
 };
 
-export default AdminSidebar;
+export default ClientSidebar;
