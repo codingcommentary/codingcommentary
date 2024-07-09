@@ -48,6 +48,7 @@ export interface ICourse extends Document {
   courseData: ICourseData[];
   ratings?: number;
   purchased: number;
+  enrolled: number;
 }
 
 const reviewSchema = new Schema<IReview>(
@@ -138,6 +139,10 @@ const courseSchema = new Schema<ICourse>({
     default: 0,
   },
   purchased: {
+    type: Number,
+    default: 0,
+  },
+  enrolled: {
     type: Number,
     default: 0,
   },

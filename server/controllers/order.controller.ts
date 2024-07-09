@@ -17,6 +17,94 @@ import { IMailData } from "../@types/types";
 require("dotenv").config();
 // const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
+// enroll in free course
+export const enrollInFreeCourse = CatchAsyncError(
+  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const { courseId } = req.body;
+
+      const user = await userModel.findById(req.user?._id);
+
+      const courseExistInUser = user?.courses.some(
+        (course: any) => course.courseId.toString() === courseId
+      );
+
+      if (courseExistInUser) {
+        return next(
+          new ErrorHandler("You have already enrolled in this course", 400)
+        );
+      }
+
+      const course = await CourseModel.findById(courseId);
+
+      if (!course) {
+        return next(new ErrorHandler("Course not found", 404));
+      }
+
+      if (course.price > 0) {
+        return next(new ErrorHandler("This course is not free", 400));
+      }
+
+      const courseIdNew = course?._id as string;
+
+      const mailData: IMailData = {
+        order: {
+          _id: courseIdNew.toString().slice(0, 6),
+          name: course.name,
+          price: course.price,
+          date: new Date().toLocaleDateString("en-US", {
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+          }),
+        },
+      };
+
+      const html = await ejs.renderFile(
+        path.join(__dirname, "../mails/enrollment-confirmation.ejs"),
+        { order: mailData }
+      );
+
+      try {
+        if (user) {
+          await sendMail({
+            email: user.email,
+            subject: "Enrollment Confirmation",
+            template: "enrollment-confirmation.ejs",
+            data: mailData,
+          });
+        }
+      } catch (error: any) {
+        return next(new ErrorHandler(error.message, 500));
+      }
+
+      user?.courses.push({ courseId });
+
+      const userId = req.user?._id as string;
+      await redis.set(userId, JSON.stringify(user));
+
+      await user?.save();
+
+      await NotificationModel.create({
+        user: user?._id,
+        title: "New Enrollment",
+        message: `You have enrolled in the course ${course.name}`,
+      });
+
+      course.enrolled += 1;
+
+      await course.save();
+
+      res.status(200).json({
+        success: true,
+        message: "You have successfully enrolled in the course",
+      });
+    } catch (error: any) {
+      return next(new ErrorHandler(error.message, 500));
+    }
+  }
+);
+
 // create order
 export const createOrder = CatchAsyncError(
   async (req: Request, res: Response, next: NextFunction) => {
