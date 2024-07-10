@@ -4,7 +4,6 @@ import {
   activateUser,
   loginUser,
   logoutUser,
-  updateAccessToken,
   getUserInfo,
   socialAuth,
   updateUserInfo,
@@ -25,8 +24,6 @@ userRouter.post("/activate-user", activateUser);
 userRouter.post("/login", loginUser);
 
 userRouter.get("/logout", isAuthenticated, authorizeRoles("admin"), logoutUser);
-
-userRouter.get("/refresh", updateAccessToken);
 
 userRouter.get("/me", isAuthenticated, getUserInfo);
 
