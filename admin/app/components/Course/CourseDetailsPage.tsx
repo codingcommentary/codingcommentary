@@ -28,7 +28,7 @@ const CourseDetailsPage = ({ id }: Props) => {
                 }
                 keywords={data?.course?.tags}
                 />
-            <CourseDetails data={data.course} />
+            <CourseDetails data={data.course} setRoute={setRoute}/>
             </div>
             )}
             </>
