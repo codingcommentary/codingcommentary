@@ -32,6 +32,7 @@ courseRouter.put(
 courseRouter.get("/get-course/:id", getSingleCourse);
 
 courseRouter.get("/get-courses", getAllCourses);
+console.log("isauthent",isAuthenticated);
 
 courseRouter.get("/get-course-content/:id", isAuthenticated, getCourseByUser);
 
