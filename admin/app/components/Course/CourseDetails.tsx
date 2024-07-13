@@ -5,19 +5,39 @@ import CoursePlayer from '../../utils/CoursePlayer';
 import Link from 'next/link';
 import CourseContentList from './CourseContentList';
 import { Elements } from '@stripe/react-stripe-js';
+import { useLoadUserQuery } from '../../../redux/features/api/apiSlice';
+import {useEnrollInFreeCourseMutation} from '../../../redux/features/orders/ordersApi';
 
 type Props = {
   data: any;
+  setRoute: (route: string) => void;
 };
 
-const CourseDetails = ({ data }: Props) => {
-  const { user } = useSelector((state: any) => state.auth);
+const CourseDetails = ({ data,setRoute}: Props) => {
+  console.log(data ,"data");
+  const {data:userData} = useLoadUserQuery(undefined,{});
+  const user = userData?.user;
   const [open, setOpen] = useState(false);
   const discountPercentage = ((data?.estimatedPrice - data.price) / data?.estimatedPrice) * 100;
   const discountPercentagePrice = discountPercentage.toFixed(0);
 
-  const isPurchased = user && user?.courses?.find((item: any) => item._id === data._id);
-  const handleOrder = (e: any) => {
+  const isPurchased = user && user?.courses?.find((item: any) => item.courseId === data._id);
+
+
+  const [enrollInFreeCourse] = useEnrollInFreeCourseMutation(); // Use the mutation hook
+  console.log("ispurcha",isPurchased);
+  const handleEnroll = async () => {
+    try {
+      console.log(user?.courses,data._id,isPurchased);
+      const response = await enrollInFreeCourse(data._id).unwrap();
+      console.log("Enrolled in course:", response);
+      window.location.reload();
+    } catch (error) {
+      console.error("Error enrolling in course:", error);
+    }
+  };
+
+  const handlePurchase = () => {
     setOpen(true);
   };
 
@@ -99,19 +119,21 @@ const CourseDetails = ({ data }: Props) => {
               </h4>
             </div>
             <div className='flex items-center'>
+              
               {isPurchased ? (
+                
                 <Link
                   className={'styles.button !w-[180px] my-3 font-Poppins cursor pointer !bg-[crimson]'}
-                  href={`/course-access/${data._id}`}
+                  href={`/client/course-access/${data._id}`}
                 >
                   Enter to course
                 </Link>
               ) : (
                 <div
-                  className={'styles.button w-[180px] my-3 font-Poppins cursor-pointer bg-[crimson]'}
-                  onClick={handleOrder}
-                >
-                  Buy Now {data.price}$
+                className={'styles.button w-[180px] my-3 font-Poppins cursor-pointer bg-[crimson]'}
+                onClick={data.price === 0 ? handleEnroll : handlePurchase}
+              >
+                {data.price === 0 ? "Enroll Now" : `Buy Now ${data.price}$`}
                 </div>
               )}
             </div>

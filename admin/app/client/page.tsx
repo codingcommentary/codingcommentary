@@ -12,7 +12,7 @@ const page = (props: Props) => {
     <div>
       <UserProtected>
         <Heading
-          title="EduVoyage - Admin"
+          title="EduVoyage - User"
           description="EduVoyage is a elearning platform for students to do online courses"
           keywords="EduVoyage"
         />
