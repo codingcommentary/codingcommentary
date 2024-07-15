@@ -5,6 +5,7 @@ import Signup from "./components/Auth/SignUp";
 import { useSelector } from "react-redux";
 import { redirect } from "next/navigation";
 import Verification from "./components/Auth/Verification";
+import ForgotPassword from "./components/Auth/ForgotPassword";
 import Login from "./components/Auth/Login";
 
 interface Props {}
@@ -30,6 +31,7 @@ const Page: FC<Props> = (props) => {
         {route === "Login" && <Login setRoute={setRoute} />}
         {route === "Sign-up" && <Signup setRoute={setRoute} />}
         {route === "Verification" && <Verification setRoute={setRoute} />}
+        {route === "ForgotPassword" && <ForgotPassword setRoute={setRoute} />}
       </div>
     </div>
   );
