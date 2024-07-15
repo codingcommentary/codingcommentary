@@ -23,7 +23,7 @@ const schema = Yup.object().shape({
 
 const Login: FC<Props> = ({ setRoute, setOpen, refetch }) => {
   const [show, setShow] = useState(false);
-  const [login, { isSuccess, error,data }] = useLoginMutation();
+  const [login, { isSuccess, error, data }] = useLoginMutation();
   const formik = useFormik({
     initialValues: { email: "", password: "" },
     validationSchema: schema,
@@ -65,9 +65,8 @@ const Login: FC<Props> = ({ setRoute, setOpen, refetch }) => {
           onChange={handleChange}
           id="email"
           placeholder="yourmail@gmail.com"
-          className={`${errors.email && touched.email && "border-red-500"} ${
-            styles.input
-          }`}
+          className={`${errors.email && touched.email && "border-red-500"} ${styles.input
+            }`}
         />
         {errors.email && touched.email && (
           <span className="text-red-500 pt-2 block">{errors.email}</span>
@@ -83,9 +82,8 @@ const Login: FC<Props> = ({ setRoute, setOpen, refetch }) => {
             onChange={handleChange}
             id="password"
             placeholder="password"
-            className={`${
-              errors.password && touched.password && "border-red-500"
-            } ${styles.input}`}
+            className={`${errors.password && touched.password && "border-red-500"
+              } ${styles.input}`}
           />
           {!show ? (
             <AiOutlineEyeInvisible
@@ -109,6 +107,18 @@ const Login: FC<Props> = ({ setRoute, setOpen, refetch }) => {
         </div>
         <br />
       </form>
+
+      <br />
+      <h5>
+        Having trouble signing in?{" "}
+        <span
+          className="text-blue-500 cursor-pointer"
+          onClick={() => setRoute("ForgotPassword")}
+        >
+          Forgot Password
+        </span>
+      </h5>
+
       <br />
       <h5>
         For the first time do sign up{" "}
