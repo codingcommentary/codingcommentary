@@ -91,6 +91,7 @@ export const enrollInFreeCourse = CatchAsyncError(
         message: `You have enrolled in the course ${course.name}`,
       });
 
+      course.purchased += 1;
       course.enrolled += 1;
 
       await course.save();
