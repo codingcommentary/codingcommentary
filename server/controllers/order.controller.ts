@@ -111,18 +111,18 @@ export const createOrder = CatchAsyncError(
     try {
       const { courseId, payment_info } = req.body as IOrder;
 
-      // if (payment_info) {
-      //   if ("id" in payment_info) {
-      //     const paymentIntentId = payment_info.id;
-      //     const paymentIntent = await stripe.paymentIntents.retrieve(
-      //       paymentIntentId
-      //     );
+      if (payment_info) {
+        if ("id" in payment_info) {
+          const paymentIntentId = payment_info.id;
+          const paymentIntent = await stripe.paymentIntents.retrieve(
+            paymentIntentId
+          );
 
-      //     if (paymentIntent.status !== "succeeded") {
-      //       return next(new ErrorHandler("Payment not authorized!", 400));
-      //     }
-      //   }
-      // }
+          if (paymentIntent.status !== "succeeded") {
+            return next(new ErrorHandler("Payment not authorized!", 400));
+          }
+        }
+      }
 
       const user = await userModel.findById(req.user?._id);
 
