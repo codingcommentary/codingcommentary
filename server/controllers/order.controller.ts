@@ -24,11 +24,10 @@ export const enrollInFreeCourse = CatchAsyncError(
       const { courseId } = req.body;
 
       const user = await userModel.findById(req.user?._id);
-
+      console.log(courseId,user);
       const courseExistInUser = user?.courses.some(
-        (course: any) => course.courseId.toString() === courseId
+        (course: any) => course.courseId && course.courseId.toString() === courseId
       );
-
       if (courseExistInUser) {
         return next(
           new ErrorHandler("You have already enrolled in this course", 400)
@@ -78,7 +77,7 @@ export const enrollInFreeCourse = CatchAsyncError(
         return next(new ErrorHandler(error.message, 500));
       }
 
-      user?.courses.push({ courseId });
+      user?.courses.push({ courseId, lastWatchedVideo: 0, completed: false, });
 
       const userId = req.user?._id as string;
       await redis.set(userId, JSON.stringify(user));

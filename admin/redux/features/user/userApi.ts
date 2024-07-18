@@ -53,6 +53,21 @@ export const userApi = apiSlice.injectEndpoints({
         credentials: "include" as const,
       }),
     }),
+    updateCourseCompletion: builder.mutation({
+      query: ({ courseId, lastWatchedVideo, completed }) => ({
+        url: `update-course-completion`,
+        method: "PUT",
+        body: { courseId, lastWatchedVideo, completed },
+        credentials: "include" as const,
+      }),
+    }),
+    getUserCourseCompletion: builder.query({
+      query: () => ({
+        url: "user-course-completion",
+        method: "GET",
+        credentials: "include" as const,
+      }),
+    }),
   }),
 });
 
@@ -62,5 +77,7 @@ export const {
   useUpdatePasswordMutation,
   useGetAllUsersQuery,
   useUpdateUserRoleMutation,
-  useDeleteUserMutation
+  useDeleteUserMutation,
+  useUpdateCourseCompletionMutation,
+  useGetUserCourseCompletionQuery
 } = userApi;
