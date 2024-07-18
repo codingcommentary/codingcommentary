@@ -1,6 +1,7 @@
 import { apiSlice } from "../api/apiSlice";
 import { userLoggedIn, userLoggedOut, userRegistration } from "./authSlice";
 import Cookies from "js-cookie";
+import { toast } from 'react-hot-toast';
 
 type RegistrationResponse = {
   message: string;
@@ -98,6 +99,27 @@ export const authApi = apiSlice.injectEndpoints({
         }
       },
     }),
+
+    resetPassword: builder.mutation({
+      query: ({ email }) => ({
+        url: "reset-password",
+        method: "POST",
+        body: {
+          email,
+        },
+        credentials: "include" as const,
+      }),
+      async onQueryStarted(arg, { queryFulfilled }) {
+        try {
+          const result = await queryFulfilled;
+          toast.success(result.data.message || "Reset password email sent successfully.");
+        } catch (error: any) {
+          console.log(error);
+        }
+      },
+    }),
+
+    
     logOut: builder.query({
       query: () => ({
         url: "logout",
@@ -120,5 +142,6 @@ export const {
   useActivationMutation,
   useLoginMutation,
   useSocialAuthMutation,
+  useResetPasswordMutation,
   useLogOutQuery,
 } = authApi;
