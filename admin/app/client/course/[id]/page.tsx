@@ -1,12 +1,17 @@
-'use client';
-import React from 'react';
+// src/app/page.tsx
+"use client";
+import React from "react";
 import CourseDetailsPage from "../../../components/Course/CourseDetailsPage";
- const Page = ({params}:any) => {
-  return (
-    <div>
-      <CourseDetailsPage id={params.id} />
-    </div>
+import { UserProvider } from "../../../hooks/userContext";
 
-  )
- }
- export default Page;
+const Page = ({ params }: any) => {
+  return (
+    <UserProvider>
+      <div>
+        <CourseDetailsPage id={params.id} />
+      </div>
+    </UserProvider>
+  );
+};
+
+export default Page;
