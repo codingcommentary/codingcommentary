@@ -488,3 +488,68 @@ export const deleteUser = CatchAsyncError(
     }
   }
 );
+
+export const updateCourseCompletion = CatchAsyncError(
+  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const { courseId, lastWatchedVideo, completed } = req.body;
+      const userId = req.user?._id;
+
+      if (!userId) {
+        return next(new ErrorHandler("User not authenticated", 401));
+      }
+
+      const user = await userModel.findById(userId);
+
+      if (!user) {
+        return next(new ErrorHandler("User not found", 404));
+      }
+
+      const courseIndex = user.courses.findIndex(
+        (course) => course.courseId === courseId
+      );
+
+      if (courseIndex > -1) {
+        user.courses[courseIndex].lastWatchedVideo = lastWatchedVideo;
+        user.courses[courseIndex].completed = completed;
+      } else {
+        user.courses.push({ courseId, lastWatchedVideo, completed });
+      }
+
+      await user.save();
+
+      res.status(200).json({
+        success: true,
+        message: "Course completion updated successfully",
+      });
+    } catch (error: any) {
+      return next(new ErrorHandler(error.message, 500));
+    }
+  }
+);
+
+export const getUserCourseCompletion = CatchAsyncError(
+  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const userId = req.user?._id;
+
+      if (!userId) {
+        return next(new ErrorHandler("User not authenticated", 401));
+      }
+
+      const user = await userModel.findById(userId).select("courses");
+
+      if (!user) {
+        return next(new ErrorHandler("User not found", 404));
+      }
+
+      res.status(200).json({
+        success: true,
+        courses: user.courses,
+      });
+    } catch (error: any) {
+      return next(new ErrorHandler(error.message, 500));
+    }
+  }
+);
+

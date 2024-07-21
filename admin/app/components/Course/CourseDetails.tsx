@@ -26,7 +26,9 @@ const CourseDetails = ({
     undefined,
     {}
   );
+  console.log("userData", userData);
   const user = userData?.user;
+  console.log(user?.role);
   const [open, setOpen] = useState(false);
   const discountPercentage =
     ((data?.estimatedPrice - data.price) / data?.estimatedPrice) * 100;
@@ -156,7 +158,7 @@ const CourseDetails = ({
               </h4>
             </div>
             <div className="flex items-center">
-              {isPurchased || hasPurchased ? (
+              {isPurchased || hasPurchased || user?.role === "admin" ? (
                 <Link
                   className={
                     "styles.button !w-[180px] my-3 font-Poppins cursor pointer !bg-[crimson]"

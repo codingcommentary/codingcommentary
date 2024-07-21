@@ -12,6 +12,8 @@ import {
   getAllUsers,
   updateUserRole,
   deleteUser,
+  updateCourseCompletion,
+  getUserCourseCompletion,
 } from "../controllers/user.controller";
 import { isAuthenticated, authorizeRoles } from "../middleware/auth";
 
@@ -55,5 +57,9 @@ userRouter.delete(
   authorizeRoles("admin"),
   deleteUser
 );
+
+userRouter.put("/update-course-completion", isAuthenticated, updateCourseCompletion);
+
+userRouter.get("/user-course-completion", isAuthenticated, getUserCourseCompletion);
 
 export default userRouter;
