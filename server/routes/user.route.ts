@@ -15,6 +15,7 @@ import {
   updateCourseCompletion,
   getUserCourseCompletion,
   getUserEnrolledCourses,
+  forgotPassword,
 } from "../controllers/user.controller";
 import { isAuthenticated, authorizeRoles } from "../middleware/auth";
 
@@ -76,5 +77,7 @@ userRouter.get(
   isAuthenticated,
   getUserEnrolledCourses
 );
+
+userRouter.post("/forgot-password", forgotPassword);
 
 export default userRouter;

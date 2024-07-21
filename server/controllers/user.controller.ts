@@ -21,6 +21,7 @@ import {
   updateUserRoleService,
 } from "../services/user.service";
 import cloudinary from "cloudinary";
+import crypto from "crypto";
 
 // register user
 interface IRegistrationBody {
@@ -576,6 +577,54 @@ export const getUserEnrolledCourses = CatchAsyncError(
       });
     } catch (error: any) {
       return next(new ErrorHandler(error.message, 500));
+    }
+  }
+);
+
+// Forgot Password - Generate and send a new password
+export const forgotPassword = CatchAsyncError(
+  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const { email } = req.body;
+
+      const user = await userModel.findOne({ email });
+      if (!user) {
+        return next(new ErrorHandler("No user found with this email", 404));
+      }
+
+      // Generate a new random password
+      const newPassword = crypto.randomBytes(8).toString("hex"); // Generates a new random password
+
+      // Update the user's password
+      user.password = newPassword;
+      user.resetPasswordToken = undefined; // No need to store a reset token
+      user.resetPasswordExpires = undefined; // No need to store an expiration date
+
+      await user.save();
+
+      // Send the new password to user's email
+      const data = {
+        user: { name: user.name },
+        newPassword,
+      };
+      const html = await ejs.renderFile(
+        path.join(__dirname, "../mails/reset-password-mail.ejs"),
+        data
+      );
+
+      await sendMail({
+        email: user.email,
+        subject: "Your New Password",
+        template: "reset-password-mail.ejs",
+        data,
+      });
+
+      res.status(200).json({
+        success: true,
+        message: `A new password has been sent to ${user.email}`,
+      });
+    } catch (error: any) {
+      return next(new ErrorHandler(error.message, 400));
     }
   }
 );
