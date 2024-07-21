@@ -45,6 +45,21 @@ const CourseDetailsPage: React.FC<CourseDetailsPageProps> = ({ id }) => {
     }
   }, [paymentIntentData]);
 
+  useEffect(() => {
+    fetch("http://localhost:8000/api/v1/me", {
+      method: "GET",
+      credentials: "include", // Include credentials (cookies, headers)
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        // Handle user data
+        console.log("User data:", data);
+      })
+      .catch((error) => {
+        console.error("Error fetching user data:", error);
+      });
+  }, []); // Fetch user data once on component mount
+
   return (
     <>
       {isLoading ? (
