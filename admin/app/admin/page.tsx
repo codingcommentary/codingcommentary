@@ -4,6 +4,7 @@ import React from "react";
 import Heading from "../utils/Heading";
 import AdminSidebar from "../components/Admin/sidebar/AdminSidebar";
 import AdminProtected from "../hooks/adminProtected";
+import Courses from "../components/Route/Courses";
 
 type Props = {};
 
@@ -23,6 +24,7 @@ const page = (props: Props) => {
           </div>
           <div className="w-4/5 p-8">
             <h1 className="text-3xl font-bold mb-4">Welcome, ADMIN!</h1>
+            <Courses/>
           </div>
         </div>
       </AdminProtected>

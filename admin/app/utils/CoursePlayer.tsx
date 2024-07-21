@@ -1,15 +1,14 @@
-import React, { FC } from "react";
+import React, { FC, useEffect } from "react";
 
 type Props = {
   videoUrl: string;
   title: string;
 };
 
-const CoursePlayer: FC<Props> = ({ videoUrl }) => {
+const CoursePlayer: FC<Props> = ({ videoUrl, title }) => {
   console.log(videoUrl)
   const extractFileName = (url: string) => {
-    // Extracts the filename from the full path (assuming the format is consistent)
-    return url.split('\\').pop() || ''; // This will get "Video1.mp4" from "C:\Users\jissa\Downloads\Videos\Video1.mp4"
+    return url.split('\\').pop() || '';
   };
   const isYouTubeUrl = (url: string) => {
     const regExp = /^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.?be)\/.+$/;
@@ -20,6 +19,26 @@ const CoursePlayer: FC<Props> = ({ videoUrl }) => {
     const regExp = /^.*(youtu.be\/|v\/|\/u\/\w\/|embed\/|watch\?v=|watch\?.+&v=)([^#\&\?]*).*/;
     const match = url.match(regExp);
     return (match && match[2].length === 11) ? match[2] : null;
+  };
+
+  useEffect(() => {
+    const videoElement = document.querySelector('video');
+    if (videoElement) {
+      videoElement.addEventListener('ended', handleVideoEnd);
+    }
+    return () => {
+      if (videoElement) {
+        videoElement.removeEventListener('ended', handleVideoEnd);
+      }
+    };
+  }, []);
+
+  const handleVideoEnd = () => {
+    const courseId = window.location.pathname.split('/').pop();
+    if (courseId) {
+      const currentIndex = parseInt(localStorage.getItem(`lastWatched_${courseId}`) || '0');
+      localStorage.setItem(`lastWatched_${courseId}`, (currentIndex + 1).toString());
+    }
   };
 
   return (
@@ -40,7 +59,7 @@ const CoursePlayer: FC<Props> = ({ videoUrl }) => {
         ></iframe>
       ) : (
         <video
-          src={`http://localhost:8080/${extractFileName(videoUrl)}`} // Replace with the correct path and filename
+          src={`http://localhost:8080/${extractFileName(videoUrl)}`}
           controls
           style={{
             position: "absolute",
@@ -53,6 +72,7 @@ const CoursePlayer: FC<Props> = ({ videoUrl }) => {
           onError={() => {
             console.error("Failed to load video from URL:", videoUrl);
           }}
+          onEnded={handleVideoEnd}
         >
           Your browser does not support the video tag.
         </video>
