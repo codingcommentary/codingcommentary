@@ -13,7 +13,7 @@ import toast from "react-hot-toast";
 type Props = {
   setOpen: any;
   data: any;
-  onSuccess: () => Promise<void>; // Add this line
+  onSuccess: () => Promise<void>;
 };
 
 const CheckOutForm = ({ setOpen, data, onSuccess }: Props) => {
@@ -41,7 +41,7 @@ const CheckOutForm = ({ setOpen, data, onSuccess }: Props) => {
     } else if (paymentIntent && paymentIntent.status === "succeeded") {
       setIsLoading(false);
       createOrder({ courseId: data._id, payment_info: paymentIntent });
-      await onSuccess(); // Call onSuccess here
+      await onSuccess();
     }
   };
 
@@ -62,10 +62,20 @@ const CheckOutForm = ({ setOpen, data, onSuccess }: Props) => {
     <form id="payment-form" onSubmit={handleSubmit}>
       <LinkAuthenticationElement id="link-authentication-element" />
       <PaymentElement id="payment-element" />
-      <button disabled={isLoading || !stripe || !elements} id="submit">
-        <span id="button-text" className={"${styles.button} text-black mt-2 !h-[35px]"}>
-          {isLoading ? "Paying..." : "Pay-now"}
-        </span>
+      <button
+        disabled={isLoading || !stripe || !elements}
+        id="submit"
+        style={{
+          backgroundColor: "#007bff",
+          color: "#fff",
+          padding: "10px 20px",
+          border: "none",
+          borderRadius: "5px",
+          cursor: isLoading || !stripe || !elements ? "not-allowed" : "pointer",
+          fontSize: "16px",
+        }}
+      >
+        <span id="button-text">{isLoading ? "Paying..." : "Pay Now"}</span>
       </button>
       {message && (
         <div id="payment-message" className="text-[red] font-Poppins pt-2">

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { IoCheckmarkDoneOutline, IoCloseOutline } from "react-icons/io5";
 import { useSelector } from "react-redux";
 import CoursePlayer from "../../utils/CoursePlayer";
@@ -34,8 +34,11 @@ const CourseDetails = ({
     ((data?.estimatedPrice - data.price) / data?.estimatedPrice) * 100;
   const discountPercentagePrice = discountPercentage.toFixed(0);
 
-  const isPurchased =
-    user && user?.courses?.find((item: any) => item.courseId === data._id);
+  useEffect(() => {
+    refetchUser();
+  }, [refetchUser]);
+
+  const isPurchased = user?.courses?.find((course) => course._id === data._id);
   const [hasPurchased, setHasPurchased] = useState(isPurchased);
 
   const [enrollInFreeCourse] = useEnrollInFreeCourseMutation();
@@ -60,6 +63,17 @@ const CourseDetails = ({
     setOpen(false);
     await refetchUser();
   };
+
+  useEffect(() => {
+    if (!user?.Courses) return;
+
+    const purchasedCourse = user?.Courses.find(
+      (course) => course._id === data._id
+    );
+    if (purchasedCourse) {
+      setHasPurchased(true);
+    }
+  }, [user?.Courses, data._id]);
 
   return (
     <div className="min-h-screen w-full bg-gray-100 dark:bg-gray-800">
