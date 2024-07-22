@@ -22,6 +22,7 @@ import {
 } from "../services/user.service";
 import cloudinary from "cloudinary";
 import crypto from "crypto";
+import CourseModel from "../models/course.model";
 
 // register user
 interface IRegistrationBody {
@@ -571,9 +572,24 @@ export const getUserEnrolledCourses = CatchAsyncError(
         return next(new ErrorHandler("User not found", 404));
       }
 
+      // Fetch additional course details
+      const enrolledCourses = await Promise.all(
+        user.courses.map(async (course) => {
+          const courseDetails = await CourseModel.findById(course.courseId);
+          console.log(courseDetails);
+          return {
+            _id: course.courseId,
+            name: courseDetails?.name || "Unknown Course",
+            thumbnail: courseDetails?.thumbnail || null,
+            lastWatchedVideo: course.lastWatchedVideo,
+            completed: course.completed,
+          };
+        })
+      );
+
       res.status(200).json({
         success: true,
-        enrolledCourses: user.courses,
+        enrolledCourses,
       });
     } catch (error: any) {
       return next(new ErrorHandler(error.message, 500));
@@ -599,20 +615,22 @@ export const requestPasswordReset = CatchAsyncError(
       const resetToken = jwt.sign(
         { email: user.email },
         process.env.RESET_PASSWORD_SECRET as Secret,
-        { expiresIn: '1h' }
+        { expiresIn: "1h" }
       );
 
-      const resetUrl = `http://localhost:3000/?token=${resetToken}&email=${encodeURIComponent(user.email)}`;
+      const resetUrl = `http://localhost:3000/?token=${resetToken}&email=${encodeURIComponent(
+        user.email
+      )}`;
       const data = { name: user.name, resetUrl };
       const html = await ejs.renderFile(
-        path.join(__dirname, '../mails/reset-password-mail.ejs'),
+        path.join(__dirname, "../mails/reset-password-mail.ejs"),
         data
       );
 
       await sendMail({
         email: user.email,
-        subject: 'Password Reset Request',
-        template: 'reset-password-mail.ejs',
+        subject: "Password Reset Request",
+        template: "reset-password-mail.ejs",
         data,
       });
 
@@ -632,7 +650,12 @@ export const resetPassword = CatchAsyncError(
       const { email, newPassword, resetToken } = req.body;
 
       if (!email || !newPassword || !resetToken) {
-        return next(new ErrorHandler("Please provide email, new password, and reset token", 400));
+        return next(
+          new ErrorHandler(
+            "Please provide email, new password, and reset token",
+            400
+          )
+        );
       }
 
       // Verify the reset token
@@ -643,11 +666,11 @@ export const resetPassword = CatchAsyncError(
           process.env.RESET_PASSWORD_SECRET as Secret
         ) as { email: string };
       } catch (error) {
-        return next(new ErrorHandler('Invalid or expired token', 400));
+        return next(new ErrorHandler("Invalid or expired token", 400));
       }
 
       if (decoded.email !== email) {
-        return next(new ErrorHandler('Email does not match the token', 400));
+        return next(new ErrorHandler("Email does not match the token", 400));
       }
 
       const user = await userModel.findOne({ email }).select("+password");
@@ -658,12 +681,22 @@ export const resetPassword = CatchAsyncError(
       // Check if new password is different from the old one
       const isPasswordMatch = await user.comparePassword(newPassword);
       if (isPasswordMatch) {
-        return next(new ErrorHandler('New password must be different from the old password', 400));
+        return next(
+          new ErrorHandler(
+            "New password must be different from the old password",
+            400
+          )
+        );
       }
 
       // Validate new password (example: minimum length 6)
       if (newPassword.length < 6) {
-        return next(new ErrorHandler("New password must be at least 6 characters long", 400));
+        return next(
+          new ErrorHandler(
+            "New password must be at least 6 characters long",
+            400
+          )
+        );
       }
 
       // Update password
