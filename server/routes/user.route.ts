@@ -15,7 +15,9 @@ import {
   updateCourseCompletion,
   getUserCourseCompletion,
   getUserEnrolledCourses,
-  forgotPassword,
+  requestPasswordReset,
+  resetPassword,
+ 
 } from "../controllers/user.controller";
 import { isAuthenticated, authorizeRoles } from "../middleware/auth";
 
@@ -78,6 +80,8 @@ userRouter.get(
   getUserEnrolledCourses
 );
 
-userRouter.post("/forgot-password", forgotPassword);
+userRouter.post("/reset-password", resetPassword); 
+
+userRouter.post("/request-password-reset", requestPasswordReset);
 
 export default userRouter;

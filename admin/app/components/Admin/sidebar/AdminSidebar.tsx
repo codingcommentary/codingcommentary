@@ -25,7 +25,8 @@ import { useSelector } from "react-redux";
 import Link from "next/link";
 import Image from "next/image";
 import { useTheme } from "next-themes";
-import Cookies from "js-cookie";
+import { useLogOutQuery } from '../../../../redux/features/auth/authApi'; // Update this path
+import { toast } from 'react-hot-toast';
 
 interface itemProps {
   title: string;
@@ -54,11 +55,12 @@ const Item: FC<itemProps> = ({ title, to, icon, selected, setSelected }) => {
 
 const AdminSidebar = () => {
   const { user } = useSelector((state: any) => state.auth);
-  const [logout, setlogout] = useState(false);
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [selected, setSelected] = useState("Dashboard");
   const [mounted, setMounted] = useState(false);
   const { theme, setTheme } = useTheme();
+
+  const { refetch: triggerLogout, isFetching: isLoggingOut } = useLogOutQuery(undefined, { skip: true });
 
   useEffect(() => setMounted(true), []);
 
@@ -67,9 +69,14 @@ const AdminSidebar = () => {
   }
 
   const logoutHandler = async () => {
-    Cookies.remove("accessToken");
-    Cookies.remove("refreshToken");
-    window.location.reload();
+    try {
+      await triggerLogout();
+      console.log("logout");
+      toast.success('Logged out successfully');
+      window.location.href = '/'; // Redirect to login page after successful logout
+    } catch (error) {
+      
+    }
   };
 
   return (
@@ -201,6 +208,16 @@ const AdminSidebar = () => {
             />
 
             <Item
+              title="Invoices"
+              to="/admin/invoices"
+              icon={
+                <ReceiptOutlinedIcon className="text-black dark:text-white" />
+              }
+              selected={selected}
+              setSelected={setSelected}
+            />
+
+            <Item
               title="Create Course"
               to="/admin/create-course"
               icon={<VideoCallIcon className="text-black dark:text-white" />}
@@ -209,7 +226,7 @@ const AdminSidebar = () => {
             />
 
             <Item
-              title="View Courses"
+              title="Manage Courses"
               to="/admin/courses"
               icon={
                 <OndemandVideoIcon className="text-black dark:text-white" />
@@ -227,7 +244,7 @@ const AdminSidebar = () => {
             </Typography>
             <div onClick={logoutHandler}>
               <Item
-                title="Logout"
+                title={isLoggingOut ? "Logging out..." : "Logout"}
                 to="/"
                 icon={<ExitToAppIcon className="text-black dark:text-white" />}
                 selected={selected}
