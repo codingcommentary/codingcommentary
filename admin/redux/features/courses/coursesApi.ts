@@ -93,9 +93,18 @@ export const coursesApi = apiSlice.injectEndpoints({
       query: ({ comment, courseId, reviewId }: any) => ({
         url: `add-reply`,
         body: {
-          comment, courseId, reviewId
+          comment,
+          courseId,
+          reviewId,
         },
         method: "PUT",
+        credentials: "include" as const,
+      }),
+    }),
+    getUserEnrolledCourses: builder.query({
+      query: () => ({
+        url: "user-enrolled-courses",
+        method: "GET",
         credentials: "include" as const,
       }),
     }),
@@ -113,5 +122,6 @@ export const {
   useAddNewQuestionMutation,
   useAddAnswerInQuestionMutation,
   useAddReviewInCourseMutation,
-  useAddReplyInReviewMutation
+  useAddReplyInReviewMutation,
+  useGetUserEnrolledCoursesQuery,
 } = coursesApi;

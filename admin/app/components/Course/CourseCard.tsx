@@ -15,14 +15,27 @@ const CourseCard: FC<Props> = ({ item, isProfile }) => {
   const [courseCompleted, setCourseCompleted] = useState(false);
 
   // Fetch user data
-  const { data: userData, refetch: refetchUser } = useLoadUserQuery(undefined, {});
+  const { data: userData, refetch: refetchUser } = useLoadUserQuery(
+    undefined,
+    {}
+  );
   const user = userData?.user;
 
   // Fetch user course completion status
-  const { data: userCourseCompletion, error: userError, isLoading: userLoading, refetch: refetchUserCourseCompletion } = useGetUserCourseCompletionQuery({});
+  const {
+    data: userCourseCompletion,
+    error: userError,
+    isLoading: userLoading,
+    refetch: refetchUserCourseCompletion,
+  } = useGetUserCourseCompletionQuery({});
 
   // Fetch course details
-  const { data: courseDetails, error: courseError, isLoading: courseLoading, refetch: refetchCourseDetails } = useGetCourseDetailsQuery(item._id);
+  const {
+    data: courseDetails,
+    error: courseError,
+    isLoading: courseLoading,
+    refetch: refetchCourseDetails,
+  } = useGetCourseDetailsQuery(item._id);
 
   useEffect(() => {
     if (userCourseCompletion) {
@@ -44,6 +57,7 @@ const CourseCard: FC<Props> = ({ item, isProfile }) => {
     const handleVisibilityChange = () => {
       if (document.visibilityState === "visible") {
         refetchUserCourseCompletion();
+        refetchCourseDetails();
       }
     };
 
@@ -52,13 +66,17 @@ const CourseCard: FC<Props> = ({ item, isProfile }) => {
     return () => {
       document.removeEventListener("visibilitychange", handleVisibilityChange);
     };
-  }, [refetchUserCourseCompletion]);
+  }, [refetchUserCourseCompletion, refetchCourseDetails]);
 
   if (userLoading || courseLoading) return <div>Loading...</div>;
   if (userError || courseError) return <div>Error fetching data</div>;
 
   return (
-    <Link href={!isProfile ? `/client/course/${item._id}` : `course-access/${item._id}`}>
+    <Link
+      href={
+        !isProfile ? `/client/course/${item._id}` : `course-access/${item._id}`
+      }
+    >
       <div className="w-full min-h-[35vh] dark:bg-slate-500 dark:bg-opacity-20 backdrop-blur border dark:border-[#ffffff1d] border-[#00000015] dark:shadow-[bg-slate-700] rounded-lg p-3 shadow-sm dark:shadow-inner relative">
         <Image
           src={item.thumbnail.url}

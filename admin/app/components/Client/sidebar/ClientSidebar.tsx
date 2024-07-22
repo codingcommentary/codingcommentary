@@ -194,7 +194,7 @@ const ClientSidebar = () => {
 
             <Item
               title="Enrolled Courses"
-              to="/client/enrolledcourses"
+              to="/client/enrolled-courses"
               icon={<GroupsIcon className="text-black dark:text-white" />}
               selected={selected}
               setSelected={setSelected}
