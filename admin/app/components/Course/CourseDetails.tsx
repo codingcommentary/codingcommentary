@@ -38,7 +38,9 @@ const CourseDetails = ({
     refetchUser();
   }, [refetchUser]);
 
-  const isPurchased = user?.courses?.find((course) => course._id === data._id);
+  const isPurchased = user && user?.courses?.find((course) => course._id === data._id || course.courseId === data._id);
+
+
   const [hasPurchased, setHasPurchased] = useState(isPurchased);
 
   const [enrollInFreeCourse] = useEnrollInFreeCourseMutation();

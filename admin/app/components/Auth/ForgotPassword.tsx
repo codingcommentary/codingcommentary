@@ -3,7 +3,7 @@ import React, { FC, useEffect, useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { styles } from "../../../app/styles/style";
-import { useResetPasswordMutation } from "../../../redux/features/auth/authApi";
+import { useRequestPasswordResetMutation } from "../../../redux/features/auth/authApi";
 import { toast } from "react-hot-toast";
 
 type Props = {
@@ -19,7 +19,7 @@ const schema = Yup.object().shape({
 const ForgotPassword: FC<Props> = ({ setRoute }) => {
 //   const [show, setShow] = useState(false);
 //   const [showConfirm, setShowConfirm] = useState(false);
-  const [resetPassword, { data, error, isSuccess }] = useResetPasswordMutation();
+  const [requestPasswordReset, { data, error, isSuccess }] = useRequestPasswordResetMutation();
 
   useEffect(() => {
     if (isSuccess) {
@@ -42,7 +42,7 @@ const ForgotPassword: FC<Props> = ({ setRoute }) => {
       const data = {
         email
       };
-      await resetPassword(data);
+      await requestPasswordReset(data);
     },
   });
 

@@ -21,6 +21,7 @@ import {
   updateUserRoleService,
 } from "../services/user.service";
 import cloudinary from "cloudinary";
+import crypto from "crypto";
 
 // register user
 interface IRegistrationBody {
@@ -448,13 +449,12 @@ export const updateUserRole = CatchAsyncError(
       const isUserExist = await userModel.findOne({ email });
       if (isUserExist) {
         const id = isUserExist._id;
-        updateUserRoleService(res, email, role )
-      }
-      else {
+        updateUserRoleService(res, email, role);
+      } else {
         res.status(400).json({
           success: false,
-          message: "User not found"
-        })
+          message: "User not found",
+        });
       }
       updateUserRoleService(res, email, role);
     } catch (error: any) {
@@ -553,3 +553,133 @@ export const getUserCourseCompletion = CatchAsyncError(
   }
 );
 
+// Get user's enrolled courses
+export const getUserEnrolledCourses = CatchAsyncError(
+  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const userId = req.user?._id;
+
+      if (!userId) {
+        return next(new ErrorHandler("User not authenticated", 401));
+      }
+
+      const user = await userModel
+        .findById(userId)
+        .populate("courses.courseId");
+
+      if (!user) {
+        return next(new ErrorHandler("User not found", 404));
+      }
+
+      res.status(200).json({
+        success: true,
+        enrolledCourses: user.courses,
+      });
+    } catch (error: any) {
+      return next(new ErrorHandler(error.message, 500));
+    }
+  }
+);
+
+export const requestPasswordReset = CatchAsyncError(
+  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const { email } = req.body;
+
+      if (!email) {
+        return next(new ErrorHandler("Please provide an email address", 400));
+      }
+
+      const user = await userModel.findOne({ email });
+      if (!user) {
+        return next(new ErrorHandler("User not found with this email", 404));
+      }
+
+      // Generate reset token
+      const resetToken = jwt.sign(
+        { email: user.email },
+        process.env.RESET_PASSWORD_SECRET as Secret,
+        { expiresIn: '1h' }
+      );
+
+      const resetUrl = `http://localhost:3000/?token=${resetToken}&email=${encodeURIComponent(user.email)}`;
+      const data = { name: user.name, resetUrl };
+      const html = await ejs.renderFile(
+        path.join(__dirname, '../mails/reset-password-mail.ejs'),
+        data
+      );
+
+      await sendMail({
+        email: user.email,
+        subject: 'Password Reset Request',
+        template: 'reset-password-mail.ejs',
+        data,
+      });
+
+      res.status(200).json({
+        success: true,
+        message: `Password reset email sent to: ${user.email}. Click on the reset link`,
+      });
+    } catch (error: any) {
+      return next(new ErrorHandler(error.message, 500));
+    }
+  }
+);
+
+export const resetPassword = CatchAsyncError(
+  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const { email, newPassword, resetToken } = req.body;
+
+      if (!email || !newPassword || !resetToken) {
+        return next(new ErrorHandler("Please provide email, new password, and reset token", 400));
+      }
+
+      // Verify the reset token
+      let decoded;
+      try {
+        decoded = jwt.verify(
+          resetToken,
+          process.env.RESET_PASSWORD_SECRET as Secret
+        ) as { email: string };
+      } catch (error) {
+        return next(new ErrorHandler('Invalid or expired token', 400));
+      }
+
+      if (decoded.email !== email) {
+        return next(new ErrorHandler('Email does not match the token', 400));
+      }
+
+      const user = await userModel.findOne({ email }).select("+password");
+      if (!user) {
+        return next(new ErrorHandler("User not found with this email", 404));
+      }
+
+      // Check if new password is different from the old one
+      const isPasswordMatch = await user.comparePassword(newPassword);
+      if (isPasswordMatch) {
+        return next(new ErrorHandler('New password must be different from the old password', 400));
+      }
+
+      // Validate new password (example: minimum length 6)
+      if (newPassword.length < 6) {
+        return next(new ErrorHandler("New password must be at least 6 characters long", 400));
+      }
+
+      // Update password
+      user.password = newPassword;
+      await user.save();
+
+      // Invalidate all active sessions/tokens
+      await redis.del(req.user?._id as string);
+      await redis.set(req.user?._id as string, JSON.stringify(user));
+
+      res.status(200).json({
+        success: true,
+        message: "Password reset successfully",
+      });
+    } catch (error: any) {
+      return next(new ErrorHandler(error.message, 500));
+    }
+  }
+);
