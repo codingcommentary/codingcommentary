@@ -8,11 +8,24 @@ type RegistrationResponse = {
   activationToken: string;
 };
 
-type RegistrationData = {};
+type RegistrationData = {
+  email: string;
+  password: string;
+  name: string;
+};
+
+type ResetPasswordRequestData = {
+  email: string;
+};
+
+type ResetPasswordData = {
+  email: string;
+  newPassword: string;
+  resetToken: string;
+};
 
 export const authApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    // endpoints here
     register: builder.mutation<RegistrationResponse, RegistrationData>({
       query: (data) => ({
         url: "registration",
@@ -100,13 +113,11 @@ export const authApi = apiSlice.injectEndpoints({
       },
     }),
 
-    resetPassword: builder.mutation({
+    requestPasswordReset: builder.mutation<{ message: string }, ResetPasswordRequestData>({
       query: ({ email }) => ({
-        url: "reset-password",
+        url: "request-password-reset",
         method: "POST",
-        body: {
-          email,
-        },
+        body: { email },
         credentials: "include" as const,
       }),
       async onQueryStarted(arg, { queryFulfilled }) {
@@ -114,12 +125,32 @@ export const authApi = apiSlice.injectEndpoints({
           const result = await queryFulfilled;
           toast.success(result.data.message || "Reset password email sent successfully.");
         } catch (error: any) {
-          console.log(error);
+          toast.error(error.data?.message || "Failed to send reset password email.");
         }
       },
     }),
 
-    
+    resetPassword: builder.mutation<{ message: string }, ResetPasswordData>({
+      query: ({ email, newPassword, resetToken }) => ({
+        url: "reset-password",
+        method: "POST",
+        body: {
+          email,
+          newPassword,
+          resetToken,
+        },
+        credentials: "include" as const,
+      }),
+      async onQueryStarted(arg, { queryFulfilled }) {
+        try {
+          const result = await queryFulfilled;
+          toast.success(result.data.message || "Password reset successfully.");
+        } catch (error: any) {
+          toast.error(error.data?.message || "Failed to reset password.");
+        }
+      },
+    }),
+
     logOut: builder.query({
       query: () => ({
         url: "logout",
@@ -128,7 +159,10 @@ export const authApi = apiSlice.injectEndpoints({
       }),
       async onQueryStarted(arg, { queryFulfilled, dispatch }) {
         try {
+          await queryFulfilled;
           dispatch(userLoggedOut());
+          Cookies.remove("accessToken");
+          Cookies.remove("refreshToken");
         } catch (error: any) {
           console.log(error);
         }
@@ -142,6 +176,7 @@ export const {
   useActivationMutation,
   useLoginMutation,
   useSocialAuthMutation,
+  useRequestPasswordResetMutation,
   useResetPasswordMutation,
   useLogOutQuery,
 } = authApi;

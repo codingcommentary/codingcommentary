@@ -23,8 +23,6 @@ export interface IUser extends Document {
   comparePassword: (password: string) => Promise<boolean>;
   SignAccessToken: () => string;
   SignRefreshToken: () => string;
-  resetPasswordToken?: string;
-  resetPasswordExpires?: Date;
 }
 
 const userSchema: Schema<IUser> = new mongoose.Schema(
@@ -77,14 +75,6 @@ const userSchema: Schema<IUser> = new mongoose.Schema(
         },
       },
     ],
-    resetPasswordToken: {
-      type: String,
-      select: false,
-    },
-    resetPasswordExpires: {
-      type: Date,
-      select: false,
-    },
   },
   { timestamps: true }
 );
