@@ -21,6 +21,7 @@ import {
   updateUserRoleService,
 } from "../services/user.service";
 import cloudinary from "cloudinary";
+import crypto from "crypto";
 
 // register user
 interface IRegistrationBody {
@@ -448,13 +449,12 @@ export const updateUserRole = CatchAsyncError(
       const isUserExist = await userModel.findOne({ email });
       if (isUserExist) {
         const id = isUserExist._id;
-        updateUserRoleService(res, email, role )
-      }
-      else {
+        updateUserRoleService(res, email, role);
+      } else {
         res.status(400).json({
           success: false,
-          message: "User not found"
-        })
+          message: "User not found",
+        });
       }
       updateUserRoleService(res, email, role);
     } catch (error: any) {
@@ -553,3 +553,78 @@ export const getUserCourseCompletion = CatchAsyncError(
   }
 );
 
+// Get user's enrolled courses
+export const getUserEnrolledCourses = CatchAsyncError(
+  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const userId = req.user?._id;
+
+      if (!userId) {
+        return next(new ErrorHandler("User not authenticated", 401));
+      }
+
+      const user = await userModel
+        .findById(userId)
+        .populate("courses.courseId");
+
+      if (!user) {
+        return next(new ErrorHandler("User not found", 404));
+      }
+
+      res.status(200).json({
+        success: true,
+        enrolledCourses: user.courses,
+      });
+    } catch (error: any) {
+      return next(new ErrorHandler(error.message, 500));
+    }
+  }
+);
+
+// Forgot Password - Generate and send a new password
+export const forgotPassword = CatchAsyncError(
+  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const { email } = req.body;
+
+      const user = await userModel.findOne({ email });
+      if (!user) {
+        return next(new ErrorHandler("No user found with this email", 404));
+      }
+
+      // Generate a new random password
+      const newPassword = crypto.randomBytes(8).toString("hex"); // Generates a new random password
+
+      // Update the user's password
+      user.password = newPassword;
+      user.resetPasswordToken = undefined; // No need to store a reset token
+      user.resetPasswordExpires = undefined; // No need to store an expiration date
+
+      await user.save();
+
+      // Send the new password to user's email
+      const data = {
+        user: { name: user.name },
+        newPassword,
+      };
+      const html = await ejs.renderFile(
+        path.join(__dirname, "../mails/reset-password-mail.ejs"),
+        data
+      );
+
+      await sendMail({
+        email: user.email,
+        subject: "Your New Password",
+        template: "reset-password-mail.ejs",
+        data,
+      });
+
+      res.status(200).json({
+        success: true,
+        message: `A new password has been sent to ${user.email}`,
+      });
+    } catch (error: any) {
+      return next(new ErrorHandler(error.message, 400));
+    }
+  }
+);
