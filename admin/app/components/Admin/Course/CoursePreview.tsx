@@ -2,6 +2,7 @@ import React, { FC } from "react";
 import CoursePlayer from "../../../utils/CoursePlayer";
 import { styles } from "../../../../app/styles/style";
 import { IoCheckmarkDoneOutline } from "react-icons/io5";
+import { useSelector } from "react-redux"; // Add this import
 
 type Props = {
   active: number;
@@ -9,6 +10,8 @@ type Props = {
   courseData: any;
   handleCourseCreate: any;
   isEdit?: boolean;
+  userPoints: number;
+  handleRedeemPoints: (courseId: string) => void;
 };
 
 const CoursePreview: FC<Props> = ({
@@ -16,7 +19,9 @@ const CoursePreview: FC<Props> = ({
   handleCourseCreate,
   setActive,
   active,
-  isEdit
+  isEdit,
+  userPoints,
+  handleRedeemPoints,
 }) => {
   const dicountPercentenge =
     ((courseData?.estimatedPrice - courseData?.price) /
@@ -31,6 +36,10 @@ const CoursePreview: FC<Props> = ({
 
   const createCourse = () => {
     handleCourseCreate();
+  };
+
+  const redeemPoints = () => {
+    handleRedeemPoints(courseData?._id);
   };
 
   return (
@@ -49,7 +58,6 @@ const CoursePreview: FC<Props> = ({
           <h5 className="pl-3 text-[20px] mt-2 line-through opacity-80">
             {courseData?.estimatedPrice}$
           </h5>
-
         </div>
 
         <div className="flex items-center">
@@ -58,9 +66,18 @@ const CoursePreview: FC<Props> = ({
           >
             Buy Now {courseData?.price}$
           </div>
-        </div>
 
-      
+          <div
+            className={`${styles.button} !w-[180px] my-3 ml-4 font-Poppins ${
+              userPoints >= 100
+                ? "!bg-[#37a39a] cursor-pointer"
+                : "!bg-gray-400 cursor-not-allowed"
+            }`}
+            onClick={userPoints >= 100 ? redeemPoints : undefined}
+          >
+            Redeem Points
+          </div>
+        </div>
       </div>
       <div className="w-full">
         <div className="w-full 800px:pr-5">
@@ -118,9 +135,7 @@ const CoursePreview: FC<Props> = ({
           className="w-full 800px:w-[180px] flex items-center justify-center h-[40px] bg-[#37a39a] text-center text-[#fff] rounded mt-8 cursor-pointer"
           onClick={() => createCourse()}
         >
-         {
-          isEdit ? 'Update' : 'Create'
-         }
+          {isEdit ? "Update" : "Create"}
         </div>
       </div>
     </div>

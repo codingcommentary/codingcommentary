@@ -38,6 +38,35 @@ export const userApi = apiSlice.injectEndpoints({
         credentials: "include" as const,
       }),
     }),
+
+    // Get user points
+    getUserPoints: builder.query({
+      query: () => ({
+        url: "get-user-points",
+        method: "GET",
+        credentials: "include" as const,
+      }),
+    }),
+
+    // Redeem points for a course
+    redeemPointsForCourse: builder.mutation({
+      query: (courseId) => ({
+        url: "redeem-points-for-course",
+        method: "POST",
+        body: { courseId },
+        credentials: "include" as const,
+      }),
+    }),
+
+    // Get available courses for redemption
+    getAvailableCoursesForRedemption: builder.query({
+      query: () => ({
+        url: "get-available-courses-for-redemption",
+        method: "GET",
+        credentials: "include" as const,
+      }),
+    }),
+
     updateUserRole: builder.mutation({
       query: ({ email, role }) => ({
         url: "update-user",
@@ -79,5 +108,8 @@ export const {
   useUpdateUserRoleMutation,
   useDeleteUserMutation,
   useUpdateCourseCompletionMutation,
-  useGetUserCourseCompletionQuery
+  useGetUserCourseCompletionQuery,
+  useGetUserPointsQuery,
+  useRedeemPointsForCourseMutation,
+  useGetAvailableCoursesForRedemptionQuery,
 } = userApi;

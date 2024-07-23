@@ -7,28 +7,32 @@ import CourseContentList from "./CourseContentList";
 import { Elements } from "@stripe/react-stripe-js";
 import { useLoadUserQuery } from "../../../redux/features/api/apiSlice";
 import { useEnrollInFreeCourseMutation } from "../../../redux/features/orders/ordersApi";
+import { useRedeemPointsForCourseMutation } from "../../../redux/features/user/userApi";
 import CheckOutForm from "../Payment/CheckOutForm";
+import { toast } from "react-hot-toast";
 
 type Props = {
   data: any;
   setRoute: (route: string) => void;
   clientSecret: string;
   stripePromise: any;
+  userPoints: number;
+  handleRedeemPoints: () => Promise<void>;
 };
 
-const CourseDetails = ({
+const CourseDetails: React.FC<Props> = ({
   data,
   setRoute,
   stripePromise,
   clientSecret,
-}: Props) => {
+  userPoints,
+  handleRedeemPoints: parentHandleRedeemPoints,
+}) => {
   const { data: userData, refetch: refetchUser } = useLoadUserQuery(
     undefined,
     {}
   );
-  console.log("userData", userData);
   const user = userData?.user;
-  console.log(user?.role);
   const [open, setOpen] = useState(false);
   const discountPercentage =
     ((data?.estimatedPrice - data.price) / data?.estimatedPrice) * 100;
@@ -38,12 +42,15 @@ const CourseDetails = ({
     refetchUser();
   }, [refetchUser]);
 
-  const isPurchased = user && user?.courses?.find((course) => course._id === data._id || course.courseId === data._id);
-
-
+  const isPurchased =
+    user &&
+    user?.courses?.find(
+      (course) => course._id === data._id || course.courseId === data._id
+    );
   const [hasPurchased, setHasPurchased] = useState(isPurchased);
 
   const [enrollInFreeCourse] = useEnrollInFreeCourseMutation();
+  const [redeemPointsForCourse] = useRedeemPointsForCourseMutation();
 
   const handleEnroll = async () => {
     try {
@@ -60,6 +67,26 @@ const CourseDetails = ({
     setOpen(true);
   };
 
+  const handleRedeemPoints = async () => {
+    try {
+      const response = await redeemPointsForCourse(data._id).unwrap();
+      if (response.success) {
+        toast.success(response.message || "Course redeemed successfully!");
+        setHasPurchased(true);
+        await refetchUser();
+        if (parentHandleRedeemPoints) {
+          await parentHandleRedeemPoints();
+        }
+      }
+    } catch (error: any) {
+      const errorMessage =
+        error.data?.message ||
+        error.message ||
+        "Failed to redeem course. Please try again.";
+      toast.error(errorMessage);
+    }
+  };
+
   const onSuccessfulPayment = async () => {
     setHasPurchased(true);
     setOpen(false);
@@ -67,15 +94,15 @@ const CourseDetails = ({
   };
 
   useEffect(() => {
-    if (!user?.Courses) return;
+    if (!user?.courses) return;
 
-    const purchasedCourse = user?.Courses.find(
+    const purchasedCourse = user?.courses.find(
       (course) => course._id === data._id
     );
     if (purchasedCourse) {
       setHasPurchased(true);
     }
-  }, [user?.Courses, data._id]);
+  }, [user?.courses, data._id]);
 
   return (
     <div className="min-h-screen w-full bg-gray-100 dark:bg-gray-800">
@@ -174,7 +201,13 @@ const CourseDetails = ({
               </h4>
             </div>
             <div className="flex items-center">
-              {isPurchased || hasPurchased || user?.role === "admin" ? (
+              {user?.courses?.some(
+                (course) => course.courseId === data._id && course.completed
+              ) ? (
+                <div className="my-3 font-Poppins text-black dark:text-white">
+                  Congratulations, you have successfully completed the course.
+                </div>
+              ) : isPurchased || hasPurchased || user?.role === "admin" ? (
                 <Link
                   className={
                     "styles.button !w-[180px] my-3 font-Poppins cursor pointer !bg-[crimson]"
@@ -184,14 +217,30 @@ const CourseDetails = ({
                   Enter to course
                 </Link>
               ) : (
-                <div
-                  className={
-                    "styles.button w-[180px] my-3 font-Poppins cursor-pointer bg-[crimson]"
-                  }
-                  onClick={data.price === 0 ? handleEnroll : handlePurchase}
-                >
-                  {data.price === 0 ? "Enroll Now" : `Buy Now ${data.price}$`}
-                </div>
+                <>
+                  <div
+                    className={
+                      "styles.button w-[180px] my-3 font-Poppins cursor-pointer bg-[crimson]"
+                    }
+                    onClick={data.price === 0 ? handleEnroll : handlePurchase}
+                  >
+                    {data.price === 0 ? "Enroll Now" : `Buy Now ${data.price}$`}
+                  </div>
+                  <div
+                    className={`styles.button w-[180px] my-3 ml-4 font-Poppins ${
+                      userPoints >= 100 && !hasPurchased
+                        ? "cursor-pointer bg-[#37a39a]"
+                        : "cursor-not-allowed bg-gray-400"
+                    }`}
+                    onClick={
+                      userPoints >= 100 && !hasPurchased
+                        ? handleRedeemPoints
+                        : undefined
+                    }
+                  >
+                    {hasPurchased ? "Course Redeemed" : "Redeem Points"}
+                  </div>
+                </>
               )}
             </div>
           </div>

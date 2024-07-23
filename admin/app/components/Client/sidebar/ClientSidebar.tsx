@@ -1,4 +1,3 @@
-"use client";
 import { FC, useEffect, useState } from "react";
 import { Sidebar, Menu, MenuItem } from "react-pro-sidebar";
 import { Box, IconButton, Typography } from "@mui/material";
@@ -6,18 +5,7 @@ import {
   HomeOutlinedIcon,
   ArrowForwardIosIcon,
   ArrowBackIosIcon,
-  PeopleOutlinedIcon,
-  ReceiptOutlinedIcon,
-  BarChartOutlinedIcon,
-  MapOutlinedIcon,
   GroupsIcon,
-  OndemandVideoIcon,
-  VideoCallIcon,
-  WebIcon,
-  QuizIcon,
-  WysiwygIcon,
-  ManageHistoryIcon,
-  SettingsIcon,
   ExitToAppIcon,
 } from "../../Admin/sidebar/Icon";
 import avatarDefault from "../../../../public/assests/avatar.png";
@@ -183,6 +171,15 @@ const ClientSidebar = () => {
               selected={selected}
               setSelected={setSelected}
             />
+
+            <Box textAlign="center" mb="15px">
+              <Typography
+                variant="h5"
+                className="!text-[18px] text-black dark:text-[#ffffffc1] capitalize !font-[400]"
+              >
+                Points: {user?.points || 0}
+              </Typography>
+            </Box>
 
             <Typography
               variant="h5"
