@@ -9,6 +9,7 @@ import mongoose from "mongoose";
 import path from "path";
 import ejs from "ejs";
 import sendMail from "../utils/sendMail";
+import UserModel from "../models/user.model";
 
 // upload course
 export const uploadCourse = CatchAsyncError(
@@ -476,6 +477,57 @@ export const deleteCourse = CatchAsyncError(
       });
     } catch (error: any) {
       return next(new ErrorHandler(error.message, 400));
+    }
+  }
+);
+
+// complete course
+export const completeCourse = CatchAsyncError(
+  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const { courseId } = req.body;
+      const course = await CourseModel.findById(courseId);
+      const user = await UserModel.findById(req.user?._id);
+
+      if (!course) {
+        return next(new ErrorHandler("Invalid course id", 400));
+      }
+
+      if (!user) {
+        return next(new ErrorHandler("Invalid user id", 400));
+      }
+      const userCourse = user.courses.find(
+        (userCourse) => userCourse.courseId === courseId
+      );
+
+      if (!userCourse) {
+        return next(
+          new ErrorHandler("User has not enrolled in this course", 400)
+        );
+      }
+
+      if (userCourse.completed) {
+        return next(new ErrorHandler("Course already completed", 400));
+      }
+
+      userCourse.completed = true;
+
+      if (!userCourse.pointsAwarded) {
+        user.points += 25;
+        userCourse.pointsAwarded = true;
+      }
+
+      if (user.points >= 100) {
+      }
+
+      await user.save();
+
+      res.status(200).json({
+        success: true,
+        message: "Course marked as completed and points updated.",
+      });
+    } catch (error: any) {
+      return next(new ErrorHandler(error.message, 500));
     }
   }
 );

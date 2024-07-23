@@ -19,10 +19,16 @@ export interface IUser extends Document {
     courseId: string;
     lastWatchedVideo: number;
     completed: boolean;
+    pointsAwarded: boolean;
   }>;
+
+  points: number;
+  redeemedCourses: string[];
   comparePassword: (password: string) => Promise<boolean>;
   SignAccessToken: () => string;
   SignRefreshToken: () => string;
+  resetPasswordToken?: string;
+  resetPasswordExpires?: Date;
 }
 
 const userSchema: Schema<IUser> = new mongoose.Schema(
@@ -73,8 +79,30 @@ const userSchema: Schema<IUser> = new mongoose.Schema(
           type: Boolean,
           default: false,
         },
+        pointsAwarded: {
+          type: Boolean,
+          default: false,
+        },
       },
     ],
+    points: {
+      type: Number,
+      default: 0,
+    },
+    redeemedCourses: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Course",
+      },
+    ],
+    resetPasswordToken: {
+      type: String,
+      select: false,
+    },
+    resetPasswordExpires: {
+      type: Date,
+      select: false,
+    },
   },
   { timestamps: true }
 );

@@ -8,6 +8,9 @@ import {
   useGetStripePublishablekeyQuery,
 } from "../../../redux/features/orders/ordersApi";
 import { loadStripe } from "@stripe/stripe-js";
+import { useSelector } from "react-redux";
+import { useRedeemPointsForCourseMutation } from "../../../redux/features/user/userApi";
+import { toast } from "react-hot-toast";
 
 type CourseDetailsPageProps = {
   id: string;
@@ -16,7 +19,8 @@ type CourseDetailsPageProps = {
 const CourseDetailsPage: React.FC<CourseDetailsPageProps> = ({ id }) => {
   const [route, setRoute] = useState("Login");
   const [open, setOpen] = useState(false);
-  const { data, isLoading } = useGetCourseDetailsQuery(id);
+  const { data, isLoading, refetch } = useGetCourseDetailsQuery(id);
+  const { user } = useSelector((state: any) => state.auth);
 
   // Stripe related states and queries
   const { data: config } = useGetStripePublishablekeyQuery({});
@@ -24,6 +28,9 @@ const CourseDetailsPage: React.FC<CourseDetailsPageProps> = ({ id }) => {
     useCreatePaymentIntentMutation();
   const [stripePromise, setStripePromise] = useState<any>(null);
   const [clientSecret, setClientSecret] = useState("");
+
+  // Points redemption
+  const [redeemPointsForCourse] = useRedeemPointsForCourseMutation();
 
   useEffect(() => {
     if (config) {
@@ -58,7 +65,17 @@ const CourseDetailsPage: React.FC<CourseDetailsPageProps> = ({ id }) => {
       .catch((error) => {
         console.error("Error fetching user data:", error);
       });
-  }, []); // Fetch user data once on component mount
+  }, []);
+
+  const handleRedeemPoints = async () => {
+    try {
+      await redeemPointsForCourse(id).unwrap();
+      toast.success("Course redeemed successfully!");
+      refetch(); // Refetch course details to update the UI
+    } catch (error) {
+      toast.error("Failed to redeem course. Please try again.");
+    }
+  };
 
   return (
     <>
@@ -76,6 +93,8 @@ const CourseDetailsPage: React.FC<CourseDetailsPageProps> = ({ id }) => {
             setRoute={setRoute}
             stripePromise={stripePromise}
             clientSecret={clientSecret}
+            userPoints={user?.points || 0}
+            handleRedeemPoints={handleRedeemPoints}
           />
         </div>
       )}

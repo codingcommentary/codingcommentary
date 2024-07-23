@@ -23,6 +23,7 @@ import {
 import cloudinary from "cloudinary";
 import crypto from "crypto";
 import CourseModel from "../models/course.model";
+import mongoose from "mongoose";
 
 // register user
 interface IRegistrationBody {
@@ -30,6 +31,10 @@ interface IRegistrationBody {
   email: string;
   password: string;
   avatar?: string;
+}
+
+interface IRedeemCourse {
+  courseId: string;
 }
 
 export const registrationUser = CatchAsyncError(
@@ -513,11 +518,24 @@ export const updateCourseCompletion = CatchAsyncError(
       if (courseIndex > -1) {
         user.courses[courseIndex].lastWatchedVideo = lastWatchedVideo;
         user.courses[courseIndex].completed = completed;
+
+        // Add points if the course is completed, regardless of whether it's free or paid
+        if (completed && !user.courses[courseIndex].pointsAwarded) {
+          user.points += 25;
+          user.courses[courseIndex].pointsAwarded = true;
+        }
       } else {
-        user.courses.push({ courseId, lastWatchedVideo, completed });
+        user.courses.push({
+          courseId,
+          lastWatchedVideo,
+          completed,
+          pointsAwarded: false,
+        });
       }
 
       await user.save();
+
+      await redis.set(userId.toString(), JSON.stringify(user));
 
       res.status(200).json({
         success: true,
@@ -554,7 +572,6 @@ export const getUserCourseCompletion = CatchAsyncError(
   }
 );
 
-// Get user's enrolled courses
 export const getUserEnrolledCourses = CatchAsyncError(
   async (req: Request, res: Response, next: NextFunction) => {
     try {
@@ -572,20 +589,30 @@ export const getUserEnrolledCourses = CatchAsyncError(
         return next(new ErrorHandler("User not found", 404));
       }
 
-      // Fetch additional course details
-      const enrolledCourses = await Promise.all(
-        user.courses.map(async (course) => {
-          const courseDetails = await CourseModel.findById(course.courseId);
-          console.log(courseDetails);
-          return {
-            _id: course.courseId,
-            name: courseDetails?.name || "Unknown Course",
-            thumbnail: courseDetails?.thumbnail || null,
-            lastWatchedVideo: course.lastWatchedVideo,
-            completed: course.completed,
-          };
-        })
-      );
+      // Fetch additional course details and filter out invalid courses
+      const enrolledCourses = (
+        await Promise.all(
+          user.courses.map(async (course) => {
+            const courseDetails = await CourseModel.findById(course.courseId);
+
+            // Check if all required fields are present
+            if (
+              courseDetails &&
+              courseDetails.name &&
+              courseDetails.thumbnail
+            ) {
+              return {
+                _id: course.courseId,
+                name: courseDetails.name,
+                thumbnail: courseDetails.thumbnail,
+                lastWatchedVideo: course.lastWatchedVideo,
+                completed: course.completed,
+              };
+            }
+            return null; // Return null for invalid courses
+          })
+        )
+      ).filter(Boolean); // Filter out null values
 
       res.status(200).json({
         success: true,
@@ -710,6 +737,97 @@ export const resetPassword = CatchAsyncError(
       res.status(200).json({
         success: true,
         message: "Password reset successfully",
+      });
+    } catch (error: any) {
+      return next(new ErrorHandler(error.message, 500));
+    }
+  }
+);
+
+//redeem points
+
+export const redeemPointsForCourse = CatchAsyncError(
+  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const { courseId } = req.body as IRedeemCourse;
+      const userId = req.user?._id;
+
+      if (!userId) {
+        return next(new ErrorHandler("User not authenticated", 401));
+      }
+
+      const user = await userModel.findById(userId);
+      if (!user) {
+        return next(new ErrorHandler("User not found", 404));
+      }
+
+      const course = await CourseModel.findById(courseId);
+      if (!course) {
+        return next(new ErrorHandler("Course not found", 404));
+      }
+
+      // Type assertion: ensure `_id` is treated as `mongoose.Types.ObjectId`
+      const courseIdStr = (course._id as mongoose.Types.ObjectId).toString();
+
+      // Check if the course is paid (price > 0) and has been purchased before
+      if (course.price <= 0) {
+        return next(
+          new ErrorHandler("Course is not eligible for redemption", 400)
+        );
+      }
+
+      if (user.points < 25) {
+        return next(
+          new ErrorHandler("Not enough points to redeem this course", 400)
+        );
+      }
+
+      user.points -= 25;
+      user.redeemedCourses.push(courseIdStr);
+      user.courses.push({
+        courseId: courseIdStr,
+        completed: false,
+        lastWatchedVideo: 0,
+        pointsAwarded: false,
+      });
+      await user.save();
+
+      // Increase the purchased count for the course
+      course.purchased += 1;
+      await course.save();
+
+      await redis.set(userId.toString(), JSON.stringify(user));
+
+      res.status(200).json({
+        success: true,
+        message: "Course redeemed successfully",
+        points: user.points,
+      });
+    } catch (error: any) {
+      return next(new ErrorHandler(error.message, 500));
+    }
+  }
+);
+
+// function to get user points
+export const getUserPoints = CatchAsyncError(
+  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const userId = req.user?._id;
+
+      if (!userId) {
+        return next(new ErrorHandler("User not authenticated", 401));
+      }
+
+      const user = await userModel.findById(userId).select("points");
+
+      if (!user) {
+        return next(new ErrorHandler("User not found", 404));
+      }
+
+      res.status(200).json({
+        success: true,
+        points: user.points,
       });
     } catch (error: any) {
       return next(new ErrorHandler(error.message, 500));

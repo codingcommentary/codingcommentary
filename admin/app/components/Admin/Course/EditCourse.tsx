@@ -9,8 +9,10 @@ import {
   useEditCourseMutation,
   useGetAllCoursesQuery,
 } from "../../../../redux/features/courses/coursesApi";
+import { useRedeemPointsForCourseMutation } from "../../../../redux/features/user/userApi";
 import { toast } from "react-hot-toast";
 import { redirect } from "next/navigation";
+import { useSelector } from "react-redux";
 
 type Props = {
   id: string;
@@ -22,6 +24,8 @@ const EditCourse: FC<Props> = ({ id }) => {
     {},
     { refetchOnMountOrArgChange: true }
   );
+  const [redeemPointsForCourse] = useRedeemPointsForCourseMutation();
+  const { user } = useSelector((state: any) => state.auth);
 
   const editCourseData = data && data.courses.find((i: any) => i._id === id);
 
@@ -117,7 +121,6 @@ const EditCourse: FC<Props> = ({ id }) => {
       })
     );
 
-    //   prepare our data object
     const data = {
       name: courseInfo.name,
       description: courseInfo.description,
@@ -140,6 +143,15 @@ const EditCourse: FC<Props> = ({ id }) => {
     const data = courseData;
     console.log(data);
     await editCourse({ id: editCourseData?._id, data });
+  };
+
+  const handleRedeemPoints = async (courseId: string) => {
+    try {
+      await redeemPointsForCourse(courseId).unwrap();
+      toast.success("Course redeemed successfully!");
+    } catch (error) {
+      toast.error("Failed to redeem course. Please try again.");
+    }
   };
 
   return (
@@ -182,6 +194,8 @@ const EditCourse: FC<Props> = ({ id }) => {
             courseData={courseData}
             handleCourseCreate={handleCourseCreate}
             isEdit={true}
+            userPoints={user.points}
+            handleRedeemPoints={handleRedeemPoints}
           />
         )}
       </div>

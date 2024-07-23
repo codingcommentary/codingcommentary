@@ -8,12 +8,16 @@ import CoursePreview from "./CoursePreview";
 import { useCreateCourseMutation } from "../../../../redux/features/courses/coursesApi";
 import { toast } from "react-hot-toast";
 import { redirect } from "next/navigation";
+import { useRedeemPointsForCourseMutation } from "../../../../redux/features/user/userApi";
+import { useSelector } from "react-redux";
 
 type Props = {};
 
 const CreateCourse = (props: Props) => {
   const [createCourse, { isLoading, isSuccess, error }] =
     useCreateCourseMutation();
+  const [redeemPointsForCourse] = useRedeemPointsForCourseMutation();
+  const { user } = useSelector((state: any) => state.auth);
 
   useEffect(() => {
     if (isSuccess) {
@@ -36,7 +40,7 @@ const CreateCourse = (props: Props) => {
     estimatedPrice: "",
     tags: "",
     level: "",
-    categories:"",
+    categories: "",
     demoUrl: "",
     thumbnail: "",
   });
@@ -59,9 +63,7 @@ const CreateCourse = (props: Props) => {
     },
   ]);
 
-
   const [courseData, setCourseData] = useState({});
-
 
   const handleSubmit = async () => {
     // Format benefits array
@@ -89,7 +91,6 @@ const CreateCourse = (props: Props) => {
       })
     );
 
-    //   prepare our data object
     const data = {
       name: courseInfo.name,
       description: courseInfo.description,
@@ -112,6 +113,15 @@ const CreateCourse = (props: Props) => {
     const data = courseData;
     if (!isLoading) {
       await createCourse(data);
+    }
+  };
+
+  const handleRedeemPoints = async (courseId: string) => {
+    try {
+      await redeemPointsForCourse(courseId).unwrap();
+      toast.success("Course redeemed successfully!");
+    } catch (error) {
+      toast.error("Failed to redeem course. Please try again.");
     }
   };
 
@@ -154,6 +164,8 @@ const CreateCourse = (props: Props) => {
             setActive={setActive}
             courseData={courseData}
             handleCourseCreate={handleCourseCreate}
+            userPoints={user.points}
+            handleRedeemPoints={handleRedeemPoints}
           />
         )}
       </div>
