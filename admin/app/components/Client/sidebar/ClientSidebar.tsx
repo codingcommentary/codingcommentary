@@ -14,6 +14,8 @@ import Link from "next/link";
 import Image from "next/image";
 import { useTheme } from "next-themes";
 import Cookies from "js-cookie";
+import { useLogOutQuery } from "../../../../redux/features/auth/authApi";
+import toast from "react-hot-toast";
 
 interface itemProps {
   title: string;
@@ -48,6 +50,11 @@ const ClientSidebar = () => {
   const [mounted, setMounted] = useState(false);
   const { theme, setTheme } = useTheme();
 
+  const { refetch: triggerLogout, isFetching: isLoggingOut } = useLogOutQuery(
+    undefined,
+    { skip: true }
+  );
+
   useEffect(() => setMounted(true), []);
 
   if (!mounted) {
@@ -55,9 +62,12 @@ const ClientSidebar = () => {
   }
 
   const logoutHandler = async () => {
-    Cookies.remove("accessToken");
-    Cookies.remove("refreshToken");
-    window.location.reload();
+    try {
+      await triggerLogout();
+      console.log("logout");
+      toast.success("Logged out successfully");
+      window.location.href = "/"; // Redirect to login page after successful logout
+    } catch (error) {}
   };
 
   return (
