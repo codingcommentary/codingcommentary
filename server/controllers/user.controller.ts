@@ -572,7 +572,6 @@ export const getUserCourseCompletion = CatchAsyncError(
   }
 );
 
-// Get user's enrolled courses
 export const getUserEnrolledCourses = CatchAsyncError(
   async (req: Request, res: Response, next: NextFunction) => {
     try {
@@ -590,20 +589,30 @@ export const getUserEnrolledCourses = CatchAsyncError(
         return next(new ErrorHandler("User not found", 404));
       }
 
-      // Fetch additional course details
-      const enrolledCourses = await Promise.all(
-        user.courses.map(async (course) => {
-          const courseDetails = await CourseModel.findById(course.courseId);
-          console.log(courseDetails);
-          return {
-            _id: course.courseId,
-            name: courseDetails?.name || "Unknown Course",
-            thumbnail: courseDetails?.thumbnail || null,
-            lastWatchedVideo: course.lastWatchedVideo,
-            completed: course.completed,
-          };
-        })
-      );
+      // Fetch additional course details and filter out invalid courses
+      const enrolledCourses = (
+        await Promise.all(
+          user.courses.map(async (course) => {
+            const courseDetails = await CourseModel.findById(course.courseId);
+
+            // Check if all required fields are present
+            if (
+              courseDetails &&
+              courseDetails.name &&
+              courseDetails.thumbnail
+            ) {
+              return {
+                _id: course.courseId,
+                name: courseDetails.name,
+                thumbnail: courseDetails.thumbnail,
+                lastWatchedVideo: course.lastWatchedVideo,
+                completed: course.completed,
+              };
+            }
+            return null; // Return null for invalid courses
+          })
+        )
+      ).filter(Boolean); // Filter out null values
 
       res.status(200).json({
         success: true,
