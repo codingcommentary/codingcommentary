@@ -17,7 +17,7 @@ import {
   getUserEnrolledCourses,
   requestPasswordReset,
   resetPassword,
- 
+  redeemPointsForCourse,
 } from "../controllers/user.controller";
 import { isAuthenticated, authorizeRoles } from "../middleware/auth";
 
@@ -80,8 +80,14 @@ userRouter.get(
   getUserEnrolledCourses
 );
 
-userRouter.post("/reset-password", resetPassword); 
+userRouter.post("/reset-password", resetPassword);
 
 userRouter.post("/request-password-reset", requestPasswordReset);
+
+userRouter.post(
+  "/redeem-points-for-course",
+  isAuthenticated,
+  redeemPointsForCourse
+);
 
 export default userRouter;

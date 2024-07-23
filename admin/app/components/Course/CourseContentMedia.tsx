@@ -1,20 +1,24 @@
-import React, { useEffect, useState } from 'react';
-import CoursePlayer from '../../utils/CoursePlayer';
-import { styles } from '../../styles/style';
-import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai';
-import Loader from '../Loader/Loader';
-import Image from 'next/image';
-import { format } from 'timeago.js';
-import { useAddNewQuestionMutation, useAddAnswerInQuestionMutation } from '../../../redux/features/courses/coursesApi';
-import toast from 'react-hot-toast';
-import avatar from '../../../public/assests/avatar.png';
+import React, { useEffect, useState } from "react";
+import CoursePlayer from "../../utils/CoursePlayer";
+import { styles } from "../../styles/style";
+import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
+import Loader from "../Loader/Loader";
+import Image from "next/image";
+import { format } from "timeago.js";
+import {
+  useAddNewQuestionMutation,
+  useAddAnswerInQuestionMutation,
+} from "../../../redux/features/courses/coursesApi";
+import toast from "react-hot-toast";
+import avatar from "../../../public/assests/avatar.png";
 import { VscVerifiedFilled } from "react-icons/vsc";
 import { BiMessage } from "react-icons/bi";
-import Link from 'next/link';
+import Link from "next/link";
 import {
   useUpdateCourseCompletionMutation,
   useGetUserCourseCompletionQuery,
-} from '../../../redux/features/user/userApi';
+} from "../../../redux/features/user/userApi";
+import Confetti from "react-confetti";
 
 type Props = {
   data: any;
@@ -25,14 +29,22 @@ type Props = {
   refetch: any;
 };
 
-const CourseContentMedia = ({ data, id, activeVideo, setActiveVideo, user, refetch }: Props) => {
+const CourseContentMedia = ({
+  data,
+  id,
+  activeVideo,
+  setActiveVideo,
+  user,
+  refetch,
+}: Props) => {
   const [activeBar, setActiveBar] = useState(0);
-  const [question, setQuestion] = useState('');
+  const [question, setQuestion] = useState("");
   const [answer, setAnswer] = useState("");
-  const [questionId, setQuestionId] = useState('');
+  const [questionId, setQuestionId] = useState("");
   const [progress, setProgress] = useState(0);
   const [courseCompleted, setCourseCompleted] = useState(false);
   const [isAnswerSubmitted, setIsAnswerSubmitted] = useState(false);
+  const [showConfetti, setShowConfetti] = useState(false);
 
   const [
     addNewQuestion,
@@ -47,11 +59,18 @@ const CourseContentMedia = ({ data, id, activeVideo, setActiveVideo, user, refet
     },
   ] = useAddAnswerInQuestionMutation();
   const [updateCourseCompletion] = useUpdateCourseCompletionMutation();
-  const { data: userCourseCompletion, error: userError, isLoading: courseCompletionLoading, refetch: refetchUserCourseCompletion } = useGetUserCourseCompletionQuery({ userId: user.id });
+  const {
+    data: userCourseCompletion,
+    error: userError,
+    isLoading: courseCompletionLoading,
+    refetch: refetchUserCourseCompletion,
+  } = useGetUserCourseCompletionQuery({ userId: user.id });
 
   useEffect(() => {
     if (userCourseCompletion && userCourseCompletion.success) {
-      const course = userCourseCompletion.courses.find(course => course.courseId === id);
+      const course = userCourseCompletion.courses.find(
+        (course) => course.courseId === id
+      );
       if (course) {
         const { lastWatchedVideo: userLastWatchedVideo } = course;
         setActiveVideo(userLastWatchedVideo || 0);
@@ -65,9 +84,17 @@ const CourseContentMedia = ({ data, id, activeVideo, setActiveVideo, user, refet
 
     if (newProgress === 100) {
       setCourseCompleted(true);
-      updateCourseCompletion({ courseId: id, lastWatchedVideo: activeVideo, completed: true });
+      updateCourseCompletion({
+        courseId: id,
+        lastWatchedVideo: activeVideo,
+        completed: true,
+      });
     } else {
-      updateCourseCompletion({ courseId: id, lastWatchedVideo: activeVideo, completed: false });
+      updateCourseCompletion({
+        courseId: id,
+        lastWatchedVideo: activeVideo,
+        completed: false,
+      });
     }
   }, [activeVideo, data?.length, id, updateCourseCompletion]);
 
@@ -76,16 +103,20 @@ const CourseContentMedia = ({ data, id, activeVideo, setActiveVideo, user, refet
       toast.error("Question can't be empty");
       return;
     }
-    addNewQuestion({ question, courseId: id, contentId: data[activeVideo]?._id });
+    addNewQuestion({
+      question,
+      courseId: id,
+      contentId: data[activeVideo]?._id,
+    });
   };
 
   useEffect(() => {
     if (isSuccess) {
-      setQuestion('');
+      setQuestion("");
       refetch();
     }
     if (error) {
-      if ('data' in error) {
+      if ("data" in error) {
         const errorMessage = error as any;
         toast.error(errorMessage.data.message);
       }
@@ -97,21 +128,27 @@ const CourseContentMedia = ({ data, id, activeVideo, setActiveVideo, user, refet
       toast.error("Answer can't be empty");
       return;
     }
-    addAnswerInQuestion({ answer, courseId: id, contentId: data[activeVideo]?._id, questionId: questionId })
-    .then(() => {
-     setAnswer('');
-     setQuestionId('');
-     setIsAnswerSubmitted(true); // Mark that the answer has been submitted
+    addAnswerInQuestion({
+      answer,
+      courseId: id,
+      contentId: data[activeVideo]?._id,
+      questionId: questionId,
     })
-    .catch(err => {
-     toast.error("Failed to submit answer");
-    });
+      .then(() => {
+        setAnswer("");
+        setQuestionId("");
+        setIsAnswerSubmitted(true); // Mark that the answer has been submitted
+      })
+      .catch((err) => {
+        toast.error("Failed to submit answer");
+      });
   };
+
   useEffect(() => {
-   if (isAnswerSubmitted) {
-    refetch(); // Refetch data after answer submission
-    setIsAnswerSubmitted(false); // Reset the submission state
-   }
+    if (isAnswerSubmitted) {
+      refetch(); // Refetch data after answer submission
+      setIsAnswerSubmitted(false); // Reset the submission state
+    }
   }, [isAnswerSubmitted, refetch]);
 
   const setActiveVideoAndUpdateProgress = (index: number) => {
@@ -120,31 +157,46 @@ const CourseContentMedia = ({ data, id, activeVideo, setActiveVideo, user, refet
     setProgress(newProgress);
     if (newProgress === 100) {
       setCourseCompleted(true);
-      updateCourseCompletion({ courseId: id, lastWatchedVideo: index, completed: true });
+      updateCourseCompletion({
+        courseId: id,
+        lastWatchedVideo: index,
+        completed: true,
+      });
     } else {
-      updateCourseCompletion({ courseId: id, lastWatchedVideo: index, completed: false });
+      updateCourseCompletion({
+        courseId: id,
+        lastWatchedVideo: index,
+        completed: false,
+      });
     }
   };
 
   const handleCourseExit = () => {
-    updateCourseCompletion({ courseId: id, lastWatchedVideo: activeVideo, completed: courseCompleted });
+    updateCourseCompletion({
+      courseId: id,
+      lastWatchedVideo: activeVideo,
+      completed: courseCompleted,
+    });
   };
 
-  const exitHref = user.role === 'admin' ? '/admin' : '/client';
+  const exitHref = user.role === "admin" ? "/admin" : "/client";
 
   if (courseCompletionLoading) {
     return <Loader />;
   }
 
   return (
-    <div className='w-[95%] 800px:w-[86%] py-4 m-auto'>
+    <div className="w-[95%] 800px:w-[86%] py-4 m-auto">
+      {showConfetti && <Confetti />}
       <CoursePlayer
         title={data[activeVideo]?.title}
         videoUrl={data[activeVideo]?.videoUrl}
       />
-      <div className='w-full flex items-center justify-between my-3'>
+      <div className="w-full flex items-center justify-between my-3">
         <div
-          className={`${styles.button} text-white !w-[unset] !min-h-[40px] !py-[unset] ${
+          className={`${
+            styles.button
+          } text-white !w-[unset] !min-h-[40px] !py-[unset] ${
             activeVideo === 0 && "!cursor-no-drop opacity-[.8]"
           }`}
           onClick={() => {
@@ -153,7 +205,7 @@ const CourseContentMedia = ({ data, id, activeVideo, setActiveVideo, user, refet
             }
           }}
         >
-          <AiOutlineArrowLeft className='mr-2' />
+          <AiOutlineArrowLeft className="mr-2" />
           Prev Lesson
         </div>
         <Link href={exitHref} passHref>
@@ -165,23 +217,39 @@ const CourseContentMedia = ({ data, id, activeVideo, setActiveVideo, user, refet
           </a>
         </Link>
         <div
-          className={`${styles.button} text-white !w-[unset] !min-h-[40px] !py-[unset] ${
-            data.length - 1 === activeVideo && "!cursor-no-drop opacity-[.8]"
+          className={`${
+            styles.button
+          } text-white !w-[unset] !min-h-[40px] !py-[unset] ${
+            data.length - 1 === activeVideo
+              ? "!cursor-pointer !opacity-100"
+              : ""
           }`}
           onClick={() => {
             if (activeVideo < data.length - 1) {
               setActiveVideoAndUpdateProgress(activeVideo + 1);
+            } else if (activeVideo === data.length - 1) {
+              // This is the last video
+              setCourseCompleted(true);
+              updateCourseCompletion({
+                courseId: id,
+                lastWatchedVideo: activeVideo,
+                completed: true,
+              });
+              setShowConfetti(true);
+              setTimeout(() => setShowConfetti(false), 5000); // Hide confetti after 5 seconds
             }
           }}
         >
-          Next Lesson
-          <AiOutlineArrowRight className='ml-2' />
+          {activeVideo === data.length - 1 ? "Finish Course" : "Next Lesson"}
+          <AiOutlineArrowRight className="ml-2" />
         </div>
       </div>
-      <div className='w-full flex justify-between items-center'>
-        <h1 className='pt-2 text-[25px] font-[600] text-white'>{data[activeVideo]?.title}</h1>
-        {user.role !== 'admin' && (
-          <div className='text-white'>
+      <div className="w-full flex justify-between items-center">
+        <h1 className="pt-2 text-[25px] font-[600] text-white">
+          {data[activeVideo]?.title}
+        </h1>
+        {user.role !== "admin" && (
+          <div className="text-white">
             Progress: {progress.toFixed(2)}%
             {courseCompleted && " - Course Completed!"}
           </div>
@@ -189,12 +257,14 @@ const CourseContentMedia = ({ data, id, activeVideo, setActiveVideo, user, refet
       </div>
       <br />
 
-      <div className='w-full p-4 flex items-center justify-between bg-slate-500 bg-opacity-20 backdrop-blur shadow-[bg-slate-700] rounded shadow-inner'>
-        {['Overview', 'Q&A'].map((text, index) => (
+      <div className="w-full p-4 flex items-center justify-between bg-slate-500 bg-opacity-20 backdrop-blur shadow-[bg-slate-700] rounded shadow-inner">
+        {["Overview", "Q&A"].map((text, index) => (
           <h5
             key={index}
             className={`800px:text-[20px] cursor-pointer ${
-              activeBar === index ? 'text-red-500' : 'dark:text-white text-black'
+              activeBar === index
+                ? "text-red-500"
+                : "dark:text-white text-black"
             }`}
             onClick={() => setActiveBar(index)}
           >
@@ -204,33 +274,35 @@ const CourseContentMedia = ({ data, id, activeVideo, setActiveVideo, user, refet
       </div>
       <br />
       {activeBar === 0 && (
-        <p className='text-[18px] whitespace-pre-line mb-3'>
+        <p className="text-[18px] whitespace-pre-line mb-3">
           {data[activeVideo]?.description}
         </p>
       )}
       {activeBar === 1 && (
         <>
-          <div className='flex w-full'>
+          <div className="flex w-full">
             <Image
               src={user.avatar ? user.avatar.url : avatar}
               width={50}
               height={50}
-              alt=''
-              className='w-[50px] h-[50px] rounded-full object-cover'
+              alt=""
+              className="w-[50px] h-[50px] rounded-full object-cover"
             />
             <textarea
               value={question}
               onChange={(e) => setQuestion(e.target.value)}
               cols={40}
               rows={5}
-              placeholder='Write your question...'
-              className='outline-none bg-transparent ml-3 border border-[#ffffff57] 800px:w-full p-2 rounded w-[90%] 800px:text-[18px] font-Poppins'
+              placeholder="Write your question..."
+              className="outline-none bg-transparent ml-3 border border-[#ffffff57] 800px:w-full p-2 rounded w-[90%] 800px:text-[18px] font-Poppins"
             ></textarea>
           </div>
-          <div className='w-full flex justify-end'>
+          <div className="w-full flex justify-end">
             <button
-              className={`${styles.button} !w-[120px] !h-[40px] text-[18px] mt-5 ${
-                questionCreationLoading && 'cursor-not-allowed'
+              className={`${
+                styles.button
+              } !w-[120px] !h-[40px] text-[18px] mt-5 ${
+                questionCreationLoading && "cursor-not-allowed"
               }`}
               onClick={questionCreationLoading ? () => {} : handleQuestion}
               disabled={questionCreationLoading}
@@ -240,7 +312,7 @@ const CourseContentMedia = ({ data, id, activeVideo, setActiveVideo, user, refet
           </div>
           <br />
           <br />
-          <div className='w-full h-[1px] bg-[#ffffff3b]'></div>
+          <div className="w-full h-[1px] bg-[#ffffff3b]"></div>
           <div>
             <CommentReply
               data={data}
@@ -281,8 +353,8 @@ const CommentItem = ({
               src={item.user.avatar ? item.user.avatar.url : avatar}
               width={50}
               height={50}
-              alt=''
-              className='w-[35px] h-[35px] rounded-full object-cover'
+              alt=""
+              className="w-[35px] h-[35px] rounded-full object-cover"
             />
           </div>
           <div className="pl-3 dark:text-white text-black">
@@ -304,7 +376,9 @@ const CommentItem = ({
             {!replyActive
               ? item.questionReplies.length !== 0
                 ? "All Replies"
-                : (user.role === 'admin' ? "Add Reply" : "No Replies")
+                : user.role === "admin"
+                ? "Add Reply"
+                : "No Replies"
               : "Hide Replies"}
           </span>
           <BiMessage
@@ -319,7 +393,10 @@ const CommentItem = ({
         {replyActive && questionId === item._id && (
           <>
             {item.questionReplies.map((reply: any) => (
-              <div className="w-full flex 800px:ml-16 my-5 text-black dark:text-white" key={reply._id}>
+              <div
+                className="w-full flex 800px:ml-16 my-5 text-black dark:text-white"
+                key={reply._id}
+              >
                 <div>
                   <Image
                     src={reply.user.avatar ? reply.user.avatar.url : avatar}
@@ -343,7 +420,7 @@ const CommentItem = ({
                 </div>
               </div>
             ))}
-            {user.role === 'admin' && (
+            {user.role === "admin" && (
               <>
                 <div className="w-full flex relative dark:text-white text-black">
                   <input
@@ -387,20 +464,17 @@ const CommentReply = ({
   user,
 }: any) => {
   return (
-    <div className='w-full my-3'>
+    <div className="w-full my-3">
       {data[activeVideo]?.questions?.length ? (
         data[activeVideo].questions.map((item: any, index: any) => (
           <CommentItem
             key={index}
             user={user}
-            data={data}
-            activeVideo={activeVideo}
-            item={item}
-            index={index}
-            answer={answer}
-            setAnswer={setAnswer}
             questionId={questionId}
             setQuestionId={setQuestionId}
+            item={item}
+            answer={answer}
+            setAnswer={setAnswer}
             handleAnswerSubmit={handleAnswerSubmit}
             answerCreationLoading={answerCreationLoading}
           />
