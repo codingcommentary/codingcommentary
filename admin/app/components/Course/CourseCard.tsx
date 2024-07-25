@@ -12,7 +12,7 @@ type Props = {
 };
 
 const CourseCard: FC<Props> = ({ item, isProfile }) => {
-  const [courseCompleted, setCourseCompleted] = useState(false);
+  const [courseCompleted, setCourseCompleted] = useState<boolean>(false);
 
   // Fetch user data
   const { data: userData, refetch: refetchUser } = useLoadUserQuery(
@@ -39,15 +39,37 @@ const CourseCard: FC<Props> = ({ item, isProfile }) => {
 
   useEffect(() => {
     if (userCourseCompletion) {
+      console.log('User course completion data:', userCourseCompletion);
+
       const completedCourses = userCourseCompletion.courses
         .filter((course: any) => course.completed)
         .map((course: any) => course.courseId);
+
+      console.log('Completed courses from API:', completedCourses);
+
       const isCompleted = completedCourses.includes(item._id);
-      setCourseCompleted(isCompleted);
+      console.log('Is course completed from API:', isCompleted);
+
+      if (isCompleted !== courseCompleted) {
+        setCourseCompleted(isCompleted);
+        localStorage.setItem(`course-${item._id}-completed`, JSON.stringify(isCompleted));
+        console.log(`Course ${item._id} completion status updated in state and localStorage:`, isCompleted);
+      }
+    } else {
+      // Check localStorage as a fallback
+      const localStatus = localStorage.getItem(`course-${item._id}-completed`);
+      const isCompleted = localStatus === "true";
+      console.log(`LocalStorage status for course ${item._id}:`, isCompleted);
+
+      if (isCompleted !== courseCompleted) {
+        setCourseCompleted(isCompleted);
+        console.log(`Course ${item._id} completion status updated from localStorage:`, isCompleted);
+      }
     }
-  }, [userCourseCompletion, item._id]);
+  }, [userCourseCompletion, item._id, courseCompleted]);
 
   useEffect(() => {
+    console.log('Refetching user course completion and course details...');
     refetchUserCourseCompletion();
     refetchCourseDetails();
   }, [item._id, refetchUserCourseCompletion, refetchCourseDetails]);
@@ -56,6 +78,7 @@ const CourseCard: FC<Props> = ({ item, isProfile }) => {
   useEffect(() => {
     const handleVisibilityChange = () => {
       if (document.visibilityState === "visible") {
+        console.log('Page visibility changed to visible, refetching data...');
         refetchUserCourseCompletion();
         refetchCourseDetails();
       }
@@ -68,8 +91,15 @@ const CourseCard: FC<Props> = ({ item, isProfile }) => {
     };
   }, [refetchUserCourseCompletion, refetchCourseDetails]);
 
-  if (userLoading || courseLoading) return <div>Loading...</div>;
-  if (userError || courseError) return <div>Error fetching data</div>;
+  if (userLoading || courseLoading) {
+    console.log('Loading user data or course details...');
+    return <div>Loading...</div>;
+  }
+
+  if (userError || courseError) {
+    console.log('Error fetching user data or course details:', userError || courseError);
+    return <div>Error fetching data</div>;
+  }
 
   return (
     <Link

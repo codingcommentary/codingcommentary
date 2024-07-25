@@ -72,31 +72,36 @@ const CourseContentMedia = ({
         (course) => course.courseId === id
       );
       if (course) {
-        const { lastWatchedVideo: userLastWatchedVideo } = course;
+        const { lastWatchedVideo: userLastWatchedVideo, completed } = course;
         setActiveVideo(userLastWatchedVideo || 0);
+        setCourseCompleted(completed);
       }
     }
   }, [userCourseCompletion]);
 
   useEffect(() => {
-    const newProgress = ((activeVideo + 1) / (data?.length || 1)) * 100;
-    setProgress(newProgress);
+    if (!courseCompleted) {
+      const newProgress = ((activeVideo + 1) / (data?.length || 1)) * 100;
+      setProgress(newProgress);
 
-    if (newProgress === 100) {
-      setCourseCompleted(true);
-      updateCourseCompletion({
-        courseId: id,
-        lastWatchedVideo: activeVideo,
-        completed: true,
-      });
-    } else {
-      updateCourseCompletion({
-        courseId: id,
-        lastWatchedVideo: activeVideo,
-        completed: false,
-      });
+      if (newProgress === 100) {
+        setCourseCompleted(true);
+        updateCourseCompletion({
+          courseId: id,
+          lastWatchedVideo: activeVideo,
+          completed: true,
+        });
+        localStorage.setItem(`course-${id}-completed`, "true");
+      } else {
+        updateCourseCompletion({
+          courseId: id,
+          lastWatchedVideo: activeVideo,
+          completed: false,
+        });
+        localStorage.removeItem(`course-${id}-completed`);
+      }
     }
-  }, [activeVideo, data?.length, id, updateCourseCompletion]);
+  }, [activeVideo, data?.length, id, updateCourseCompletion, courseCompleted]);
 
   const handleQuestion = () => {
     if (question.trim().length === 0) {
@@ -153,21 +158,25 @@ const CourseContentMedia = ({
 
   const setActiveVideoAndUpdateProgress = (index: number) => {
     setActiveVideo(index);
-    const newProgress = ((index + 1) / (data?.length || 1)) * 100;
-    setProgress(newProgress);
-    if (newProgress === 100) {
-      setCourseCompleted(true);
-      updateCourseCompletion({
-        courseId: id,
-        lastWatchedVideo: index,
-        completed: true,
-      });
-    } else {
-      updateCourseCompletion({
-        courseId: id,
-        lastWatchedVideo: index,
-        completed: false,
-      });
+    if (!courseCompleted) {
+      const newProgress = ((index + 1) / (data?.length || 1)) * 100;
+      setProgress(newProgress);
+      if (newProgress === 100) {
+        setCourseCompleted(true);
+        updateCourseCompletion({
+          courseId: id,
+          lastWatchedVideo: index,
+          completed: true,
+        });
+        localStorage.setItem(`course-${id}-completed`, "true");
+      } else {
+        updateCourseCompletion({
+          courseId: id,
+          lastWatchedVideo: index,
+          completed: false,
+        });
+        localStorage.removeItem(`course-${id}-completed`);
+      }
     }
   };
 
@@ -194,11 +203,9 @@ const CourseContentMedia = ({
       />
       <div className="w-full flex items-center justify-between my-3">
         <div
-          className={`${
-            styles.button
-          } text-white !w-[unset] !min-h-[40px] !py-[unset] ${
-            activeVideo === 0 && "!cursor-no-drop opacity-[.8]"
-          }`}
+          className={`${styles.button
+            } text-white !w-[unset] !min-h-[40px] !py-[unset] ${activeVideo === 0 && "!cursor-no-drop opacity-[.8]"
+            }`}
           onClick={() => {
             if (activeVideo > 0) {
               setActiveVideoAndUpdateProgress(activeVideo - 1);
@@ -217,13 +224,11 @@ const CourseContentMedia = ({
           </a>
         </Link>
         <div
-          className={`${
-            styles.button
-          } text-white !w-[unset] !min-h-[40px] !py-[unset] ${
-            data.length - 1 === activeVideo
+          className={`${styles.button
+            } text-white !w-[unset] !min-h-[40px] !py-[unset] ${data.length - 1 === activeVideo
               ? "!cursor-pointer !opacity-100"
               : ""
-          }`}
+            }`}
           onClick={() => {
             if (activeVideo < data.length - 1) {
               setActiveVideoAndUpdateProgress(activeVideo + 1);
@@ -235,6 +240,7 @@ const CourseContentMedia = ({
                 lastWatchedVideo: activeVideo,
                 completed: true,
               });
+              localStorage.setItem(`course-${id}-completed`, "true");
               setShowConfetti(true);
               setTimeout(() => setShowConfetti(false), 5000); // Hide confetti after 5 seconds
             }
@@ -248,24 +254,23 @@ const CourseContentMedia = ({
         <h1 className="pt-2 text-[25px] font-[600] text-white">
           {data[activeVideo]?.title}
         </h1>
-        {user.role !== "admin" && (
+        {user.role !== "admin" && !courseCompleted && (
           <div className="text-white">
             Progress: {progress.toFixed(2)}%
+
             {courseCompleted && " - Course Completed!"}
           </div>
         )}
       </div>
       <br />
-
       <div className="w-full p-4 flex items-center justify-between bg-slate-500 bg-opacity-20 backdrop-blur shadow-[bg-slate-700] rounded shadow-inner">
         {["Overview", "Q&A"].map((text, index) => (
           <h5
             key={index}
-            className={`800px:text-[20px] cursor-pointer ${
-              activeBar === index
+            className={`800px:text-[20px] cursor-pointer ${activeBar === index
                 ? "text-red-500"
                 : "dark:text-white text-black"
-            }`}
+              }`}
             onClick={() => setActiveBar(index)}
           >
             {text}
@@ -299,12 +304,10 @@ const CourseContentMedia = ({
           </div>
           <div className="w-full flex justify-end">
             <button
-              className={`${
-                styles.button
-              } !w-[120px] !h-[40px] text-[18px] mt-5 ${
-                questionCreationLoading && "cursor-not-allowed"
-              }`}
-              onClick={questionCreationLoading ? () => {} : handleQuestion}
+              className={`${styles.button
+                } !w-[120px] !h-[40px] text-[18px] mt-5 ${questionCreationLoading && "cursor-not-allowed"
+                }`}
+              onClick={questionCreationLoading ? () => { } : handleQuestion}
               disabled={questionCreationLoading}
             >
               Submit
@@ -377,8 +380,8 @@ const CommentItem = ({
               ? item.questionReplies.length !== 0
                 ? "All Replies"
                 : user.role === "admin"
-                ? "Add Reply"
-                : "No Replies"
+                  ? "Add Reply"
+                  : "No Replies"
               : "Hide Replies"}
           </span>
           <BiMessage
@@ -428,10 +431,9 @@ const CommentItem = ({
                     placeholder="Enter your answer..."
                     value={answer}
                     onChange={(e: any) => setAnswer(e.target.value)}
-                    className={`block 800px:ml-12 mt-2 outline-none bg-transparent border-b border-[#00000027] dark:text-white text-black dark:border-[#fff] p-[5px] w-[95%] ${
-                      answer === "" ||
+                    className={`block 800px:ml-12 mt-2 outline-none bg-transparent border-b border-[#00000027] dark:text-white text-black dark:border-[#fff] p-[5px] w-[95%] ${answer === "" ||
                       (answerCreationLoading && "cursor-not-allowed")
-                    }`}
+                      }`}
                   />
                   <button
                     type="submit"

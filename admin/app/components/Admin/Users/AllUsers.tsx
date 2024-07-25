@@ -71,20 +71,21 @@ const AllCourses: FC<Props> = ({ isTeam }) => {
       headerName: "Delete",
       flex: 0.2,
       renderCell: (params: any) => {
+        if (params.row.role === "admin") {
+          return null; // Hide delete button for admin users
+        }
         return (
-          <>
-            <Button
-              onClick={() => {
-                setOpen(!open);
-                setUserId(params.row.id);
-              }}
-            >
-              <AiOutlineDelete
-                className="dark:text-white text-black"
-                size={20}
-              />
-            </Button>
-          </>
+          <Button
+            onClick={() => {
+              setOpen(!open);
+              setUserId(params.row.id);
+            }}
+          >
+            <AiOutlineDelete
+              className="dark:text-white text-black"
+              size={20}
+            />
+          </Button>
         );
       },
     },
@@ -92,15 +93,11 @@ const AllCourses: FC<Props> = ({ isTeam }) => {
       field: "  ",
       headerName: "Email",
       flex: 0.2,
-      renderCell: (params: any) => {
-        return (
-          <>
-            <a href={`mailto:${params.row.email}`}>
-              <AiOutlineMail className="dark:text-white text-black" size={20} />
-            </a>
-          </>
-        );
-      },
+      renderCell: (params: any) => (
+        <a href={`mailto:${params.row.email}`}>
+          <AiOutlineMail className="dark:text-white text-black" size={20} />
+        </a>
+      ),
     },
   ];
 

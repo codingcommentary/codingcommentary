@@ -36,7 +36,7 @@ const CourseDetails: React.FC<Props> = ({
   const [open, setOpen] = useState(false);
   const discountPercentage =
     ((data?.estimatedPrice - data.price) / data?.estimatedPrice) * 100;
-  const discountPercentagePrice = discountPercentage.toFixed(0);
+  const discountPercentagePrice = isNaN(discountPercentage) ? '0' : discountPercentage.toFixed(0);
 
   useEffect(() => {
     refetchUser();
@@ -190,7 +190,7 @@ const CourseDetails: React.FC<Props> = ({
           <div className="sticky top-[100px] left-0 z-50 w-full">
             <CoursePlayer videoUrl={data?.demoUrl} title={data?.title} />
             <div className="flex items-center">
-              <h1 className="pt-5 text-[25%] text-black dark:text-white">
+              <h1 className="pl-3 text-[22px] text-black dark:text-white">
                 {data.price === 0 ? "Free" : data.price + "$"}
               </h1>
               <h5 className="pl-3 text-[20px] mt-2 line-through opacity-80 text-black dark:text-white">
@@ -201,13 +201,32 @@ const CourseDetails: React.FC<Props> = ({
               </h4>
             </div>
             <div className="flex items-center">
-              {user?.courses?.some(
+              {user?.role === "admin" ? (
+                <Link
+                  className={
+                    "styles.button !w-[180px] my-3 font-Poppins cursor pointer !bg-[crimson]"
+                  }
+                  href={`/client/course-access/${data._id}`}
+                >
+                  Enter to course
+                </Link>
+              ) : user?.courses?.some(
                 (course) => course.courseId === data._id && course.completed
               ) ? (
-                <div className="my-3 font-Poppins text-black dark:text-white">
-                  Congratulations, you have successfully completed the course.
-                </div>
-              ) : isPurchased || hasPurchased || user?.role === "admin" ? (
+                <>
+                  <div className="my-3 font-Poppins text-black dark:text-white">
+                    Congratulations, you have successfully completed the course.
+                  </div>
+                  <Link
+                    className={
+                      "styles.button !w-[180px] my-3 font-Poppins cursor pointer !bg-[crimson]"
+                    }
+                    href={`/client/course-access/${data._id}`}
+                  >
+                    Enter to course
+                  </Link>
+                </>
+              ) : isPurchased || hasPurchased ? (
                 <Link
                   className={
                     "styles.button !w-[180px] my-3 font-Poppins cursor pointer !bg-[crimson]"
