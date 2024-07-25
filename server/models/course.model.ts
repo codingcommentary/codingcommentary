@@ -14,11 +14,6 @@ interface IReview extends Document {
   commentReplies?: IReview[];
 }
 
-interface ILink extends Document {
-  title: string;
-  url: string;
-}
-
 interface ICourseData extends Document {
   title: string;
   description: string;
@@ -27,7 +22,6 @@ interface ICourseData extends Document {
   videoSection: string;
   videoLength: number;
   videoPlayer: string;
-  links: ILink[];
   suggestion: string;
   questions: IComment[];
 }
@@ -64,11 +58,6 @@ const reviewSchema = new Schema<IReview>(
   { timestamps: true }
 );
 
-const linkSchema = new Schema<ILink>({
-  title: String,
-  url: String,
-});
-
 const commentSchema = new Schema<IComment>(
   {
     user: Object,
@@ -85,7 +74,6 @@ const courseDataSchema = new Schema<ICourseData>({
   description: String,
   videoLength: Number,
   videoPlayer: String,
-  links: [linkSchema],
   suggestion: String,
   questions: [commentSchema],
 });
